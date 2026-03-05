@@ -8,7 +8,7 @@ const ThemeManager = (() => {
     function init() {
         const saved = localStorage.getItem(STORAGE_KEY) || 'dark';
         applyTheme(saved);
-        renderFixedToggle();
+        injectHeaderToggle();
     }
 
     function applyTheme(theme) {
@@ -27,35 +27,22 @@ const ThemeManager = (() => {
         applyTheme(next);
     }
 
-    function renderFixedToggle() {
-        if (document.getElementById('themeToggleFixed')) return;
-        const btn = document.createElement('button');
-        btn.id = 'themeToggleFixed';
+    function injectHeaderToggle() {
+        if (document.getElementById('themeToggleBtn')) return;
+        const actions = document.querySelector('.header__actions');
+        if (!actions) return;
+
+        const btn = document.createElement('a');
+        btn.id = 'themeToggleBtn';
+        btn.href = 'javascript:void(0)';
+        btn.className = 'header__action';
         btn.setAttribute('aria-label', 'Alternar tema');
-        btn.onclick = toggle;
-        btn.style.cssText = `
-            position: fixed;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 999;
-            width: 48px;
-            height: 48px;
-            border: 2px solid var(--glass-border);
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        btn.onclick = (e) => { e.preventDefault(); toggle(); };
+        btn.innerHTML = `
+            <span class="header__action-icon theme-toggle__icon">🌙</span>
+            <span>Tema</span>
         `;
-        btn.innerHTML = '<span class="theme-toggle__icon">🌙</span>';
-        btn.onmouseenter = () => { btn.style.transform = 'translateY(-50%) scale(1.1)'; btn.style.borderColor = 'var(--primary)'; };
-        btn.onmouseleave = () => { btn.style.transform = 'translateY(-50%) scale(1)'; btn.style.borderColor = 'var(--glass-border)'; };
-        document.body.appendChild(btn);
+        actions.appendChild(btn);
         updateToggleIcon();
     }
 
@@ -69,5 +56,4 @@ const ThemeManager = (() => {
     return { init, toggle };
 })();
 
-// Initialize theme as early as possible
 document.addEventListener('DOMContentLoaded', ThemeManager.init);
