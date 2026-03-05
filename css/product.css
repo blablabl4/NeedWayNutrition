@@ -1,0 +1,346 @@
+/* ===================================
+   Needway Nutrition — Product Page
+   PDP specific styles
+   =================================== */
+
+/* ── PDP Layout ── */
+.pdp {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+    padding: var(--space-xl) 0;
+}
+
+/* ── Gallery ── */
+.pdp__gallery {
+    position: sticky;
+    top: calc(var(--header-height) + var(--nav-height) + var(--space-lg));
+    align-self: start;
+}
+
+.pdp__main-image {
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--bg-dark);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8rem;
+    cursor: zoom-in;
+    position: relative;
+}
+
+.pdp__main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform var(--duration-normal);
+}
+
+.pdp__main-image:hover img {
+    transform: scale(1.5);
+}
+
+.pdp__thumbs {
+    display: flex;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+}
+
+.pdp__thumb {
+    width: 80px;
+    height: 80px;
+    background: var(--bg-dark);
+    border: 2px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    transition: border-color var(--duration-fast);
+}
+
+.pdp__thumb.active,
+.pdp__thumb:hover {
+    border-color: var(--primary);
+}
+
+/* ── Info ── */
+.pdp__info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.pdp__brand {
+    font-size: var(--fs-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+}
+
+.pdp__name {
+    font-family: var(--font-heading);
+    font-size: var(--fs-2xl);
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+
+.pdp__rating {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.pdp__rating-text {
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+}
+
+/* Price block */
+.pdp__price-block {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+}
+
+.pdp__price-original {
+    font-size: var(--fs-base);
+    color: var(--text-muted);
+    text-decoration: line-through;
+}
+
+.pdp__price-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin: var(--space-xs) 0;
+}
+
+.pdp__price-current {
+    font-family: var(--font-heading);
+    font-size: var(--fs-3xl);
+    font-weight: var(--fw-bold);
+    color: var(--primary);
+}
+
+.pdp__price-pix {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-sm) var(--space-md);
+    background: var(--success-bg);
+    border: 1px solid var(--success);
+    border-radius: var(--radius-md);
+    color: var(--success);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semibold);
+}
+
+.pdp__price-installment {
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+    margin-top: var(--space-xs);
+}
+
+/* Variations */
+.pdp__variations {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.pdp__variation-label {
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semibold);
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.pdp__flavor-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.pdp__flavor-btn {
+    padding: 8px 20px;
+    background: var(--bg-dark);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-full);
+    color: var(--text-light);
+    font-size: var(--fs-sm);
+    cursor: pointer;
+    transition: all var(--duration-fast);
+}
+
+.pdp__flavor-btn:hover,
+.pdp__flavor-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+}
+
+.pdp__size-select {
+    padding: 12px 16px;
+    background: var(--bg-dark);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--text-light);
+    font-size: var(--fs-base);
+    width: 100%;
+    max-width: 200px;
+    cursor: pointer;
+}
+
+/* Shipping Calc */
+.pdp__shipping {
+    background: var(--bg-dark);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+}
+
+.pdp__shipping-title {
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semibold);
+    margin-bottom: var(--space-md);
+}
+
+.pdp__shipping-results {
+    margin-top: var(--space-md);
+}
+
+.pdp__shipping-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--glass-border);
+    font-size: var(--fs-sm);
+}
+
+.pdp__shipping-option:last-child {
+    border-bottom: none;
+}
+
+.pdp__shipping-name {
+    font-weight: var(--fw-semibold);
+}
+
+.pdp__shipping-days {
+    color: var(--text-muted);
+}
+
+.pdp__shipping-price {
+    color: var(--primary);
+    font-weight: var(--fw-bold);
+}
+
+/* Buy Section */
+.pdp__buy {
+    display: flex;
+    gap: var(--space-md);
+    align-items: center;
+}
+
+/* ── Sticky Buy Bar ── */
+.sticky-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-dark);
+    border-top: 1px solid var(--glass-border);
+    padding: var(--space-md) 0;
+    z-index: var(--z-sticky);
+    transform: translateY(100%);
+    transition: transform var(--duration-normal) var(--ease-out);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.sticky-bar.visible {
+    transform: translateY(0);
+}
+
+.sticky-bar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+}
+
+.sticky-bar__info {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.sticky-bar__name {
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semibold);
+}
+
+.sticky-bar__price {
+    color: var(--primary);
+    font-family: var(--font-heading);
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-bold);
+}
+
+/* ── Related Products ── */
+.related-products {
+    margin-top: var(--space-3xl);
+}
+
+/* ── PDP Responsive ── */
+@media (max-width: 768px) {
+    .pdp {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+
+    .pdp__gallery {
+        position: static;
+    }
+
+    .pdp__name {
+        font-size: var(--fs-xl);
+    }
+
+    .pdp__price-current {
+        font-size: var(--fs-2xl);
+    }
+
+    .pdp__buy {
+        flex-direction: column;
+    }
+
+    .pdp__buy .btn {
+        width: 100%;
+    }
+
+    .sticky-bar {
+        display: block;
+    }
+
+    .sticky-bar__inner {
+        gap: var(--space-md);
+    }
+
+    .sticky-bar__name {
+        display: none;
+    }
+}

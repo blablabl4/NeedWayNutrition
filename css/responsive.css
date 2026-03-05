@@ -1,0 +1,431 @@
+/* ===================================
+   Needway Nutrition — Responsive
+   Mobile-first media queries
+   =================================== */
+
+/* ── Tablet (max 1024px) ── */
+@media (max-width: 1024px) {
+    :root {
+        --header-height: 70px;
+        --nav-height: 46px;
+    }
+
+    .header__logo img {
+        height: 42px;
+    }
+
+    .grid--4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid--5 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .footer__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-xl);
+    }
+
+    .mega-menu__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .benefits-bar__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-md);
+    }
+
+    .section {
+        padding: var(--space-2xl) 0;
+    }
+
+    .heading--1 {
+        font-size: var(--fs-3xl);
+    }
+
+    .heading--2 {
+        font-size: var(--fs-2xl);
+    }
+
+    .section-title {
+        font-size: var(--fs-xl);
+    }
+}
+
+/* ── Mobile (max 768px) ── */
+@media (max-width: 768px) {
+    :root {
+        --header-height: 64px;
+        --topbar-height: 36px;
+        --nav-height: 0px;
+    }
+
+    .container {
+        padding: 0 var(--space-md);
+    }
+
+    /* Top Bar */
+    .topbar__item {
+        font-size: 11px;
+        padding: 0 var(--space-lg);
+    }
+
+    /* Header */
+    .header__search {
+        display: none;
+    }
+
+    .header__logo img {
+        height: 38px;
+    }
+
+    .header__action span {
+        display: none;
+    }
+
+    .header__action {
+        padding: var(--space-xs);
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    /* Navigation - Mobile Drawer */
+    .nav {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 85%;
+        max-width: 360px;
+        height: 100vh;
+        background: var(--bg-dark);
+        z-index: var(--z-modal);
+        transition: left var(--duration-normal) var(--ease-out);
+        overflow-y: auto;
+        border-right: 1px solid var(--glass-border);
+        padding-top: var(--space-3xl);
+    }
+
+    .nav.active {
+        left: 0;
+    }
+
+    .nav__inner {
+        flex-direction: column;
+        height: auto;
+        padding: var(--space-md);
+        gap: 0;
+    }
+
+    .nav__link {
+        width: 100%;
+        padding: var(--space-md);
+        border-bottom: 1px solid var(--glass-border);
+        font-size: var(--fs-base);
+    }
+
+    .nav__link::after {
+        display: none;
+    }
+
+    /* Mobile Search */
+    .mobile-search {
+        display: block;
+        padding: var(--space-md);
+        background: var(--bg-darker);
+    }
+
+    .mobile-search .header__search-input {
+        width: 100%;
+        padding: 14px 48px 14px 20px;
+    }
+
+    /* Mega Menu Mobile */
+    .mega-menu {
+        position: static;
+        border: none;
+        box-shadow: none;
+        padding: 0 var(--space-md);
+        background: var(--bg-card-dark);
+    }
+
+    .mega-menu__grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    /* Grids */
+    .grid--2,
+    .grid--3,
+    .grid--4,
+    .grid--5 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid--products {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-md);
+    }
+
+    /* Product Card Mobile */
+    .product-card__body {
+        padding: var(--space-sm);
+    }
+
+    .product-card__name {
+        font-size: var(--fs-xs);
+    }
+
+    .product-card__price {
+        font-size: var(--fs-base);
+    }
+
+    .product-card__quick-add {
+        transform: translateY(0);
+        padding: var(--space-xs);
+    }
+
+    .product-card__favorite {
+        width: 30px;
+        height: 30px;
+        font-size: var(--fs-sm);
+    }
+
+    /* Category Card Mobile */
+    .category-card {
+        aspect-ratio: 1 / 1;
+    }
+
+    .category-card__name {
+        font-size: var(--fs-base);
+    }
+
+    /* Benefits Bar */
+    .benefits-bar__grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-sm);
+    }
+
+    .benefits-bar__item {
+        gap: var(--space-sm);
+    }
+
+    .benefits-bar__icon {
+        width: 36px;
+        height: 36px;
+        font-size: var(--fs-md);
+    }
+
+    .benefits-bar__text {
+        font-size: var(--fs-xs);
+    }
+
+    .benefits-bar__text span {
+        display: none;
+    }
+
+    /* Footer */
+    .footer__grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+    }
+
+    .footer__bottom-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    /* Mini Cart */
+    .minicart {
+        width: 100%;
+        right: -100%;
+    }
+
+    /* Buttons */
+    .btn {
+        padding: 12px 24px;
+        font-size: var(--fs-sm);
+    }
+
+    .btn--lg {
+        padding: 14px 32px;
+        font-size: var(--fs-base);
+    }
+
+    /* Section Titles */
+    .section {
+        padding: var(--space-xl) 0;
+    }
+
+    .section-title {
+        font-size: var(--fs-lg);
+        margin-bottom: var(--space-lg);
+    }
+
+    .heading--1 {
+        font-size: var(--fs-2xl);
+    }
+
+    .heading--2 {
+        font-size: var(--fs-xl);
+    }
+
+    /* Quick Links */
+    .quicklinks__inner {
+        padding: 0 var(--space-md);
+    }
+
+    .quicklinks__link {
+        padding: 6px 16px;
+        font-size: var(--fs-xs);
+    }
+
+    /* Tabs */
+    .tabs__tab {
+        padding: var(--space-sm) var(--space-md);
+        font-size: var(--fs-xs);
+    }
+
+    /* Toast */
+    .toast {
+        bottom: var(--space-md);
+        left: var(--space-md);
+        right: var(--space-md);
+        max-width: none;
+    }
+
+    /* Coupon Popup */
+    .coupon-popup {
+        left: var(--space-md);
+        right: var(--space-md);
+        bottom: var(--space-md);
+        max-width: none;
+    }
+
+    /* Sidebar Filters */
+    .sidebar-filter {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 85%;
+        max-width: 320px;
+        height: 100vh;
+        background: var(--bg-dark);
+        z-index: var(--z-modal);
+        overflow-y: auto;
+        padding: var(--space-xl);
+        transition: left var(--duration-normal) var(--ease-out);
+        border-right: 1px solid var(--glass-border);
+    }
+
+    .sidebar-filter.active {
+        left: 0;
+    }
+
+    /* Countdown */
+    .countdown__block {
+        min-width: 50px;
+        padding: var(--space-xs) var(--space-sm);
+    }
+
+    .countdown__number {
+        font-size: var(--fs-lg);
+    }
+
+    /* Accordion */
+    .accordion__header {
+        padding: var(--space-md) 0;
+        font-size: var(--fs-sm);
+    }
+
+    /* WhatsApp */
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: var(--space-md);
+        right: var(--space-md);
+    }
+}
+
+/* ── Small Mobile (max 480px) ── */
+@media (max-width: 480px) {
+
+    .grid--2,
+    .grid--3,
+    .grid--4,
+    .grid--5,
+    .grid--products {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-sm);
+    }
+
+    .product-card__body {
+        padding: var(--space-xs) var(--space-sm) var(--space-sm);
+    }
+
+    .product-card__category {
+        display: none;
+    }
+
+    .product-card__rating {
+        display: none;
+    }
+
+    .product-card__price-installment {
+        display: none;
+    }
+
+    .objective-card {
+        padding: var(--space-md);
+    }
+
+    .objective-card__icon {
+        width: 48px;
+        height: 48px;
+        font-size: var(--fs-xl);
+    }
+
+    .objective-card__name {
+        font-size: var(--fs-sm);
+    }
+
+    .heading--1 {
+        font-size: var(--fs-xl);
+    }
+
+    .heading--2 {
+        font-size: var(--fs-lg);
+    }
+
+    .carousel__btn {
+        width: 36px;
+        height: 36px;
+        font-size: var(--fs-base);
+    }
+}
+
+/* ── Large Desktop (min 1440px) ── */
+@media (min-width: 1440px) {
+    .container {
+        padding: 0 var(--space-2xl);
+    }
+}
+
+/* ── Desktop-only visibility ── */
+@media (max-width: 768px) {
+    .desktop-only {
+        display: none !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .mobile-only {
+        display: none !important;
+    }
+
+    .mobile-search {
+        display: none !important;
+    }
+}

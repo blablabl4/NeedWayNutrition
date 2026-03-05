@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outlet — Até 50% OFF | Needway Nutrition</title>
+    <link rel="icon" type="image/png" href="IMG_0425.PNG">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+    <div class="topbar">
+        <div class="topbar__track">
+            <span class="topbar__item"><span class="icon">🔥</span> <strong>Outlet até 50% OFF</strong> — Estoque
+                limitado!</span>
+            <span class="topbar__item"><span class="icon">💰</span> <strong>PIX com 10% OFF</strong> extra</span>
+            <span class="topbar__item"><span class="icon">🚚</span> Frete grátis acima de R$250</span>
+        </div>
+    </div>
+
+    <header class="header" id="header">
+        <div class="header__inner">
+            <button class="menu-toggle mobile-only" aria-label="Menu"><span></span><span></span><span></span></button>
+            <a href="index.html" class="header__logo"><img src="IMG_0425.PNG" alt="Needway Nutrition"></a>
+            <div class="header__search desktop-only"><input type="text" class="header__search-input" id="searchInput"
+                    placeholder="Buscar..." autocomplete="off"><button class="header__search-btn">🔍</button>
+                <div class="search-dropdown" id="searchDropdown"></div>
+            </div>
+            <div class="header__actions">
+                <a href="login.html" class="header__action"><span class="header__action-icon">👤</span></a>
+                <a href="favoritos.html" class="header__action"><span class="header__action-icon">♡</span></a>
+                <button class="header__action" onclick="Cart.toggleMiniCart()"><span
+                        class="header__action-icon">🛒</span><span class="header__action-badge cart-count"
+                        style="display:none;">0</span></button>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="nav__inner">
+            <a href="loja.html" class="nav__link">Categorias</a>
+            <a href="lancamentos.html" class="nav__link">Lançamentos</a>
+            <a href="mais-vendidos.html" class="nav__link">Mais Vendidos</a>
+            <a href="outlet.html" class="nav__link active" style="color:var(--accent-gold);">🔥 Outlet</a>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <!-- Outlet Hero -->
+        <div class="outlet-banner" style="border-radius:0;padding:var(--space-3xl) var(--space-xl);">
+            <h1 class="outlet-banner__title" style="font-size:var(--fs-4xl);">🔥 <span class="highlight">Outlet</span>
+                Needway</h1>
+            <p class="outlet-banner__subtitle" style="font-size:var(--fs-lg);">Suplementos com até 50% de desconto.
+                Produtos originais com qualidade garantida!</p>
+            <div class="countdown" id="outletCountdown" style="margin-top:var(--space-xl);"></div>
+            <p class="text-muted text-sm" style="margin-top:var(--space-md);">⚠️ Ofertas por tempo limitado. Quando
+                acabar, acabou!</p>
+        </div>
+
+        <div class="container" style="padding-top:var(--space-2xl);">
+            <div class="grid grid--products" id="outletGrid"></div>
+            <div style="text-align:center;margin-top:var(--space-2xl);">
+                <p class="text-muted">Não encontrou o que procurava? <a href="loja.html" class="link">Explore toda a
+                        loja →</a></p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__grid">
+            <div class="footer__brand"><img src="IMG_0425.PNG" alt="Needway Nutrition">
+                <p>Suplementos de alta performance.</p>
+            </div>
+            <div class="footer__column">
+                <h4>Institucional</h4><a href="sobre.html">Sobre</a><a href="blog.html">Blog</a><a
+                    href="fale-conosco.html">Contato</a>
+            </div>
+            <div class="footer__column">
+                <h4>Ajuda</h4><a href="trocas.html">Trocas</a><a href="politica-entrega.html">Entrega</a><a
+                    href="politica-privacidade.html">Privacidade</a>
+            </div>
+            <div class="footer__column">
+                <h4>Conta</h4><a href="login.html">Entrar</a><a href="meus-pedidos.html">Pedidos</a><a
+                    href="favoritos.html">Favoritos</a>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <div class="footer__bottom-inner"><span class="footer__copyright">© 2026 Needway Nutrition.</span></div>
+        </div>
+    </footer>
+    <aside class="minicart" id="minicart">
+        <div class="minicart__header">
+            <h3 class="minicart__title">🛒 Carrinho</h3><button onclick="Cart.toggleMiniCart()"
+                style="color:var(--text-muted);font-size:var(--fs-xl);">✕</button>
+        </div>
+        <div class="minicart__progress">
+            <div class="minicart__progress-text" id="minicartProgressText"></div>
+            <div class="minicart__progress-bar">
+                <div class="minicart__progress-fill" id="minicartProgressFill" style="width:0%;"></div>
+            </div>
+        </div>
+        <div class="minicart__items" id="minicartItems"></div>
+        <div class="minicart__footer">
+            <div class="minicart__total"><span>Total:</span><span class="minicart__total-value" id="minicartTotal">R$
+                    0,00</span></div><a href="carrinho.html" class="btn btn--primary btn--full">Ver Carrinho</a>
+        </div>
+    </aside>
+    <div class="overlay" id="overlay"></div>
+    <a href="https://wa.me/5500000000000" target="_blank" class="whatsapp-float" aria-label="WhatsApp">💬</a>
+
+    <script src="js/data.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Render outlet products + highest discount products
+            const outletProducts = NeedwayData.products.filter(p => p.isOutlet || p.discount >= 20).sort((a, b) => b.discount - a.discount);
+            document.getElementById('outletGrid').innerHTML = outletProducts.map(renderProductCard).join('');
+            initSearch();
+            const target = new Date(); target.setDate(target.getDate() + 7);
+            initCountdown('#outletCountdown', target.getTime());
+        });
+    </script>
+</body>
+
+</html>

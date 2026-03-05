@@ -1,0 +1,302 @@
+/* ===================================
+   Needway Nutrition — Homepage Styles
+   =================================== */
+
+/* ── Hero ── */
+.hero {
+    position: relative;
+    height: 520px;
+    overflow: hidden;
+}
+
+.hero__slide {
+    position: relative;
+    height: 520px;
+}
+
+.hero__slide-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.1) 100%);
+}
+
+.hero__content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 var(--space-3xl);
+    max-width: var(--container-max);
+    margin: 0 auto;
+    z-index: 2;
+}
+
+.hero__subtitle {
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent-gold);
+    margin-bottom: var(--space-sm);
+}
+
+.hero__title {
+    font-family: var(--font-heading);
+    font-size: var(--fs-5xl);
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    line-height: 1;
+    max-width: 600px;
+    margin-bottom: var(--space-md);
+}
+
+.hero__title .highlight {
+    color: var(--primary);
+}
+
+.hero__desc {
+    font-size: var(--fs-md);
+    color: var(--text-muted);
+    max-width: 480px;
+    margin-bottom: var(--space-xl);
+}
+
+.hero__actions {
+    display: flex;
+    gap: var(--space-md);
+}
+
+/* ── Categories Section ── */
+.categories-section .grid {
+    gap: var(--space-md);
+}
+
+/* ── Best Sellers with Tabs ── */
+.bestsellers .tabs {
+    margin-bottom: var(--space-xl);
+    justify-content: center;
+    border-bottom: none;
+    gap: var(--space-sm);
+}
+
+.bestsellers .tabs__tab {
+    background: var(--bg-dark);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-full);
+    padding: 8px 24px;
+}
+
+.bestsellers .tabs__tab::after {
+    display: none;
+}
+
+.bestsellers .tabs__tab.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+}
+
+/* ── Outlet Banner ── */
+.outlet-banner {
+    position: relative;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    padding: var(--space-3xl);
+    background: linear-gradient(135deg, #1a0a00 0%, #0d0d0d 50%, #1a0d00 100%);
+    border: 1px solid var(--glass-border);
+    text-align: center;
+}
+
+.outlet-banner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 117, 31, 0.08) 0%, transparent 60%);
+    animation: pulse 4s ease-in-out infinite;
+}
+
+.outlet-banner__title {
+    font-family: var(--font-heading);
+    font-size: var(--fs-4xl);
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+}
+
+.outlet-banner__title .highlight {
+    background: var(--gradient-btn);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.outlet-banner__subtitle {
+    font-size: var(--fs-lg);
+    color: var(--text-muted);
+    margin: var(--space-md) 0 var(--space-xl);
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Objectives Section ── */
+.objectives-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+}
+
+/* ── About Section ── */
+.about-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+    align-items: center;
+}
+
+.about-section__image {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+}
+
+.about-section__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.about-section__text {
+    color: var(--text-muted);
+    line-height: 1.8;
+    font-size: var(--fs-base);
+}
+
+/* ── Instagram Feed ── */
+.insta-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--space-xs);
+}
+
+.insta-grid__item {
+    aspect-ratio: 1;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+
+.insta-grid__item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.insta-grid__item:hover img {
+    transform: scale(1.1);
+}
+
+.insta-grid__item::after {
+    content: '📸';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 117, 31, 0.6);
+    font-size: var(--fs-xl);
+    opacity: 0;
+    transition: opacity var(--duration-fast);
+}
+
+.insta-grid__item:hover::after {
+    opacity: 1;
+}
+
+/* ── Homepage Responsive ── */
+@media (max-width: 1024px) {
+    .hero {
+        height: 400px;
+    }
+
+    .hero__slide {
+        height: 400px;
+    }
+
+    .hero__title {
+        font-size: var(--fs-3xl);
+    }
+
+    .objectives-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .about-section {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+    }
+
+    .insta-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        height: 360px;
+    }
+
+    .hero__slide {
+        height: 360px;
+    }
+
+    .hero__content {
+        padding: 0 var(--space-lg);
+    }
+
+    .hero__title {
+        font-size: var(--fs-2xl);
+        max-width: 100%;
+    }
+
+    .hero__desc {
+        font-size: var(--fs-sm);
+    }
+
+    .hero__actions {
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+
+    .hero__actions .btn {
+        width: 100%;
+    }
+
+    .outlet-banner {
+        padding: var(--space-xl);
+    }
+
+    .outlet-banner__title {
+        font-size: var(--fs-2xl);
+    }
+
+    .objectives-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-md);
+    }
+
+    .insta-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

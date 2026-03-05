@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Conta | Needway Nutrition</title>
+    <link rel="icon" type="image/png" href="IMG_0425.PNG">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/cart-checkout.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+    <div class="topbar">
+        <div class="topbar__track">
+            <span class="topbar__item"><span class="icon">🚚</span> <strong>Frete Grátis</strong> acima de R$250</span>
+            <span class="topbar__item"><span class="icon">💰</span> <strong>PIX com 10% OFF</strong></span>
+        </div>
+    </div>
+    <header class="header" id="header">
+        <div class="header__inner">
+            <button class="menu-toggle mobile-only" aria-label="Menu"><span></span><span></span><span></span></button>
+            <a href="index.html" class="header__logo"><img src="IMG_0425.PNG" alt="Needway Nutrition"></a>
+            <div class="header__search desktop-only"><input type="text" class="header__search-input" id="searchInput"
+                    placeholder="Buscar..." autocomplete="off"><button class="header__search-btn">🔍</button>
+                <div class="search-dropdown" id="searchDropdown"></div>
+            </div>
+            <div class="header__actions">
+                <a href="favoritos.html" class="header__action"><span class="header__action-icon">♡</span></a>
+                <button class="header__action" onclick="Cart.toggleMiniCart()"><span
+                        class="header__action-icon">🛒</span><span class="header__action-badge cart-count"
+                        style="display:none;">0</span></button>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="nav__inner">
+            <a href="loja.html" class="nav__link">Categorias</a>
+            <a href="lancamentos.html" class="nav__link">Lançamentos</a>
+            <a href="outlet.html" class="nav__link" style="color:var(--accent-gold);">🔥 Outlet</a>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <div class="container">
+            <div class="breadcrumb"><a href="index.html">Início</a><span class="breadcrumb__separator">›</span><span
+                    class="breadcrumb__current">Minha Conta</span></div>
+
+            <div class="account-page">
+                <!-- Sidebar -->
+                <aside class="account-sidebar">
+                    <div class="account-sidebar__user">
+                        <div class="account-sidebar__avatar">N</div>
+                        <div>
+                            <div class="account-sidebar__name">Needway Cliente</div>
+                            <div class="account-sidebar__email">cliente@needway.com</div>
+                        </div>
+                    </div>
+                    <nav class="account-sidebar__nav">
+                        <a href="#" class="active" onclick="showSection('overview', this)">📊 Visão Geral</a>
+                        <a href="#" onclick="showSection('orders', this)">📦 Meus Pedidos</a>
+                        <a href="#" onclick="showSection('tracking', this)">🚚 Rastreamento</a>
+                        <a href="#" onclick="showSection('addresses', this)">📍 Endereços</a>
+                        <a href="favoritos.html">♡ Favoritos</a>
+                        <a href="#" onclick="showSection('data', this)">👤 Meus Dados</a>
+                        <a href="login.html" style="color:var(--danger);">🚪 Sair</a>
+                    </nav>
+                </aside>
+
+                <!-- Content -->
+                <div class="account-content">
+                    <!-- Overview -->
+                    <div id="sec-overview">
+                        <h2 class="heading heading--3" style="margin-bottom:var(--space-xl);">Olá, <span
+                                class="highlight">Needway Cliente</span>!</h2>
+                        <div class="grid grid--3" style="gap:var(--space-md);">
+                            <div class="glass-card" style="text-align:center;transform:none;">
+                                <div style="font-size:2rem;margin-bottom:var(--space-sm);">📦</div>
+                                <div style="font-size:var(--fs-2xl);font-weight:var(--fw-bold);color:var(--primary);">3
+                                </div>
+                                <div class="text-sm text-muted">Pedidos</div>
+                            </div>
+                            <div class="glass-card" style="text-align:center;transform:none;">
+                                <div style="font-size:2rem;margin-bottom:var(--space-sm);">♡</div>
+                                <div style="font-size:var(--fs-2xl);font-weight:var(--fw-bold);color:var(--primary);">5
+                                </div>
+                                <div class="text-sm text-muted">Favoritos</div>
+                            </div>
+                            <div class="glass-card" style="text-align:center;transform:none;">
+                                <div style="font-size:2rem;margin-bottom:var(--space-sm);">🎁</div>
+                                <div
+                                    style="font-size:var(--fs-2xl);font-weight:var(--fw-bold);color:var(--accent-gold);">
+                                    150</div>
+                                <div class="text-sm text-muted">Pontos</div>
+                            </div>
+                        </div>
+                        <h3 style="margin-top:var(--space-2xl);margin-bottom:var(--space-md);">Últimos Pedidos</h3>
+                        <div class="glass-card" style="transform:none;overflow-x:auto;">
+                            <table style="width:100%;font-size:var(--fs-sm);">
+                                <thead>
+                                    <tr>
+                                        <th
+                                            style="text-align:left;padding:var(--space-sm);border-bottom:1px solid var(--glass-border);color:var(--primary);">
+                                            Pedido</th>
+                                        <th
+                                            style="text-align:left;padding:var(--space-sm);border-bottom:1px solid var(--glass-border);color:var(--primary);">
+                                            Data</th>
+                                        <th
+                                            style="text-align:left;padding:var(--space-sm);border-bottom:1px solid var(--glass-border);color:var(--primary);">
+                                            Status</th>
+                                        <th
+                                            style="text-align:right;padding:var(--space-sm);border-bottom:1px solid var(--glass-border);color:var(--primary);">
+                                            Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td
+                                            style="padding:var(--space-sm);border-bottom:1px solid var(--glass-border);">
+                                            #NW-8F3K2</td>
+                                        <td
+                                            style="padding:var(--space-sm);border-bottom:1px solid var(--glass-border);">
+                                            28/02/2026</td>
+                                        <td
+                                            style="padding:var(--space-sm);border-bottom:1px solid var(--glass-border);">
+                                            <span class="badge badge--success">Entregue</span></td>
+                                        <td
+                                            style="text-align:right;padding:var(--space-sm);border-bottom:1px solid var(--glass-border);">
+                                            R$ 349,90</td>
+                                    </tr>
+                                    <tr>
+                                        <td
+                                            style="padding:var(--space-sm);border-bottom:1px solid var(--glass-border);">
+                                            #NW-7D2J1</td>
+                                        <td
+                                            style="padding:var(--space-sm);border-bottom:1px solid var(--glass-border);">
+                                            15/02/2026</td>
+                                        <td
+                                            style="padding:var(--space-sm);border-bottom:1px solid var(--glass-border);">
+                                            <span class="badge badge--primary">Em trânsito</span></td>
+                                        <td
+                                            style="text-align:right;padding:var(--space-sm);border-bottom:1px solid var(--glass-border);">
+                                            R$ 189,90</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:var(--space-sm);">#NW-6C1I0</td>
+                                        <td style="padding:var(--space-sm);">01/02/2026</td>
+                                        <td style="padding:var(--space-sm);"><span
+                                                class="badge badge--success">Entregue</span></td>
+                                        <td style="text-align:right;padding:var(--space-sm);">R$ 279,80</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Orders -->
+                    <div id="sec-orders" style="display:none;">
+                        <h2 class="heading heading--3" style="margin-bottom:var(--space-xl);">Meus <span
+                                class="highlight">Pedidos</span></h2>
+                        <div style="display:flex;flex-direction:column;gap:var(--space-md);">
+                            <div class="glass-card" style="transform:none;">
+                                <div
+                                    style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--space-md);">
+                                    <div><strong>Pedido #NW-7D2J1</strong><br><span
+                                            class="text-sm text-muted">15/02/2026</span></div>
+                                    <span class="badge badge--primary">Em trânsito</span>
+                                    <strong style="color:var(--primary);">R$ 189,90</strong>
+                                </div>
+                                <hr class="divider">
+                                <div
+                                    style="display:flex;gap:var(--space-md);align-items:center;font-size:var(--fs-sm);">
+                                    <div
+                                        style="width:60px;height:60px;background:var(--bg-dark);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:1.5rem;">
+                                        🥛</div>
+                                    <div>
+                                        <div>Whey Protein Concentrado 900g</div>
+                                        <div class="text-muted">Chocolate · 900g · Qtd: 1</div>
+                                    </div>
+                                </div>
+                                <div
+                                    style="display:flex;gap:var(--space-md);align-items:center;font-size:var(--fs-sm);margin-top:var(--space-sm);">
+                                    <div
+                                        style="width:60px;height:60px;background:var(--bg-dark);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:1.5rem;">
+                                        ⚡</div>
+                                    <div>
+                                        <div>Creatina Monohidratada 300g</div>
+                                        <div class="text-muted">Neutro · 300g · Qtd: 1</div>
+                                    </div>
+                                </div>
+                                <div style="margin-top:var(--space-lg);"><a href="rastreamento.html"
+                                        class="btn btn--outline btn--sm">🚚 Rastrear Pedido</a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tracking -->
+                    <div id="sec-tracking" style="display:none;">
+                        <h2 class="heading heading--3" style="margin-bottom:var(--space-xl);">Rastreamento <span
+                                class="highlight">#NW-7D2J1</span></h2>
+                        <div class="order-status">
+                            <div class="order-status__step completed">
+                                <div class="order-status__dot">✓</div>
+                                <div class="order-status__label">Pedido Confirmado</div>
+                            </div>
+                            <div class="order-status__step completed">
+                                <div class="order-status__dot">✓</div>
+                                <div class="order-status__label">Pagamento Aprovado</div>
+                            </div>
+                            <div class="order-status__step completed">
+                                <div class="order-status__dot">✓</div>
+                                <div class="order-status__label">Em Separação</div>
+                            </div>
+                            <div class="order-status__step active">
+                                <div class="order-status__dot">📦</div>
+                                <div class="order-status__label">Em Trânsito</div>
+                            </div>
+                            <div class="order-status__step">
+                                <div class="order-status__dot">5</div>
+                                <div class="order-status__label">Entregue</div>
+                            </div>
+                        </div>
+                        <h3 style="margin-top:var(--space-2xl);margin-bottom:var(--space-lg);">Histórico</h3>
+                        <div class="tracking-timeline">
+                            <div class="tracking-event">
+                                <div class="tracking-event__date">03/03/2026 — 14:32</div>
+                                <div class="tracking-event__text">Objeto em trânsito — por favor aguarde</div>
+                                <div class="tracking-event__location">📍 São Paulo, SP</div>
+                            </div>
+                            <div class="tracking-event">
+                                <div class="tracking-event__date">02/03/2026 — 09:15</div>
+                                <div class="tracking-event__text">Objeto postado após o horário limite</div>
+                                <div class="tracking-event__location">📍 Centro de Distribuição NW</div>
+                            </div>
+                            <div class="tracking-event">
+                                <div class="tracking-event__date">01/03/2026 — 16:45</div>
+                                <div class="tracking-event__text">Objeto em separação</div>
+                                <div class="tracking-event__location">📍 Estoque Needway</div>
+                            </div>
+                            <div class="tracking-event">
+                                <div class="tracking-event__date">28/02/2026 — 10:20</div>
+                                <div class="tracking-event__text">Pagamento aprovado</div>
+                            </div>
+                            <div class="tracking-event">
+                                <div class="tracking-event__date">28/02/2026 — 10:05</div>
+                                <div class="tracking-event__text">Pedido realizado</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Addresses -->
+                    <div id="sec-addresses" style="display:none;">
+                        <h2 class="heading heading--3" style="margin-bottom:var(--space-xl);">Meus <span
+                                class="highlight">Endereços</span></h2>
+                        <div class="grid grid--2" style="gap:var(--space-md);">
+                            <div class="glass-card" style="transform:none;">
+                                <div style="display:flex;justify-content:space-between;margin-bottom:var(--space-sm);">
+                                    <strong>🏠 Casa</strong><span class="badge badge--primary">Padrão</span></div>
+                                <p class="text-sm text-muted">Rua dos Suplementos, 123<br>Bairro Fitness - São Paulo,
+                                    SP<br>CEP: 01234-567</p>
+                                <div style="margin-top:var(--space-md);display:flex;gap:var(--space-sm);"><button
+                                        class="btn btn--ghost btn--sm">Editar</button><button
+                                        class="btn btn--ghost btn--sm" style="color:var(--danger);">Remover</button>
+                                </div>
+                            </div>
+                            <div class="glass-card"
+                                style="transform:none;border-style:dashed;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:var(--space-md);cursor:pointer;">
+                                <div style="font-size:2rem;color:var(--text-muted);">+</div>
+                                <span class="text-sm text-muted">Adicionar Endereço</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Personal Data -->
+                    <div id="sec-data" style="display:none;">
+                        <h2 class="heading heading--3" style="margin-bottom:var(--space-xl);">Meus <span
+                                class="highlight">Dados</span></h2>
+                        <div class="glass-card" style="transform:none;">
+                            <div class="login-card__form">
+                                <div class="form-grid">
+                                    <div class="input-group"><label>Nome</label><input type="text" class="input"
+                                            value="Needway Cliente"></div>
+                                    <div class="input-group"><label>E-mail</label><input type="email" class="input"
+                                            value="cliente@needway.com"></div>
+                                </div>
+                                <div class="form-grid">
+                                    <div class="input-group"><label>Telefone</label><input type="tel" class="input"
+                                            value="(11) 99999-9999"></div>
+                                    <div class="input-group"><label>CPF</label><input type="text" class="input"
+                                            value="123.456.789-00" disabled style="opacity:0.5;"></div>
+                                </div>
+                                <hr class="divider">
+                                <h4 style="color:var(--primary);">Alterar Senha</h4>
+                                <div class="input-group"><label>Senha Atual</label><input type="password" class="input"
+                                        placeholder="Senha atual"></div>
+                                <div class="form-grid">
+                                    <div class="input-group"><label>Nova Senha</label><input type="password"
+                                            class="input" placeholder="Nova senha"></div>
+                                    <div class="input-group"><label>Confirmar</label><input type="password"
+                                            class="input" placeholder="Confirmar nova senha"></div>
+                                </div>
+                                <button class="btn btn--primary">Salvar Alterações</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__grid">
+            <div class="footer__brand"><img src="IMG_0425.PNG" alt="Needway Nutrition">
+                <p>Suplementos de alta performance.</p>
+            </div>
+            <div class="footer__column">
+                <h4>Institucional</h4><a href="sobre.html">Sobre</a><a href="blog.html">Blog</a><a
+                    href="fale-conosco.html">Contato</a>
+            </div>
+            <div class="footer__column">
+                <h4>Ajuda</h4><a href="trocas.html">Trocas</a><a href="politica-entrega.html">Entrega</a><a
+                    href="politica-privacidade.html">Privacidade</a>
+            </div>
+            <div class="footer__column">
+                <h4>Conta</h4><a href="login.html">Entrar</a><a href="meus-pedidos.html">Pedidos</a><a
+                    href="favoritos.html">Favoritos</a>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <div class="footer__bottom-inner"><span class="footer__copyright">© 2026 Needway Nutrition.</span></div>
+        </div>
+    </footer>
+
+    <aside class="minicart" id="minicart">
+        <div class="minicart__header">
+            <h3 class="minicart__title">🛒 Carrinho</h3><button onclick="Cart.toggleMiniCart()"
+                style="color:var(--text-muted);font-size:var(--fs-xl);">✕</button>
+        </div>
+        <div class="minicart__progress">
+            <div class="minicart__progress-text" id="minicartProgressText"></div>
+            <div class="minicart__progress-bar">
+                <div class="minicart__progress-fill" id="minicartProgressFill" style="width:0%;"></div>
+            </div>
+        </div>
+        <div class="minicart__items" id="minicartItems"></div>
+        <div class="minicart__footer">
+            <div class="minicart__total"><span>Total:</span><span class="minicart__total-value" id="minicartTotal">R$
+                    0,00</span></div><a href="carrinho.html" class="btn btn--primary btn--full">Ver Carrinho</a>
+        </div>
+    </aside>
+    <div class="overlay" id="overlay"></div>
+    <a href="https://wa.me/5500000000000" target="_blank" class="whatsapp-float" aria-label="WhatsApp">💬</a>
+
+    <script src="js/data.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        function showSection(section, el) {
+            document.querySelectorAll('[id^="sec-"]').forEach(s => s.style.display = 'none');
+            document.getElementById(`sec-${section}`).style.display = 'block';
+            document.querySelectorAll('.account-sidebar__nav a').forEach(a => a.classList.remove('active'));
+            el?.classList.add('active');
+        }
+    </script>
+</body>
+
+</html>

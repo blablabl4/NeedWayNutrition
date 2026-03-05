@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Loja Needway Nutrition — Todos os suplementos de alta performance em um só lugar.">
+    <title>Loja | Needway Nutrition</title>
+    <link rel="icon" type="image/png" href="IMG_0425.PNG">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        .shop-layout {
+            display: flex;
+            gap: var(--space-2xl);
+            padding: var(--space-xl) 0;
+        }
+
+        .shop-main {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .shop-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+
+        .shop-header__count {
+            font-size: var(--fs-sm);
+            color: var(--text-muted);
+        }
+
+        .shop-header__sort select {
+            padding: 8px 16px;
+            background: var(--bg-dark);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            color: var(--text-light);
+            font-size: var(--fs-sm);
+        }
+
+        .mobile-filter-btn {
+            display: none;
+        }
+
+        @media(max-width:768px) {
+            .mobile-filter-btn {
+                display: flex;
+            }
+
+            .shop-layout {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- TOP BAR -->
+    <div class="topbar">
+        <div class="topbar__track">
+            <span class="topbar__item"><span class="icon">🚚</span> <strong>Frete Grátis</strong> acima de R$250</span>
+            <span class="topbar__item"><span class="icon">💰</span> <strong>PIX com 10% OFF</strong></span>
+            <span class="topbar__item"><span class="icon">⚡</span> Entrega rápida <strong>todo Brasil</strong></span>
+            <span class="topbar__item"><span class="icon">🔒</span> Compra <strong>100% segura</strong></span>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header" id="header">
+        <div class="header__inner">
+            <button class="menu-toggle mobile-only" aria-label="Menu"><span></span><span></span><span></span></button>
+            <a href="index.html" class="header__logo"><img src="IMG_0425.PNG" alt="Needway Nutrition"></a>
+            <div class="header__search desktop-only" id="headerSearch">
+                <input type="text" class="header__search-input" id="searchInput"
+                    placeholder="Busque por whey, creatina, pré-treino..." autocomplete="off">
+                <button class="header__search-btn" aria-label="Buscar"
+                    onclick="document.getElementById('searchInput').value&&(window.location.href='busca.html?q='+encodeURIComponent(document.getElementById('searchInput').value))">🔍</button>
+                <div class="search-dropdown" id="searchDropdown"></div>
+            </div>
+            <div class="header__actions">
+                <a href="login.html" class="header__action"><span class="header__action-icon">👤</span><span
+                        class="desktop-only">Entrar</span></a>
+                <a href="favoritos.html" class="header__action"><span class="header__action-icon">♡</span><span
+                        class="desktop-only">Favoritos</span></a>
+                <button class="header__action" onclick="Cart.toggleMiniCart()"><span
+                        class="header__action-icon">🛒</span><span class="desktop-only">Carrinho</span><span
+                        class="header__action-badge cart-count" style="display:none;">0</span></button>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav" id="mainNav">
+        <div class="nav__inner">
+            <a href="loja.html" class="nav__link active">Categorias</a>
+            <a href="lancamentos.html" class="nav__link">Lançamentos</a>
+            <a href="mais-vendidos.html" class="nav__link">Mais Vendidos</a>
+            <a href="outlet.html" class="nav__link" style="color:var(--accent-gold);">🔥 Outlet</a>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Início</a><span class="breadcrumb__separator">›</span><span
+                    class="breadcrumb__current" id="shopTitle">Loja</span>
+            </div>
+
+            <h1 class="heading heading--2" id="shopHeading" style="margin-bottom:var(--space-lg);">Todos os <span
+                    class="highlight">Produtos</span></h1>
+
+            <div class="shop-layout">
+                <!-- Sidebar Filters -->
+                <aside class="sidebar-filter" id="sidebarFilter">
+                    <div class="sidebar-filter__group">
+                        <h3 class="sidebar-filter__title">Categorias</h3>
+                        <div id="filterCategories"></div>
+                    </div>
+                    <div class="sidebar-filter__group">
+                        <h3 class="sidebar-filter__title">Preço</h3>
+                        <div class="price-range">
+                            <div class="price-range__values"><span>R$ 0</span><span>R$ 350</span></div>
+                            <input type="range" min="0" max="350" value="350"
+                                style="width:100%;accent-color:var(--primary);" oninput="filterByPrice(this.value)">
+                            <div
+                                style="text-align:center;font-size:var(--fs-sm);color:var(--primary);margin-top:var(--space-xs);">
+                                Até: <strong id="priceMaxLabel">R$ 350</strong></div>
+                        </div>
+                    </div>
+                    <div class="sidebar-filter__group">
+                        <h3 class="sidebar-filter__title">Objetivo</h3>
+                        <div id="filterObjectives"></div>
+                    </div>
+                    <div class="sidebar-filter__group">
+                        <h3 class="sidebar-filter__title">Avaliação</h3>
+                        <div class="sidebar-filter__option" onclick="filterByRating(4)"><span class="stars"
+                                style="font-size:var(--fs-sm);">★★★★<span class="star-empty">★</span></span> <span
+                                style="margin-left:var(--space-sm);">& acima</span></div>
+                        <div class="sidebar-filter__option" onclick="filterByRating(3)"><span class="stars"
+                                style="font-size:var(--fs-sm);">★★★<span class="star-empty">★★</span></span> <span
+                                style="margin-left:var(--space-sm);">& acima</span></div>
+                    </div>
+                    <button class="btn btn--outline btn--sm btn--full" onclick="clearFilters()"
+                        style="margin-top:var(--space-lg);">Limpar Filtros</button>
+                </aside>
+
+                <!-- Main Products -->
+                <div class="shop-main">
+                    <div class="shop-header">
+                        <div>
+                            <button class="btn btn--dark btn--sm mobile-filter-btn"
+                                onclick="document.getElementById('sidebarFilter').classList.toggle('active');document.getElementById('overlay').classList.toggle('active');">☰
+                                Filtros</button>
+                            <span class="shop-header__count" id="productCount">0 produtos</span>
+                        </div>
+                        <div class="shop-header__sort">
+                            <select onchange="sortProducts(this.value)" id="sortSelect">
+                                <option value="relevance">Relevância</option>
+                                <option value="price-asc">Menor Preço</option>
+                                <option value="price-desc">Maior Preço</option>
+                                <option value="name">Nome A-Z</option>
+                                <option value="best-seller">Mais Vendidos</option>
+                                <option value="rating">Melhor Avaliação</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="grid grid--products" id="productsGrid"></div>
+                    <div class="pagination" id="pagination"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer__grid">
+            <div class="footer__brand"><img src="IMG_0425.PNG" alt="Needway Nutrition">
+                <p>Suplementos de alta performance.</p>
+            </div>
+            <div class="footer__column">
+                <h4>Institucional</h4><a href="sobre.html">Sobre</a><a href="blog.html">Blog</a><a
+                    href="fale-conosco.html">Contato</a>
+            </div>
+            <div class="footer__column">
+                <h4>Ajuda</h4><a href="trocas.html">Trocas</a><a href="politica-entrega.html">Entrega</a><a
+                    href="politica-privacidade.html">Privacidade</a>
+            </div>
+            <div class="footer__column">
+                <h4>Conta</h4><a href="login.html">Entrar</a><a href="meus-pedidos.html">Pedidos</a><a
+                    href="favoritos.html">Favoritos</a>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <div class="footer__bottom-inner"><span class="footer__copyright">© 2026 Needway Nutrition.</span></div>
+        </div>
+    </footer>
+
+    <aside class="minicart" id="minicart">
+        <div class="minicart__header">
+            <h3 class="minicart__title">🛒 Carrinho</h3><button onclick="Cart.toggleMiniCart()"
+                style="color:var(--text-muted);font-size:var(--fs-xl);">✕</button>
+        </div>
+        <div class="minicart__progress">
+            <div class="minicart__progress-text" id="minicartProgressText"></div>
+            <div class="minicart__progress-bar">
+                <div class="minicart__progress-fill" id="minicartProgressFill" style="width:0%;"></div>
+            </div>
+        </div>
+        <div class="minicart__items" id="minicartItems"></div>
+        <div class="minicart__footer">
+            <div class="minicart__total"><span>Total:</span><span class="minicart__total-value" id="minicartTotal">R$
+                    0,00</span></div><a href="carrinho.html" class="btn btn--primary btn--full"
+                style="margin-bottom:var(--space-sm);">Ver Carrinho</a><a href="checkout.html"
+                class="btn btn--gold btn--full">Finalizar</a>
+        </div>
+    </aside>
+    <div class="overlay" id="overlay"></div>
+    <a href="https://wa.me/5500000000000" target="_blank" class="whatsapp-float" aria-label="WhatsApp">💬</a>
+
+    <script src="js/data.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        let filteredProducts = [...NeedwayData.products];
+        let activeFilters = { categories: [], maxPrice: 350, minRating: 0 };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const cat = params.get('cat');
+            const obj = params.get('obj');
+
+            // Build filter UI
+            document.getElementById('filterCategories').innerHTML = NeedwayData.categories.map(c => `
+        <div class="sidebar-filter__option" onclick="toggleCategoryFilter('${c.id}', this)">
+          <div class="sidebar-filter__checkbox" id="chk-${c.id}"></div>
+          <span>${c.icon} ${c.name} (${c.count})</span>
+        </div>`).join('');
+
+            document.getElementById('filterObjectives').innerHTML = NeedwayData.objectives.map(o => `
+        <div class="sidebar-filter__option" onclick="toggleObjectiveFilter('${o.id}')">
+          <span>${o.icon} ${o.name}</span>
+        </div>`).join('');
+
+            // Pre-filter by URL params
+            if (cat) {
+                activeFilters.categories = [cat];
+                const catObj = NeedwayData.categories.find(c => c.id === cat);
+                if (catObj) {
+                    document.getElementById('shopHeading').innerHTML = `${catObj.icon} <span class="highlight">${catObj.name}</span>`;
+                    document.getElementById('shopTitle').textContent = catObj.name;
+                    document.title = `${catObj.name} | Needway Nutrition`;
+                }
+                document.getElementById(`chk-${cat}`)?.classList.add('checked');
+            }
+
+            applyFilters();
+            initSearch();
+        });
+
+        function toggleCategoryFilter(catId, el) {
+            const idx = activeFilters.categories.indexOf(catId);
+            if (idx >= 0) { activeFilters.categories.splice(idx, 1); } else { activeFilters.categories.push(catId); }
+            document.getElementById(`chk-${catId}`)?.classList.toggle('checked');
+            applyFilters();
+        }
+
+        function toggleObjectiveFilter(objId) {
+            // Simple toggle: filter by tags
+            applyFilters();
+        }
+
+        function filterByPrice(maxPrice) {
+            activeFilters.maxPrice = parseInt(maxPrice);
+            document.getElementById('priceMaxLabel').textContent = formatPrice(activeFilters.maxPrice);
+            applyFilters();
+        }
+
+        function filterByRating(minRating) {
+            activeFilters.minRating = minRating;
+            applyFilters();
+        }
+
+        function clearFilters() {
+            activeFilters = { categories: [], maxPrice: 350, minRating: 0 };
+            document.querySelectorAll('.sidebar-filter__checkbox').forEach(c => c.classList.remove('checked'));
+            document.getElementById('shopHeading').innerHTML = 'Todos os <span class="highlight">Produtos</span>';
+            applyFilters();
+        }
+
+        function applyFilters() {
+            filteredProducts = NeedwayData.products.filter(p => {
+                if (activeFilters.categories.length > 0 && !activeFilters.categories.includes(p.category)) return false;
+                if (p.price > activeFilters.maxPrice) return false;
+                if (p.rating < activeFilters.minRating) return false;
+                return true;
+            });
+            sortProducts(document.getElementById('sortSelect')?.value || 'relevance');
+        }
+
+        function sortProducts(sortBy) {
+            switch (sortBy) {
+                case 'price-asc': filteredProducts.sort((a, b) => a.price - b.price); break;
+                case 'price-desc': filteredProducts.sort((a, b) => b.price - a.price); break;
+                case 'name': filteredProducts.sort((a, b) => a.name.localeCompare(b.name)); break;
+                case 'best-seller': filteredProducts.sort((a, b) => b.sold - a.sold); break;
+                case 'rating': filteredProducts.sort((a, b) => b.rating - a.rating); break;
+                default: filteredProducts.sort((a, b) => b.sold - a.sold); break;
+            }
+            renderProducts();
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            const count = document.getElementById('productCount');
+            count.textContent = `${filteredProducts.length} produto${filteredProducts.length !== 1 ? 's' : ''}`;
+
+            if (filteredProducts.length === 0) {
+                grid.innerHTML = `<div style="grid-column:1/-1;" class="empty-state"><div class="empty-state__icon">🔍</div><h3 class="empty-state__title">Nenhum produto encontrado</h3><p class="empty-state__text">Tente ajustar os filtros ou explorar outras categorias.</p><a href="loja.html" class="btn btn--outline">Ver Todos</a></div>`;
+                return;
+            }
+            grid.innerHTML = filteredProducts.map(renderProductCard).join('');
+        }
+    </script>
+</body>
+
+</html>
