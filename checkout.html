@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout | Needway Nutrition</title>
-    <link rel="icon" type="image/png" href="IMG_0425.PNG">
+    <link rel="icon" type="image/png" href="icone sem fundo.png">
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/global.css">
@@ -18,7 +18,7 @@
 <body>
     <header class="header">
         <div class="header__inner">
-            <a href="index.html" class="header__logo"><img src="IMG_0425.PNG" alt="Needway Nutrition"></a>
+            <a href="index.html" class="header__logo"><img src="logo sem fundo.png" alt="Needway Nutrition"></a>
             <div
                 style="display:flex;align-items:center;gap:var(--space-sm);color:var(--text-muted);font-size:var(--fs-sm);">
                 🔒 Ambiente Seguro</div>
@@ -219,7 +219,24 @@
                     <h3 class="cart-summary__title">Seu Pedido</h3>
                     <div id="checkoutItems"></div>
                     <hr class="divider">
+                    <!-- Coupon -->
+                    <div style="margin-bottom:var(--space-md);">
+                        <label
+                            style="font-size:var(--fs-sm);color:var(--text-muted);display:block;margin-bottom:var(--space-xs);">🎁
+                            Cupom de desconto</label>
+                        <div style="display:flex;gap:var(--space-xs);">
+                            <input type="text" class="input" id="ckoCouponInput" placeholder="Digite seu cupom"
+                                style="flex:1;padding:8px 12px;font-size:var(--fs-sm);text-transform:uppercase;">
+                            <button class="btn btn--primary btn--sm" onclick="applyCouponCheckout()"
+                                style="white-space:nowrap;">Aplicar</button>
+                        </div>
+                        <div id="ckoCouponMsg" style="margin-top:var(--space-xs);font-size:var(--fs-xs);"></div>
+                    </div>
                     <div class="cart-summary__row"><span>Subtotal</span><span id="ckoSubtotal">R$ 0,00</span></div>
+                    <div class="cart-summary__row" id="ckoCouponRow" style="display:none;color:var(--success);">
+                        <span>Cupom (<span id="ckoCouponName"></span>)</span><span id="ckoCouponDiscount">- R$
+                            0,00</span>
+                    </div>
                     <div class="cart-summary__row"><span>Frete</span><span id="ckoShipping">A calcular</span></div>
                     <div class="cart-summary__row cart-summary__row--pix"><span>Total no PIX</span><span id="ckoPix">R$
                             0,00</span></div>
@@ -240,11 +257,34 @@
         let currentStep = 1;
         let selectedShipping = 'sedex';
         let selectedPayment = 'pix';
+        let checkoutCoupon = null;
 
         document.addEventListener('DOMContentLoaded', () => {
             renderCheckoutSummary();
             populateInstallments();
         });
+
+        function applyCouponCheckout() {
+            const input = document.getElementById('ckoCouponInput');
+            const msg = document.getElementById('ckoCouponMsg');
+            const code = input.value.trim().toUpperCase();
+            if (!code) { msg.innerHTML = '<span style="color:var(--danger);">Digite um cupom</span>'; return; }
+            const coupon = NeedwayData.coupons.find(c => c.code === code);
+            if (!coupon) { msg.innerHTML = '<span style="color:var(--danger);">❌ Cupom inválido</span>'; checkoutCoupon = null; }
+            else {
+                const subtotal = Cart.getTotal();
+                if (coupon.minValue && subtotal < coupon.minValue) {
+                    msg.innerHTML = `<span style="color:var(--warning);">⚠️ Mínimo de ${formatPrice(coupon.minValue)}</span>`;
+                    checkoutCoupon = null;
+                } else {
+                    checkoutCoupon = coupon;
+                    msg.innerHTML = `<span style="color:var(--success);">✅ Cupom aplicado! ${coupon.discount}% OFF</span>`;
+                    input.disabled = true;
+                    input.style.opacity = '0.6';
+                }
+            }
+            renderCheckoutSummary();
+        }
 
         function goToStep(step) {
             document.querySelectorAll('.checkout-form').forEach(f => f.style.display = 'none');
@@ -286,10 +326,23 @@
           <span>${formatPrice(item.price * item.quantity)}</span>
         </div>`).join('');
 
-            const subtotal = Cart.getTotal();
+            let subtotal = Cart.getTotal();
             const shipping = NeedwayData.shippingOptions.find(o => o.id === selectedShipping);
             const shippingCost = subtotal >= NeedwayData.config.freeShippingMin && selectedShipping !== 'express' ? 0 : (shipping?.price || 0);
-            const total = subtotal + shippingCost;
+
+            let couponDiscount = 0;
+            const couponRow = document.getElementById('ckoCouponRow');
+            if (checkoutCoupon) {
+                couponDiscount = subtotal * (checkoutCoupon.discount / 100);
+                couponRow.style.display = 'flex';
+                document.getElementById('ckoCouponName').textContent = checkoutCoupon.code;
+                document.getElementById('ckoCouponDiscount').textContent = '- ' + formatPrice(couponDiscount);
+            } else {
+                couponRow.style.display = 'none';
+            }
+
+            const totalAfterCoupon = subtotal - couponDiscount;
+            const total = totalAfterCoupon + shippingCost;
             const pix = total * (1 - NeedwayData.config.pixDiscount);
 
             document.getElementById('ckoSubtotal').textContent = formatPrice(subtotal);
