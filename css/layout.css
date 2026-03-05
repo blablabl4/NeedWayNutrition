@@ -88,10 +88,6 @@
     width: auto;
 }
 
-.header__logo .logo-mobile {
-    display: none;
-}
-
 /* ── Search Bar ── */
 .header__search {
     flex: 1;
@@ -530,7 +526,7 @@
 }
 
 .footer__brand img {
-    height: 200px;
+    height: 150px;
     width: auto;
     object-fit: contain;
 }

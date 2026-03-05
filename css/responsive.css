@@ -88,15 +88,8 @@
         height: 38px;
     }
 
-    .header__logo .logo-desktop {
-        display: none;
-    }
-
-    .header__logo .logo-mobile {
-        display: block;
-    }
-
-    .header__action span {
+    /* Hide text labels but keep emoji icons on mobile */
+    .header__action span:not(.header__action-icon):not(.header__action-badge):not(.theme-toggle__icon):not(.cart-count) {
         display: none;
     }
 
@@ -104,10 +97,7 @@
         padding: var(--space-xs);
     }
 
-    /* Theme toggle icon should still show on mobile */
-    .header__action .theme-toggle__icon {
-        display: inline !important;
-    }
+
 
     .menu-toggle {
         display: flex;
