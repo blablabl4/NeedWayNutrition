@@ -748,6 +748,7 @@
 /* ── Page Content ── */
 .page-content {
     min-height: calc(100vh - var(--header-height) - var(--topbar-height));
+    padding-bottom: var(--space-3xl);
 }
 
 /* ── Popup / Modal ── */
