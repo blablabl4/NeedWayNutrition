@@ -216,6 +216,14 @@
 .header__action-icon {
     font-size: var(--fs-xl);
     line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header__action-icon svg {
+    width: 20px;
+    height: 20px;
 }
 
 .header__action-badge {
