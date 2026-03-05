@@ -273,12 +273,12 @@
             if (!coupon) { msg.innerHTML = '<span style="color:var(--danger);">❌ Cupom inválido</span>'; checkoutCoupon = null; }
             else {
                 const subtotal = Cart.getTotal();
-                if (coupon.minValue && subtotal < coupon.minValue) {
-                    msg.innerHTML = `<span style="color:var(--warning);">⚠️ Mínimo de ${formatPrice(coupon.minValue)}</span>`;
+                if (coupon.minOrder > 0 && subtotal < coupon.minOrder) {
+                    msg.innerHTML = `<span style="color:var(--warning);">⚠️ Mínimo de ${formatPrice(coupon.minOrder)}</span>`;
                     checkoutCoupon = null;
                 } else {
                     checkoutCoupon = coupon;
-                    msg.innerHTML = `<span style="color:var(--success);">✅ Cupom aplicado! ${coupon.discount}% OFF</span>`;
+                    msg.innerHTML = `<span style="color:var(--success);">✅ ${coupon.description}</span>`;
                     input.disabled = true;
                     input.style.opacity = '0.6';
                 }
@@ -333,7 +333,9 @@
             let couponDiscount = 0;
             const couponRow = document.getElementById('ckoCouponRow');
             if (checkoutCoupon) {
-                couponDiscount = subtotal * (checkoutCoupon.discount / 100);
+                if (checkoutCoupon.type === 'percent') couponDiscount = subtotal * (checkoutCoupon.value / 100);
+                else if (checkoutCoupon.type === 'fixed') couponDiscount = checkoutCoupon.value;
+                else if (checkoutCoupon.type === 'shipping') couponDiscount = 0;
                 couponRow.style.display = 'flex';
                 document.getElementById('ckoCouponName').textContent = checkoutCoupon.code;
                 document.getElementById('ckoCouponDiscount').textContent = '- ' + formatPrice(couponDiscount);
