@@ -100,12 +100,12 @@
     --space-4xl: 6rem;
     /* 96px */
 
-    /* ── Border Radius ── */
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 12px;
-    --radius-xl: 16px;
-    --radius-2xl: 24px;
+    /* ── Border Radius (cantos retos) ── */
+    --radius-sm: 0px;
+    --radius-md: 0px;
+    --radius-lg: 0px;
+    --radius-xl: 0px;
+    --radius-2xl: 0px;
     --radius-full: 9999px;
 
     /* ── Shadows ── */
@@ -140,14 +140,51 @@
     --sidebar-width: 280px;
 }
 
-/* ── Dark sections ── */
-[data-theme="dark"] {
-    --bg-current: var(--bg-main);
-    --text-current: var(--text-light);
+/* ══════════════════════════════════
+   TEMA CLARO (Light Mode)
+   ══════════════════════════════════ */
+body.theme-light {
+    --bg-main: #F5F5F5;
+    --bg-dark: #FFFFFF;
+    --bg-darker: #EBEBEB;
+    --bg-card-dark: #FFFFFF;
+    --bg-card-light: #FFFFFF;
+    --bg-surface: #F5F5F5;
+    --bg-surface-alt: #EBEBEB;
+
+    --text-light: #1A1A1A;
+    --text-dark: #1A1A1A;
+    --text-muted: #666666;
+    --text-muted-dark: #999999;
+
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(0, 0, 0, 0.1);
+
+    --gradient-hero: linear-gradient(135deg, #F5F5F5 0%, #FFFFFF 50%, #EBEBEB 100%);
+    --gradient-overlay: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(245, 245, 245, 0.9) 100%);
+
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 16px 50px rgba(0, 0, 0, 0.12);
+
+    --primary-light: rgba(255, 117, 31, 0.1);
+    --success-bg: rgba(46, 204, 113, 0.08);
+    --danger-bg: rgba(231, 76, 60, 0.08);
 }
 
-/* ── Light sections ── */
-[data-theme="light"] {
-    --bg-current: var(--bg-surface);
-    --text-current: var(--text-dark);
+/* Ajustes específicos do light mode */
+body.theme-light .header,
+body.theme-light .nav,
+body.theme-light .footer {
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+body.theme-light .topbar {
+    background: #1A1A1A;
+    color: #F5F5F5;
+}
+
+body.theme-light .product-card {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
