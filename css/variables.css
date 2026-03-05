@@ -6,11 +6,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap');
 
 :root {
-    /* ── Brand Colors ── */
-    --primary: #FF751F;
-    --primary-hover: #CC5E18;
-    --primary-light: rgba(255, 117, 31, 0.15);
-    --primary-glow: rgba(255, 117, 31, 0.4);
+    /* ── Brand Colors (Warm Amber — sofisticado, menos cansativo) ── */
+    --primary: #E8723A;
+    --primary-hover: #C95F2E;
+    --primary-light: rgba(232, 114, 58, 0.12);
+    --primary-glow: rgba(232, 114, 58, 0.35);
 
     /* ── Backgrounds ── */
     --bg-main: #000000;
@@ -28,8 +28,8 @@
     --text-muted-dark: #666666;
 
     /* ── Accent ── */
-    --accent-gold: #FFB81F;
-    --accent-gold-hover: #E5A51B;
+    --accent-gold: #F0AD4E;
+    --accent-gold-hover: #D99A3E;
 
     /* ── Semantic ── */
     --success: #2ECC71;
@@ -40,11 +40,11 @@
     --info: #3498DB;
 
     /* ── Gradients ── */
-    --gradient-btn: linear-gradient(135deg, #FF751F 0%, #CC5E18 100%);
-    --gradient-btn-hover: linear-gradient(135deg, #CC5E18 0%, #FF751F 100%);
+    --gradient-btn: linear-gradient(135deg, #E8723A 0%, #C95F2E 100%);
+    --gradient-btn-hover: linear-gradient(135deg, #C95F2E 0%, #E8723A 100%);
     --gradient-hero: linear-gradient(135deg, #000000 0%, #1A1A1A 50%, #0D0D0D 100%);
     --gradient-overlay: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.85) 100%);
-    --gradient-gold: linear-gradient(135deg, #FFB81F 0%, #FF751F 100%);
+    --gradient-gold: linear-gradient(135deg, #F0AD4E 0%, #E8723A 100%);
 
     /* ── Glass ── */
     --glass-bg: rgba(26, 26, 26, 0.8);
@@ -113,8 +113,8 @@
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
     --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.2);
     --shadow-xl: 0 16px 50px rgba(0, 0, 0, 0.3);
-    --shadow-glow: 0 0 20px rgba(255, 117, 31, 0.3);
-    --shadow-gold: 0 0 15px rgba(255, 184, 31, 0.25);
+    --shadow-glow: 0 0 20px rgba(232, 114, 58, 0.25);
+    --shadow-gold: 0 0 15px rgba(240, 173, 78, 0.2);
 
     /* ── Transitions ── */
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -168,7 +168,7 @@ body.theme-light {
     --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.1);
     --shadow-xl: 0 16px 50px rgba(0, 0, 0, 0.12);
 
-    --primary-light: rgba(255, 117, 31, 0.1);
+    --primary-light: rgba(232, 114, 58, 0.08);
     --success-bg: rgba(46, 204, 113, 0.08);
     --danger-bg: rgba(231, 76, 60, 0.08);
 }
@@ -180,9 +180,22 @@ body.theme-light .footer {
     border-color: rgba(0, 0, 0, 0.08);
 }
 
+/* Topbar SEMPRE escura — texto visível no light mode */
 body.theme-light .topbar {
     background: #1A1A1A;
     color: #F5F5F5;
+}
+
+body.theme-light .topbar__item {
+    color: #F5F5F5;
+}
+
+body.theme-light .topbar__item strong {
+    color: #F0AD4E;
+}
+
+body.theme-light .topbar__item .icon {
+    color: #E8723A;
 }
 
 body.theme-light .product-card {
