@@ -140,6 +140,9 @@
 .product-card__price-wrap {
     margin-top: auto;
     padding-top: var(--space-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
 }
 
 .product-card__price-original {
@@ -164,6 +167,16 @@
 .product-card__price-installment {
     font-size: var(--fs-xs);
     color: var(--text-muted);
+}
+
+/* Quick Add: desktop = full button, mobile = icon only */
+.quick-add__icon {
+    display: none;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: var(--radius-md);
+    margin-left: auto;
 }
 
 /* ── Category Card ── */
@@ -887,8 +900,17 @@
     }
 
     .product-card__quick-add {
-        font-size: var(--fs-xs);
-        padding: var(--space-xs) var(--space-sm);
+        transform: translateY(0);
+        padding: var(--space-xs);
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    }
+
+    .quick-add__full {
+        display: none !important;
+    }
+
+    .quick-add__icon {
+        display: inline-flex;
     }
 }
 

@@ -277,6 +277,7 @@ function renderProductCard(product) {
     const stock = getStockStatus(product.stock);
     const pix = getPixPrice(product.price);
     const inst = getInstallments(product.price);
+    const CART_SVG = '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>';
 
     return `
     <div class="product-card" data-product-id="${product.id}">
@@ -290,8 +291,11 @@ function renderProductCard(product) {
         </div>
         <button class="product-card__favorite" onclick="event.preventDefault(); event.stopPropagation(); toggleFavorite(${product.id}, this);" aria-label="Favoritar">♡</button>
         <div class="product-card__quick-add">
-          <button class="btn btn--primary btn--sm btn--full" onclick="event.preventDefault(); event.stopPropagation(); Cart.addItem(${product.id}, 1, '${product.flavors[0] || ''}', '${product.sizes[0] || ''}');">
-            🛒 Adicionar
+          <button class="btn btn--primary btn--sm btn--full quick-add__full" onclick="event.preventDefault(); event.stopPropagation(); Cart.addItem(${product.id}, 1, '${product.flavors[0] || ''}', '${product.sizes[0] || ''}');">
+            ${CART_SVG} Adicionar
+          </button>
+          <button class="btn btn--primary btn--sm quick-add__icon" onclick="event.preventDefault(); event.stopPropagation(); Cart.addItem(${product.id}, 1, '${product.flavors[0] || ''}', '${product.sizes[0] || ''}');" aria-label="Adicionar">
+            ${CART_SVG}
           </button>
         </div>
       </a>
@@ -305,7 +309,7 @@ function renderProductCard(product) {
         <div class="product-card__price-wrap">
           ${product.originalPrice > product.price ? `<span class="product-card__price-original">${formatPrice(product.originalPrice)}</span>` : ''}
           <span class="product-card__price">${formatPrice(product.price)}</span>
-          <span class="product-card__price-pix">💰 ${formatPrice(pix)} no PIX</span>
+          <span class="product-card__price-pix">${formatPrice(pix)} no PIX</span>
           <span class="product-card__price-installment">ou ${inst.count}x de ${formatPrice(inst.value)} s/ juros</span>
         </div>
       </div>
