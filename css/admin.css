@@ -1,0 +1,211 @@
+/* ===================================
+   Needway Nutrition — Admin Panel
+   =================================== */
+
+.admin-login {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-main);
+    padding: var(--space-lg);
+}
+
+.admin-login__card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2xl);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+.admin-login__card img {
+    height: 60px;
+    margin-bottom: var(--space-lg);
+}
+
+/* Dashboard */
+.admin-wrap {
+    display: flex;
+    min-height: 100vh;
+}
+
+.admin-sidebar {
+    width: 240px;
+    background: var(--bg-darker);
+    border-right: 1px solid var(--glass-border);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 10;
+}
+
+.admin-sidebar__logo {
+    text-align: center;
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--glass-border);
+    margin-bottom: var(--space-md);
+}
+
+.admin-sidebar__logo img {
+    height: 40px;
+}
+
+.admin-sidebar__link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 10px 14px;
+    border-radius: var(--radius-md);
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    transition: all var(--duration-fast);
+    cursor: pointer;
+}
+
+.admin-sidebar__link:hover,
+.admin-sidebar__link.active {
+    background: var(--primary);
+    color: #fff;
+}
+
+.admin-sidebar__link svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.admin-main {
+    flex: 1;
+    margin-left: 240px;
+    padding: var(--space-xl);
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-xl);
+}
+
+.admin-header h1 {
+    font-size: var(--fs-2xl);
+    font-weight: var(--fw-bold);
+}
+
+/* Stats */
+.admin-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.admin-stat {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+}
+
+.admin-stat__label {
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.admin-stat__value {
+    font-size: var(--fs-2xl);
+    font-weight: var(--fw-bold);
+    color: var(--primary);
+    margin-top: var(--space-xs);
+}
+
+/* Table */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.admin-table th {
+    text-align: left;
+    padding: 12px 16px;
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--glass-border);
+    background: var(--bg-darker);
+}
+
+.admin-table td {
+    padding: 12px 16px;
+    font-size: var(--fs-sm);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.admin-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Tabs */
+.admin-tab { display: none; }
+.admin-tab.active { display: block; }
+
+/* Mobile */
+@media (max-width: 768px) {
+    .admin-sidebar {
+        width: 100%;
+        position: static;
+        flex-direction: row;
+        overflow-x: auto;
+        padding: var(--space-sm);
+        gap: var(--space-xs);
+        border-right: none;
+        border-bottom: 1px solid var(--glass-border);
+    }
+
+    .admin-sidebar__logo { display: none; }
+
+    .admin-sidebar__link {
+        white-space: nowrap;
+        padding: 8px 12px;
+        font-size: var(--fs-xs);
+    }
+
+    .admin-main {
+        margin-left: 0;
+        padding: var(--space-md);
+    }
+
+    .admin-wrap {
+        flex-direction: column;
+    }
+
+    .admin-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-md);
+    }
+
+    .admin-table {
+        font-size: var(--fs-xs);
+    }
+
+    .admin-table th,
+    .admin-table td {
+        padding: 8px 10px;
+    }
+}
