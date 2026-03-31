@@ -534,7 +534,7 @@
 }
 
 .coupon-popup {
-    background: var(--bg-card);
+    background: var(--bg-dark);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-xl);
     padding: var(--space-2xl);

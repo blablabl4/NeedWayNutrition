@@ -821,55 +821,6 @@
     color: var(--primary);
 }
 
-/* ── Coupon Popup ── */
-.coupon-popup {
-    position: fixed;
-    bottom: var(--space-lg);
-    left: var(--space-lg);
-    background: var(--bg-dark);
-    border: 2px solid var(--primary);
-    border-radius: var(--radius-xl);
-    padding: var(--space-xl);
-    max-width: 360px;
-    z-index: var(--z-modal);
-    box-shadow: var(--shadow-glow);
-    animation: fadeInUp var(--duration-slow) var(--ease-out);
-    display: none;
-}
-
-.coupon-popup.active {
-    display: block;
-}
-
-.coupon-popup__close {
-    position: absolute;
-    top: var(--space-sm);
-    right: var(--space-sm);
-    color: var(--text-muted);
-    font-size: var(--fs-lg);
-}
-
-.coupon-popup__title {
-    font-family: var(--font-heading);
-    font-size: var(--fs-xl);
-    text-transform: uppercase;
-    margin-bottom: var(--space-sm);
-}
-
-.coupon-popup__code {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-    margin: var(--space-md) 0;
-    padding: var(--space-sm) var(--space-md);
-    background: var(--bg-card-dark);
-    border: 2px dashed var(--primary);
-    border-radius: var(--radius-md);
-    font-family: var(--font-heading);
-    font-size: var(--fs-lg);
-    letter-spacing: 0.1em;
-    justify-content: center;
-}
 
 /* ── WhatsApp Float ── */
 .whatsapp-float {

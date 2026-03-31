@@ -703,23 +703,22 @@
     }
   </script>
 
-  <!-- Coupon Popup -->
+  <!-- Coupon Popup (Lead Gate) -->
   <div class="coupon-popup-overlay" id="couponPopup">
     <div class="coupon-popup">
-      <button class="coupon-popup__close" onclick="closeCouponPopup()">&times;</button>
       <img src="logo sem fundo.png" alt="Needway" style="height:50px;margin-bottom:var(--space-md);">
       <div class="coupon-popup__title">Ganhe <span class="highlight">15% OFF</span></div>
-      <p class="coupon-popup__subtitle">Na sua primeira compra! Cadastre-se e receba seu cupom exclusivo.</p>
+      <p class="coupon-popup__subtitle">Na sua primeira compra! Cadastre seu e-mail e WhatsApp para liberar o site e receber seu cupom.</p>
       <div class="coupon-popup__form" id="couponForm">
         <input type="email" class="input" id="couponEmail" placeholder="Seu melhor e-mail" required>
-        <input type="tel" class="input" id="couponPhone" placeholder="WhatsApp (11) 99999-9999">
-        <button class="btn btn--primary btn--full" onclick="submitCoupon()">Quero meu Cupom!</button>
+        <input type="tel" class="input" id="couponPhone" placeholder="WhatsApp (DDD) 99999-9999" required>
+        <button class="btn btn--primary btn--full" onclick="submitCoupon()">Quero meu Cupom e Acessar!</button>
       </div>
       <div class="coupon-popup__success" id="couponSuccess">
-        <p style="color:var(--success);font-weight:var(--fw-semibold);">Cupom liberado!</p>
-        <div class="coupon-popup__code" onclick="navigator.clipboard.writeText('PRIMEIRA15');this.style.borderColor='var(--success)'" style="cursor:pointer;">PRIMEIRA15</div>
-        <p class="text-xs text-muted">Clique para copiar. Válido na primeira compra.</p>
-        <a href="loja.html" class="btn btn--primary btn--full" style="margin-top:var(--space-sm);">Comprar Agora</a>
+        <p style="color:var(--success);font-weight:var(--fw-semibold);">Site Liberado e Cupom Ativo!</p>
+        <div class="coupon-popup__code" onclick="navigator.clipboard.writeText('PRIMEIRA15');this.style.borderColor='var(--success)';this.innerHTML='COPIADO!'" style="cursor:pointer;">PRIMEIRA15</div>
+        <p class="text-xs text-muted">Clique no código para copiar. Válido na primeira compra.</p>
+        <button class="btn btn--primary btn--full" style="margin-top:var(--space-sm);" onclick="closeCouponPopup()">Entrar no Site</button>
       </div>
     </div>
   </div>
@@ -728,12 +727,13 @@
     function closeCouponPopup() {
       document.getElementById('couponPopup').classList.remove('active');
       localStorage.setItem('needway-popup-seen', 'true');
+      document.body.classList.remove('no-scroll');
     }
 
     function submitCoupon() {
       const email = document.getElementById('couponEmail').value;
       const phone = document.getElementById('couponPhone').value;
-      if (!email) { alert('Digite seu e-mail.'); return; }
+      if (!email || !phone) { alert('Por favor, preencha seu e-mail e WhatsApp para continuar.'); return; }
       // Save lead
       const leads = JSON.parse(localStorage.getItem('needway-leads') || '[]');
       leads.push({ email, phone, date: new Date().toISOString() });
@@ -748,6 +748,7 @@
     if (!localStorage.getItem('needway-popup-seen')) {
       setTimeout(() => {
         document.getElementById('couponPopup').classList.add('active');
+        document.body.classList.add('no-scroll');
       }, 3000);
     }
   </script>
