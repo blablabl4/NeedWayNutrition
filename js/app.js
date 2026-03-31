@@ -11,7 +11,74 @@ document.addEventListener('DOMContentLoaded', () => {
     initCouponPopup();
     initOverlay();
     initTopbarScroll();
+    initModalitiesCarousel();
 });
+
+// ── Modalities Carousel Showcase ──
+function initModalitiesCarousel() {
+    const showcase = document.getElementById('modalitiesShowcase');
+    if (!showcase) return;
+
+    const tabs = showcase.querySelectorAll('.modalities-showcase__tab');
+    const images = showcase.querySelectorAll('.modalities-showcase__img');
+    const panels = showcase.querySelectorAll('.modalities-showcase__panel');
+    let currentIndex = 0;
+    let fallbackTimeout;
+    let isPaused = false;
+
+    function activateIndex(index) {
+        tabs.forEach(t => t.classList.remove('active'));
+        images.forEach(img => img.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+
+        if(tabs[index]) tabs[index].classList.add('active');
+        if(images[index]) images[index].classList.add('active');
+        if(panels[index]) panels[index].classList.add('active');
+        currentIndex = index;
+    }
+
+    function rotate() {
+        if(isPaused) return;
+        let nxt = (currentIndex + 1) % tabs.length;
+        activateIndex(nxt);
+    }
+
+    let interval = setInterval(rotate, 4500);
+
+    function pauseAndActivate(index) {
+        clearInterval(interval);
+        activateIndex(index);
+        clearTimeout(fallbackTimeout);
+        isPaused = true;
+        fallbackTimeout = setTimeout(() => {
+            isPaused = false;
+            interval = setInterval(rotate, 4500);
+        }, 10000); // Resume auto-play after 10s of inactivity
+    }
+
+    tabs.forEach((tab, index) => {
+        tab.addEventListener('mouseenter', () => pauseAndActivate(index));
+        tab.addEventListener('click', () => {
+            pauseAndActivate(index);
+            // Optionally navigate to category page if on mobile, or just let them read
+        });
+    });
+
+    // Pause while interacting with the products
+    panels.forEach(panel => {
+        panel.addEventListener('mouseenter', () => {
+            clearInterval(interval);
+            clearTimeout(fallbackTimeout);
+            isPaused = true;
+        });
+        panel.addEventListener('mouseleave', () => {
+            fallbackTimeout = setTimeout(() => {
+                isPaused = false;
+                interval = setInterval(rotate, 4500);
+            }, 3000);
+        });
+    });
+}
 
 // ── Header Scroll Effect ──
 function initHeader() {

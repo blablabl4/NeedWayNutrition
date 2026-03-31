@@ -367,59 +367,71 @@
     <section class="section section--dark reveal">
       <div class="container">
         
-        <!-- Musculação -->
-        <div class="modality-shelf">
-          <a href="loja.html?cat=whey-protein" class="modality-shelf__banner">
-            <img src="img/objetivos/musculacao.png" alt="Musculação" loading="lazy">
-            <div class="modality-shelf__overlay">
-              <h3 class="modality-shelf__title">Musculação</h3>
-              <span class="btn btn--primary btn--sm">Ver Tudo</span>
+        <div class="modalities-showcase" id="modalitiesShowcase">
+          <!-- Banners Stack Container -->
+          <div class="modalities-showcase__banners">
+            <div class="modalities-showcase__images">
+              <img src="img/objetivos/musculacao.png" alt="Musculação" class="modalities-showcase__img active">
+              <img src="img/objetivos/luta.png" alt="Luta" class="modalities-showcase__img">
+              <img src="img/objetivos/corrida.png" alt="Corrida" class="modalities-showcase__img">
+              <img src="img/objetivos/bike.png" alt="Bike" class="modalities-showcase__img">
+              <div class="modalities-showcase__overlay"></div>
             </div>
-          </a>
-          <div class="modality-shelf__products">
-            <div class="grid grid--products" id="modalityMusculacaoGrid"></div>
+            
+            <!-- Interactive Overlay Tabs -->
+            <div class="modalities-showcase__tabs">
+              <button class="modalities-showcase__tab active" data-index="0" data-link="loja.html?cat=whey-protein">Musculação</button>
+              <button class="modalities-showcase__tab" data-index="1" data-link="loja.html?cat=pre-treino">Luta</button>
+              <button class="modalities-showcase__tab" data-index="2" data-link="loja.html?cat=aminoacidos">Corrida</button>
+              <button class="modalities-showcase__tab" data-index="3" data-link="loja.html?cat=vitaminas">Bike</button>
+            </div>
           </div>
-        </div>
 
-        <!-- Luta -->
-        <div class="modality-shelf" style="margin-top: var(--space-3xl);">
-          <a href="loja.html?cat=pre-treino" class="modality-shelf__banner">
-            <img src="img/objetivos/luta.png" alt="Luta" loading="lazy">
-            <div class="modality-shelf__overlay">
-              <h3 class="modality-shelf__title">Luta</h3>
-              <span class="btn btn--primary btn--sm">Ver Tudo</span>
+          <!-- Products Content Panels -->
+          <div class="modalities-showcase__content">
+            <!-- Panel 0: Musculação -->
+            <div class="modalities-showcase__panel active">
+              <div class="modalities-showcase__header">
+                <h3>Treino de Força</h3>
+                <a href="loja.html?cat=whey-protein" class="btn btn--primary btn--sm">Ver Tudo</a>
+              </div>
+              <div class="modalities-showcase__products">
+                <div class="grid grid--products" id="modalityMusculacaoGrid"></div>
+              </div>
             </div>
-          </a>
-          <div class="modality-shelf__products">
-            <div class="grid grid--products" id="modalityLutaGrid"></div>
-          </div>
-        </div>
-
-        <!-- Corrida -->
-        <div class="modality-shelf" style="margin-top: var(--space-3xl);">
-          <a href="loja.html?cat=aminoacidos" class="modality-shelf__banner">
-            <img src="img/objetivos/corrida.png" alt="Corrida" loading="lazy">
-            <div class="modality-shelf__overlay">
-              <h3 class="modality-shelf__title">Corrida</h3>
-              <span class="btn btn--primary btn--sm">Ver Tudo</span>
+            
+            <!-- Panel 1: Luta -->
+            <div class="modalities-showcase__panel">
+              <div class="modalities-showcase__header">
+                <h3>Artes Marciais</h3>
+                <a href="loja.html?cat=pre-treino" class="btn btn--primary btn--sm">Ver Tudo</a>
+              </div>
+              <div class="modalities-showcase__products">
+                <div class="grid grid--products" id="modalityLutaGrid"></div>
+              </div>
             </div>
-          </a>
-          <div class="modality-shelf__products">
-            <div class="grid grid--products" id="modalityCorridaGrid"></div>
-          </div>
-        </div>
-
-        <!-- Bike -->
-        <div class="modality-shelf" style="margin-top: var(--space-3xl);">
-          <a href="loja.html?cat=vitaminas" class="modality-shelf__banner">
-            <img src="img/objetivos/bike.png" alt="Bike" loading="lazy">
-            <div class="modality-shelf__overlay">
-              <h3 class="modality-shelf__title">Bike</h3>
-              <span class="btn btn--primary btn--sm">Ver Tudo</span>
+            
+            <!-- Panel 2: Corrida -->
+            <div class="modalities-showcase__panel">
+              <div class="modalities-showcase__header">
+                <h3>Endurance</h3>
+                <a href="loja.html?cat=aminoacidos" class="btn btn--primary btn--sm">Ver Tudo</a>
+              </div>
+              <div class="modalities-showcase__products">
+                <div class="grid grid--products" id="modalityCorridaGrid"></div>
+              </div>
             </div>
-          </a>
-          <div class="modality-shelf__products">
-            <div class="grid grid--products" id="modalityBikeGrid"></div>
+            
+            <!-- Panel 3: Bike -->
+            <div class="modalities-showcase__panel">
+              <div class="modalities-showcase__header">
+                <h3>Ciclismo</h3>
+                <a href="loja.html?cat=vitaminas" class="btn btn--primary btn--sm">Ver Tudo</a>
+              </div>
+              <div class="modalities-showcase__products">
+                <div class="grid grid--products" id="modalityBikeGrid"></div>
+              </div>
+            </div>
           </div>
         </div>
 
