@@ -305,7 +305,7 @@ function renderProductCard(product) {
     const inst = getInstallments(product.price);
     const CART_SVG = '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>';
 
-    const PRODUCT_PLACEHOLDER_SVG = `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><path d="M7 8V6a2 2 0 012-2h6a2 2 0 012 2v2M5 8h14v12a2 2 0 01-2 2H7a2 2 0 01-2-2V8z"/><rect x="9" y="12" width="6" height="4" rx="1"/></svg>`;
+    const PRODUCT_PLACEHOLDER_SVG = `<img src="logo sem fundo.png" style="width:60%; opacity:0.1; object-fit:contain; filter:grayscale(100%); pointer-events:none;" alt="Needway">`;
 
     return `
     <div class="product-card" data-product-id="${product.id}">
