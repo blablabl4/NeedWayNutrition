@@ -208,7 +208,7 @@
 }
 
 .insta-grid__item::after {
-    content: '📸';
+    content: '';
     position: absolute;
     inset: 0;
     display: flex;
@@ -401,6 +401,60 @@
     letter-spacing: 0.05em;
 }
 
+/* ── Modality Shelves ── */
+.modality-shelf {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: var(--space-xl);
+}
+
+.modality-shelf__banner {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    height: 100%;
+    min-height: 480px;
+    display: block;
+}
+
+.modality-shelf__banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--duration-slow) var(--ease-out);
+}
+
+.modality-shelf__banner:hover img {
+    transform: scale(1.08);
+}
+
+.modality-shelf__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.85) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: var(--space-xl);
+}
+
+.modality-shelf__title {
+    font-family: var(--font-heading);
+    font-size: var(--fs-3xl);
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: var(--space-md);
+    letter-spacing: 0.05em;
+    line-height: 1;
+}
+
+.modality-shelf__products {
+    display: flex;
+    align-items: center;
+}
+
 /* ── Dual Banners ── */
 .dual-banners {
     display: grid;
@@ -448,6 +502,15 @@
     color: var(--text-muted);
     font-size: var(--fs-sm);
     margin-bottom: var(--space-md);
+}
+
+.dual-banner .btn {
+    transition: transform var(--duration-normal) var(--ease-out), box-shadow var(--duration-normal);
+}
+
+.dual-banner:hover .btn {
+    transform: scale(1.08);
+    box-shadow: 0 6px 20px rgba(255, 117, 31, 0.4);
 }
 
 /* ── Coupon Popup ── */
@@ -562,5 +625,26 @@
     }
     .coupon-popup {
         padding: var(--space-xl);
+    }
+    .modality-shelf {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+    .modality-shelf__banner {
+        min-height: 240px;
+    }
+    .modality-shelf__products {
+        overflow-x: auto;
+        padding-bottom: var(--space-md);
+        scroll-snap-type: x mandatory;
+    }
+    .modality-shelf__products .grid {
+        display: flex;
+        gap: var(--space-sm);
+        min-width: max-content;
+    }
+    .modality-shelf__products .product-card {
+        width: 200px;
+        scroll-snap-align: start;
     }
 }

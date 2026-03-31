@@ -16,26 +16,26 @@ const NeedwayData = {
 
   // ── Categories ──
   categories: [
-    { id: 'whey-protein', name: 'Whey Protein', icon: '🥛', slug: 'whey-protein', count: 12, image: '' },
-    { id: 'creatina', name: 'Creatina', icon: '⚡', slug: 'creatina', count: 6, image: '' },
-    { id: 'pre-treino', name: 'Pré-Treino', icon: '🔥', slug: 'pre-treino', count: 8, image: '' },
-    { id: 'vitaminas', name: 'Vitaminas', icon: '💊', slug: 'vitaminas', count: 15, image: '' },
-    { id: 'aminoacidos', name: 'Aminoácidos', icon: '💪', slug: 'aminoacidos', count: 10, image: '' },
-    { id: 'barras', name: 'Barras Proteicas', icon: '🍫', slug: 'barras', count: 8, image: '' },
-    { id: 'hipercalorico', name: 'Hipercalórico', icon: '📈', slug: 'hipercalorico', count: 4, image: '' },
-    { id: 'encapsulados', name: 'Encapsulados', icon: '💎', slug: 'encapsulados', count: 18, image: '' },
-    { id: 'termogenicos', name: 'Termogênicos', icon: '🌡️', slug: 'termogenicos', count: 5, image: '' },
-    { id: 'colageno', name: 'Colágeno', icon: '✨', slug: 'colageno', count: 6, image: '' },
-    { id: 'omega3', name: 'Ômega 3', icon: '🐟', slug: 'omega3', count: 4, image: '' },
-    { id: 'kits', name: 'Kits & Combos', icon: '📦', slug: 'kits', count: 10, image: '' },
+    { id: 'whey-protein', name: 'Whey Protein', icon: '', slug: 'whey-protein', count: 12, image: '' },
+    { id: 'creatina', name: 'Creatina', icon: '', slug: 'creatina', count: 6, image: '' },
+    { id: 'pre-treino', name: 'Pré-Treino', icon: '', slug: 'pre-treino', count: 8, image: '' },
+    { id: 'vitaminas', name: 'Vitaminas', icon: '', slug: 'vitaminas', count: 15, image: '' },
+    { id: 'aminoacidos', name: 'Aminoácidos', icon: '', slug: 'aminoacidos', count: 10, image: '' },
+    { id: 'barras', name: 'Barras Proteicas', icon: '', slug: 'barras', count: 8, image: '' },
+    { id: 'hipercalorico', name: 'Hipercalórico', icon: '', slug: 'hipercalorico', count: 4, image: '' },
+    { id: 'encapsulados', name: 'Encapsulados', icon: '', slug: 'encapsulados', count: 18, image: '' },
+    { id: 'termogenicos', name: 'Termogênicos', icon: '', slug: 'termogenicos', count: 5, image: '' },
+    { id: 'colageno', name: 'Colágeno', icon: '', slug: 'colageno', count: 6, image: '' },
+    { id: 'omega3', name: 'Ômega 3', icon: '', slug: 'omega3', count: 4, image: '' },
+    { id: 'kits', name: 'Kits & Combos', icon: '', slug: 'kits', count: 10, image: '' },
   ],
 
   // ── Objectives ──
   objectives: [
-    { id: 'massa', name: 'Massa Muscular', icon: '💪', desc: 'Ganhe massa com qualidade', slug: 'massa-muscular' },
-    { id: 'emagrecimento', name: 'Emagrecimento', icon: '🔥', desc: 'Queime gordura de forma inteligente', slug: 'emagrecimento' },
-    { id: 'energia', name: 'Energia', icon: '⚡', desc: 'Potencialize seus treinos', slug: 'energia' },
-    { id: 'saude', name: 'Saúde & Bem-estar', icon: '🛡️', desc: 'Cuide do seu corpo por completo', slug: 'saude' },
+    { id: 'massa', name: 'Massa Muscular', icon: '', desc: 'Ganhe massa com qualidade', slug: 'massa-muscular' },
+    { id: 'emagrecimento', name: 'Emagrecimento', icon: '', desc: 'Queime gordura de forma inteligente', slug: 'emagrecimento' },
+    { id: 'energia', name: 'Energia', icon: '', desc: 'Potencialize seus treinos', slug: 'energia' },
+    { id: 'saude', name: 'Saúde & Bem-estar', icon: '', desc: 'Cuide do seu corpo por completo', slug: 'saude' },
   ],
 
   // ── Products ──

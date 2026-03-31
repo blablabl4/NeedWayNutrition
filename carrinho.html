@@ -169,7 +169,7 @@
                 });
                 return `
           <div class="cart-item">
-            <div class="cart-item__image">${cat?.icon || '📦'}</div>
+            <div class="cart-item__image">${cat?.icon || ''}</div>
             <div class="cart-item__info">
               <a href="produto.html?id=${item.productId}" class="cart-item__name">${item.name}</a>
               <span class="cart-item__variant">${[item.flavor, item.size].filter(Boolean).join(' · ')}</span>
@@ -228,7 +228,7 @@
             const el = document.getElementById('couponResult');
             if (result.success) {
                 appliedCoupon = result.coupon;
-                el.innerHTML = `<span style="color:var(--success);">✅ ${result.message}</span>`;
+                el.innerHTML = `<span style="color:var(--success);"> ${result.message}</span>`;
             } else {
                 appliedCoupon = null;
                 el.innerHTML = `<span style="color:var(--danger);">❌ ${result.message}</span>`;

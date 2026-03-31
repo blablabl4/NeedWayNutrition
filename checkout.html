@@ -204,7 +204,7 @@
 
                     <!-- Step 5: Confirm -->
                     <div class="checkout-form" id="step5" style="display:none;">
-                        <h2 class="checkout-form__title">✅ Revisão do Pedido</h2>
+                        <h2 class="checkout-form__title"> Revisão do Pedido</h2>
                         <div id="orderReview"></div>
                         <div style="display:flex;gap:var(--space-md);margin-top:var(--space-xl);">
                             <button class="btn btn--ghost" onclick="goToStep(4)">← Voltar</button>
@@ -222,7 +222,7 @@
                     <!-- Coupon -->
                     <div style="margin-bottom:var(--space-md);">
                         <label
-                            style="font-size:var(--fs-sm);color:var(--text-muted);display:block;margin-bottom:var(--space-xs);">🎁
+                            style="font-size:var(--fs-sm);color:var(--text-muted);display:block;margin-bottom:var(--space-xs);">
                             Cupom de desconto</label>
                         <div style="display:flex;gap:var(--space-xs);">
                             <input type="text" class="input" id="ckoCouponInput" placeholder="Digite seu cupom"
@@ -278,7 +278,7 @@
                     checkoutCoupon = null;
                 } else {
                     checkoutCoupon = coupon;
-                    msg.innerHTML = `<span style="color:var(--success);">✅ ${coupon.description}</span>`;
+                    msg.innerHTML = `<span style="color:var(--success);"> ${coupon.description}</span>`;
                     input.disabled = true;
                     input.style.opacity = '0.6';
                 }
@@ -372,7 +372,7 @@
             document.getElementById('orderReview').innerHTML = `
         <div style="display:flex;flex-direction:column;gap:var(--space-lg);">
           <div class="glass-card" style="transform:none;">
-            <h4 style="margin-bottom:var(--space-md);color:var(--primary);">📦 Itens</h4>
+            <h4 style="margin-bottom:var(--space-md);color:var(--primary);"> Itens</h4>
             ${items.map(item => `<div style="display:flex;justify-content:space-between;padding:var(--space-xs) 0;font-size:var(--fs-sm);"><span>${item.name} x${item.quantity}</span><span>${formatPrice(item.price * item.quantity)}</span></div>`).join('')}
           </div>
           <div class="glass-card" style="transform:none;">

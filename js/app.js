@@ -112,7 +112,7 @@ function initCouponPopup() {
     copyBtn?.addEventListener('click', () => {
         const code = copyBtn.getAttribute('data-copy-coupon');
         navigator.clipboard.writeText(code).then(() => {
-            copyBtn.textContent = '✅ Copiado!';
+            copyBtn.textContent = 'Copiado!';
             setTimeout(() => { copyBtn.textContent = 'Copiar'; }, 2000);
         });
     });
@@ -140,52 +140,78 @@ function initTopbarScroll() {
     track.innerHTML = items + items;
 }
 
-// ── Carousel Component ──
+// ── Carousel Component (dots + progress bar, no arrows) ──
 function initCarousel(selector) {
     const carousel = document.querySelector(selector);
     if (!carousel) return;
 
     const track = carousel.querySelector('.carousel__track');
     const slides = carousel.querySelectorAll('.carousel__slide');
-    const prevBtn = carousel.querySelector('.carousel__btn--prev');
-    const nextBtn = carousel.querySelector('.carousel__btn--next');
     const dotsContainer = carousel.querySelector('.carousel__dots');
 
     let current = 0;
     const total = slides.length;
+    const INTERVAL = 5000;
 
-    function goTo(index) {
+    function goTo(index, resetTimer) {
         current = ((index % total) + total) % total;
         track.style.transform = `translateX(-${current * 100}%)`;
         updateDots();
+        if (resetTimer !== false) restartAutoPlay();
     }
 
     function updateDots() {
         if (!dotsContainer) return;
         dotsContainer.querySelectorAll('.carousel__dot').forEach((dot, i) => {
-            dot.classList.toggle('active', i === current);
+            const isActive = i === current;
+            dot.classList.toggle('active', isActive);
+            // Reset animation by removing and re-adding element
+            const bar = dot.querySelector('.carousel__dot-progress');
+            if (bar) {
+                bar.style.animation = 'none';
+                if (isActive) {
+                    // Force reflow
+                    void bar.offsetWidth;
+                    bar.style.animation = `dotProgress ${INTERVAL}ms linear forwards`;
+                }
+            }
         });
     }
 
-    // Create dots
+    // Create dots with progress bar
     if (dotsContainer) {
         slides.forEach((_, i) => {
             const dot = document.createElement('button');
             dot.className = `carousel__dot ${i === 0 ? 'active' : ''}`;
             dot.setAttribute('aria-label', `Slide ${i + 1}`);
+            const progressBar = document.createElement('span');
+            progressBar.className = 'carousel__dot-progress';
+            if (i === 0) progressBar.style.animation = `dotProgress ${INTERVAL}ms linear forwards`;
+            dot.appendChild(progressBar);
             dot.addEventListener('click', () => goTo(i));
             dotsContainer.appendChild(dot);
         });
     }
 
-    prevBtn?.addEventListener('click', () => goTo(current - 1));
-    nextBtn?.addEventListener('click', () => goTo(current + 1));
-
     // Auto-play
-    let autoPlay = setInterval(() => goTo(current + 1), 5000);
-    carousel.addEventListener('mouseenter', () => clearInterval(autoPlay));
+    let autoPlay = setInterval(() => goTo(current + 1, false), INTERVAL);
+    function restartAutoPlay() {
+        clearInterval(autoPlay);
+        autoPlay = setInterval(() => goTo(current + 1, false), INTERVAL);
+        updateDots();
+    }
+    carousel.addEventListener('mouseenter', () => {
+        clearInterval(autoPlay);
+        // Pause progress bar
+        dotsContainer?.querySelectorAll('.carousel__dot-progress').forEach(b => {
+            b.style.animationPlayState = 'paused';
+        });
+    });
     carousel.addEventListener('mouseleave', () => {
-        autoPlay = setInterval(() => goTo(current + 1), 5000);
+        restartAutoPlay();
+        dotsContainer?.querySelectorAll('.carousel__dot-progress').forEach(b => {
+            b.style.animationPlayState = 'running';
+        });
     });
 
     // Touch/swipe support
@@ -279,11 +305,13 @@ function renderProductCard(product) {
     const inst = getInstallments(product.price);
     const CART_SVG = '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>';
 
+    const PRODUCT_PLACEHOLDER_SVG = `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><path d="M7 8V6a2 2 0 012-2h6a2 2 0 012 2v2M5 8h14v12a2 2 0 01-2 2H7a2 2 0 01-2-2V8z"/><rect x="9" y="12" width="6" height="4" rx="1"/></svg>`;
+
     return `
     <div class="product-card" data-product-id="${product.id}">
       <a href="produto.html?id=${product.id}" class="product-card__image-wrap">
-        <div style="width:100%;height:100%;background:var(--bg-dark);display:flex;align-items:center;justify-content:center;font-size:4rem;">
-          ${NeedwayData.categories.find(c => c.id === product.category)?.icon || '📦'}
+        <div style="width:100%;height:100%;background:var(--bg-surface-alt);display:flex;align-items:center;justify-content:center;">
+          ${PRODUCT_PLACEHOLDER_SVG}
         </div>
         <div class="product-card__badges">
           ${discountBadge}
@@ -358,8 +386,8 @@ function initSearch() {
             } else {
                 dropdown.innerHTML = results.map(p => `
           <a href="produto.html?id=${p.id}" class="search-dropdown__item">
-            <div style="width:48px;height:48px;background:var(--bg-card-dark);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:1.5rem;">
-              ${NeedwayData.categories.find(c => c.id === p.category)?.icon || '📦'}
+            <div style="width:48px;height:48px;background:var(--bg-surface-alt);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><path d="M7 8V6a2 2 0 012-2h6a2 2 0 012 2v2M5 8h14v12a2 2 0 01-2 2H7a2 2 0 01-2-2V8z"/><rect x="9" y="12" width="6" height="4" rx="1"/></svg>
             </div>
             <div class="search-dropdown__item-info">
               <div class="search-dropdown__item-name">${p.name}</div>

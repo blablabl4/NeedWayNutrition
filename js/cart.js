@@ -142,7 +142,7 @@ const Cart = {
 
         container.innerHTML = items.map(item => `
       <div class="minicart__item" data-key="${item.key}">
-        <div class="minicart__item-img" style="background: var(--bg-card-dark); display: flex; align-items: center; justify-content: center; font-size: 2rem;">🥛</div>
+        <div class="minicart__item-img" style="background: var(--bg-card-dark); display: flex; align-items: center; justify-content: center; font-size: 2rem;"></div>
         <div class="minicart__item-info">
           <div class="minicart__item-name">${item.name}</div>
           <div class="minicart__item-variant">${[item.flavor, item.size].filter(Boolean).join(' · ')}</div>
@@ -175,7 +175,7 @@ const Cart = {
 
         const toast = document.createElement('div');
         toast.className = `toast toast--${type}`;
-        toast.innerHTML = `<span>${type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️'}</span> ${message}`;
+        toast.innerHTML = `<span>${type === 'success' ? '' : type === 'error' ? '❌' : 'ℹ️'}</span> ${message}`;
         document.body.appendChild(toast);
 
         setTimeout(() => toast.remove(), 3500);

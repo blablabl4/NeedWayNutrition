@@ -351,21 +351,48 @@
     display: flex;
     justify-content: center;
     gap: var(--space-sm);
-    margin-top: var(--space-md);
+    position: absolute;
+    bottom: var(--space-lg);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
 }
 
 .carousel__dot {
-    width: 12px;
+    width: 40px;
     height: 4px;
-    background: var(--text-muted);
+    background: rgba(255, 255, 255, 0.3);
     border-radius: var(--radius-full);
     cursor: pointer;
-    transition: all var(--duration-fast);
+    transition: background var(--duration-fast);
+    position: relative;
+    overflow: hidden;
+    border: none;
+    padding: 0;
+}
+
+.carousel__dot:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.carousel__dot-progress {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0%;
+    background: #fff;
+    border-radius: var(--radius-full);
+    pointer-events: none;
 }
 
 .carousel__dot.active {
-    width: 32px;
-    background: var(--primary);
+    background: rgba(255, 255, 255, 0.3);
+}
+
+@keyframes dotProgress {
+    from { width: 0%; }
+    to { width: 100%; }
 }
 
 /* ── Tabs ── */
