@@ -378,11 +378,15 @@ function renderProductCard(product) {
 
  const PRODUCT_PLACEHOLDER_SVG = `<img src="logo sem fundo.png" style="width:60%; opacity:0.1; object-fit:contain; filter:grayscale(100%); pointer-events:none;" alt="Needway">`;
 
+ const heroImageHTML = product.images && product.images.length > 0
+  ? `<img src="${product.images[0]}" alt="${product.name}" style="width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;">`
+  : PRODUCT_PLACEHOLDER_SVG;
+
  return `
  <div class="product-card" data-product-id="${product.id}">
   <a href="produto.html?id=${product.id}" class="product-card__image-wrap">
-  <div style="width:100%;height:100%;background:var(--bg-surface-alt);display:flex;align-items:center;justify-content:center;">
-   ${PRODUCT_PLACEHOLDER_SVG}
+  <div style="width:100%;height:100%;background:var(--bg-card);display:flex;align-items:center;justify-content:center;">
+   ${heroImageHTML}
   </div>
   <div class="product-card__badges">
    ${discountBadge}
