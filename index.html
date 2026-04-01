@@ -195,56 +195,55 @@
  <!-- ═══ MAIN CONTENT ═══ -->
  <main class="page-content">
 
- <!-- ── Hero Banner ── -->
+ <!-- ── Hero Banner (dinâmico, gerenciado pelo Admin) ── -->
  <section class="hero carousel" id="heroCarousel">
-  <div class="carousel__track">
-  <!-- Slide 1 -->
-  <div class="carousel__slide hero__slide">
-   <div style="width:100%;height:100%;background:linear-gradient(135deg, #000 0%, #1a0a00 50%, #0d0d0d 100%);">
-   </div>
-   <div class="hero__overlay"></div>
-   <div class="hero__content">
-   <span class="hero__subtitle">Novos Lançamentos</span>
-   <h1 class="hero__title">Força em <span class="highlight">Cada Dose</span></h1>
-   <p class="hero__desc">Suplementos de alta performance desenvolvidos para quem busca resultados reais.
-    Qualidade premium, preço justo.</p>
-   <div class="hero__actions">
-    <a href="lancamentos.html" class="btn btn--primary btn--lg">Ver Lançamentos</a>
-    <a href="loja.html" class="btn btn--outline btn--lg">Explorar Loja</a>
-   </div>
-   </div>
+  <div class="carousel__track" id="heroBannerTrack">
+  <!-- Slides injetados via JS abaixo -->
   </div>
-  <!-- Slide 2 -->
-  <div class="carousel__slide hero__slide">
-   <div style="width:100%;height:100%;background:linear-gradient(135deg, #0d0d0d 0%, #1a0d00 50%, #000 100%);">
-   </div>
-   <div class="hero__overlay"></div>
-   <div class="hero__content">
-   <span class="hero__subtitle">Oferta Especial</span>
-   <h1 class="hero__title">Whey Protein a partir de <span class="highlight">R$149</span></h1>
-   <p class="hero__desc">24g de proteína por dose. Diversas opções de sabores. Entrega para todo o Brasil.</p>
-   <div class="hero__actions">
-    <a href="categoria.html?cat=whey-protein" class="btn btn--primary btn--lg">Comprar Agora</a>
-   </div>
-   </div>
-  </div>
-  <!-- Slide 3 -->
-  <div class="carousel__slide hero__slide">
-   <div style="width:100%;height:100%;background:linear-gradient(135deg, #1a0a00 0%, #000 50%, #0d0a00 100%);">
-   </div>
-   <div class="hero__overlay"></div>
-   <div class="hero__content">
-   <span class="hero__subtitle" style="color: var(--accent-gold);">Outlet — até 50% OFF</span>
-   <h1 class="hero__title">Ofertas <span class="highlight">Imperdíveis</span></h1>
-   <p class="hero__desc">Produtos selecionados com descontos especiais. Estoque limitado — aproveite!</p>
-   <div class="hero__actions">
-    <a href="outlet.html" class="btn btn--gold btn--lg">Ver Outlet</a>
-   </div>
-   </div>
-  </div>
-  </div>
-  <div class="carousel__dots"></div>
+  <div class="carousel__dots" id="heroBannerDots"></div>
  </section>
+
+ <script>
+ (function() {
+  var defaultSlides = [
+   { title: 'Força em <span class="highlight">Cada Dose</span>', subtitle: 'Novos Lançamentos', desc: 'Suplementos de alta performance desenvolvidos para quem busca resultados reais. Qualidade premium, preço justo.', ctaText: 'Ver Lançamentos', ctaLink: 'lancamentos.html', ctaText2: 'Explorar Loja', ctaLink2: 'loja.html', bg: 'linear-gradient(135deg, #000 0%, #1a0a00 50%, #0d0d0d 100%)', image: '' },
+   { title: 'Whey Protein a partir de <span class="highlight">R$149</span>', subtitle: 'Oferta Especial', desc: '24g de proteína por dose. Diversas opções de sabores. Entrega para todo o Brasil.', ctaText: 'Comprar Agora', ctaLink: 'categoria.html?cat=whey-protein', bg: 'linear-gradient(135deg, #0d0d0d 0%, #1a0d00 50%, #000 100%)', image: '' },
+   { title: 'Ofertas <span class="highlight">Imperdíveis</span>', subtitle: 'Outlet — até 50% OFF', desc: 'Produtos selecionados com descontos especiais. Estoque limitado — aproveite!', ctaText: 'Ver Outlet', ctaLink: 'outlet.html', subtitleColor: 'var(--accent-gold)', bg: 'linear-gradient(135deg, #1a0a00 0%, #000 50%, #0d0a00 100%)', image: '' }
+  ];
+
+  var saved = null;
+  try { var raw = localStorage.getItem('needway-banners'); if (raw) saved = JSON.parse(raw); } catch(e) {}
+  var adminBanners = saved && saved.length ? saved.filter(function(b){ return b.active !== false; }) : null;
+
+  var slides = adminBanners ? adminBanners.map(function(b) {
+   return { title: b.title || '', subtitle: b.subtitle || '', desc: '', ctaText: b.ctaText || 'Saiba Mais', ctaLink: b.ctaLink || '#', bg: b.bg || '#111', image: b.image || '' };
+  }) : defaultSlides;
+
+  var track = document.getElementById('heroBannerTrack');
+  if (!track) return;
+
+  slides.forEach(function(s) {
+   var bgStyle = s.image
+    ? 'background:url(' + JSON.stringify(s.image) + ') center/cover no-repeat;'
+    : 'background:' + s.bg + ';';
+   var subtitleColor = s.subtitleColor ? 'style="color:' + s.subtitleColor + '"' : '';
+   var cta2 = (s.ctaText2 && s.ctaLink2) ? '<a href="' + s.ctaLink2 + '" class="btn btn--outline btn--lg">' + s.ctaText2 + '</a>' : '';
+   var div = document.createElement('div');
+   div.className = 'carousel__slide hero__slide';
+   div.innerHTML =
+    '<div style="width:100%;height:100%;' + bgStyle + '"></div>' +
+    '<div class="hero__overlay"></div>' +
+    '<div class="hero__content">' +
+    '<span class="hero__subtitle" ' + subtitleColor + '>' + s.subtitle + '</span>' +
+    '<h1 class="hero__title">' + s.title + '</h1>' +
+    (s.desc ? '<p class="hero__desc">' + s.desc + '</p>' : '') +
+    '<div class="hero__actions"><a href="' + s.ctaLink + '" class="btn btn--primary btn--lg">' + s.ctaText + '</a>' + cta2 + '</div>' +
+    '</div>';
+   track.appendChild(div);
+  });
+ })();
+ </script>
+
 
  <!-- ── Benefits Bar ── -->
  <section class="benefits-bar">

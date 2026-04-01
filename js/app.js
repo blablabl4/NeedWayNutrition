@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
  initOverlay();
  initTopbarScroll();
  initModalitiesCarousel();
+ // Inicializa o carrossel principal (slides injetados dinamicamente pelo bloco inline em index.html)
+ if (document.getElementById('heroCarousel')) initCarousel('#heroCarousel');
 });
 
 // ── Modalities Carousel Showcase ──
