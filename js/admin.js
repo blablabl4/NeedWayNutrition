@@ -7,9 +7,15 @@ const ADMIN_KEY = 'needway-admin';
 const DEFAULT_PASS = 'needway2026';
 
 // ── Data helpers ──
+function getNeedwayData() {
+  // NeedwayData is declared with const in data.js — it IS available as a global in browser scope
+  // but window.NeedwayData may not work if strict mode treats it differently.
+  try { return typeof NeedwayData !== 'undefined' ? NeedwayData : null; } catch(e) { return null; }
+}
 function getProducts() {
   const override = localStorage.getItem('needway-products-override');
-  return override ? JSON.parse(override) : (window.NeedwayData?.products || []);
+  if (override) return JSON.parse(override);
+  const d = getNeedwayData(); return d ? d.products : [];
 }
 function saveProducts(arr) { localStorage.setItem('needway-products-override', JSON.stringify(arr)); }
 
@@ -29,13 +35,15 @@ function getLeads() { return JSON.parse(localStorage.getItem('needway-leads') ||
 
 function getCoupons() {
   const override = localStorage.getItem('needway-coupons-override');
-  return override ? JSON.parse(override) : (window.NeedwayData?.coupons || []);
+  if (override) return JSON.parse(override);
+  const d = getNeedwayData(); return d ? (d.coupons || []) : [];
 }
 function saveCoupons(arr) { localStorage.setItem('needway-coupons-override', JSON.stringify(arr)); }
 
 function getCategories() {
   const override = localStorage.getItem('needway-categories-override');
-  return override ? JSON.parse(override) : (window.NeedwayData?.categories || []);
+  if (override) return JSON.parse(override);
+  const d = getNeedwayData(); return d ? (d.categories || []) : [];
 }
 function saveCategories(arr) { localStorage.setItem('needway-categories-override', JSON.stringify(arr)); }
 
@@ -709,7 +717,10 @@ function saveAdminPassword() {
 }
 
 // ── Init ──
-function initDashboard() { showTab('overview', document.querySelector('.admin-sidebar__link')); }
+function initDashboard() {
+  // Defer by one tick to ensure data.js NeedwayData is fully available
+  setTimeout(() => showTab('overview', document.querySelector('.admin-sidebar__link')), 0);
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   if (localStorage.getItem(ADMIN_KEY) === 'true') {
@@ -719,6 +730,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   // Enter key on login
   document.getElementById('adminPassword')?.addEventListener('keydown', e => { if (e.key === 'Enter') adminLogin(); });
+
+  // Populate category select for product form
+  const sel = document.getElementById('pCategory');
+  if (sel && sel.options.length === 0) {
+    const d = getNeedwayData();
+    if (d?.categories) {
+      d.categories.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c.id; opt.textContent = c.name;
+        sel.appendChild(opt);
+      });
+    }
+  }
 });
 
 // Close modal on overlay click
