@@ -213,9 +213,11 @@
 
   var saved = null;
   try { var raw = localStorage.getItem('needway-banners'); if (raw) saved = JSON.parse(raw); } catch(e) {}
-  var adminBanners = saved && saved.length ? saved.filter(function(b){ return b.active !== false; }) : null;
+  window.AdminBanners = saved && saved.length ? saved.filter(function(b){ return b.active !== false; }) : [];
 
-  var slides = adminBanners ? adminBanners.map(function(b) {
+  var heroBanners = window.AdminBanners.filter(function(b){ return !b.position || b.position === 'hero'; });
+
+  var slides = heroBanners.length ? heroBanners.map(function(b) {
    return { title: b.title || '', subtitle: b.subtitle || '', desc: '', ctaText: b.ctaText || 'Saiba Mais', ctaLink: b.ctaLink || '#', bg: b.bg || '#111', image: b.image || '' };
   }) : defaultSlides;
 
@@ -275,53 +277,95 @@
 
 
  <!-- ── Coupon Banner ── -->
- <section class="section" style="padding:var(--space-2xl) 0; background-color: #f2f2f2;">
+ <section class="section" style="padding:var(--space-2xl) 0; background-color: #f2f2f2;" id="couponBannerSection">
   <div class="container">
-  <div style="display:flex;flex-wrap:wrap;gap:var(--space-xl);justify-content:center;align-items:center;background:#fff;border-top:3px solid #e55c00;padding:var(--space-2xl);box-shadow:0 10px 30px rgba(0,0,0,0.05); border-radius:4px;">
-   <div style="flex:1;min-width:250px;text-align:center; display:flex; flex-direction:column; justify-content:center;">
-    <h3 style="font-family:var(--font-heading);font-size:1.8rem;text-transform:uppercase;color:#111;margin:0;letter-spacing:0.02em;">Use seu <span style="font-weight:900;">Cupom</span></h3>
-    <p style="font-size:1rem;color:#777;margin-top:6px;">Digite no carrinho ou checkout</p>
+  <div id="couponBannerWrapper" style="display:flex;flex-wrap:wrap;gap:var(--space-xl);justify-content:center;align-items:center;background:#fff;border-top:3px solid #e55c00;padding:var(--space-2xl);box-shadow:0 10px 30px rgba(0,0,0,0.05); border-radius:4px; position:relative; overflow:hidden;">
+   <div style="flex:1;min-width:250px;text-align:center; display:flex; flex-direction:column; justify-content:center; position:relative; z-index:2;">
+    <h3 id="couponTitle" style="font-family:var(--font-heading);font-size:1.8rem;text-transform:uppercase;color:#111;margin:0;letter-spacing:0.02em;">Use seu <span style="font-weight:900;">Cupom</span></h3>
+    <p id="couponSubtitle" style="font-size:1rem;color:#777;margin-top:6px;">Digite no carrinho ou checkout</p>
    </div>
-   <div style="display:flex;gap:var(--space-xl);flex-wrap:wrap;justify-content:center;flex:2;">
-   <div
+   <div style="display:flex;gap:var(--space-xl);flex-wrap:wrap;justify-content:center;flex:2; position:relative; z-index:2;">
+   <div class="coupon-btn"
     style="background:#fff;border:2px dashed #e55c00;padding:var(--space-md) var(--space-xl);text-align:center;cursor:pointer;min-width:240px;flex:1;border-radius:2px; transition:transform 0.2s ease, opacity 0.2s ease;"
     onmouseover="this.style.transform='scale(1.02)'; this.style.opacity='0.9';"
     onmouseout="this.style.transform='scale(1)'; this.style.opacity='1';"
     onclick="navigator.clipboard.writeText('PRIMEIRA15');this.querySelector('small').textContent='✓ Código Copiado!'">
     <div style="font-family:var(--font-heading);font-size:1.5rem;font-weight:900;color:#e55c00;letter-spacing:0.05em;margin-bottom:6px;">
     PRIMEIRA15</div>
-    <small style="color:#777;font-size:0.85rem;">15% OFF na 1ª compra — Clique p/ copiar</small>
+    <small style="color:#777;font-size:0.85rem;background:rgba(255,255,255,0.8);padding:2px 8px;border-radius:4px;display:inline-block;font-weight:bold;">15% OFF na 1ª compra — Clique p/ copiar</small>
    </div>
-   <div
+   <div class="coupon-btn"
     style="background:#fff;border:2px dashed #f5a623;padding:var(--space-md) var(--space-xl);text-align:center;cursor:pointer;min-width:240px;flex:1;border-radius:2px; transition:transform 0.2s ease, opacity 0.2s ease;"
     onmouseover="this.style.transform='scale(1.02)'; this.style.opacity='0.9';"
     onmouseout="this.style.transform='scale(1)'; this.style.opacity='1';"
     onclick="navigator.clipboard.writeText('NEEDWAY10');this.querySelector('small').textContent='✓ Código Copiado!'">
     <div style="font-family:var(--font-heading);font-size:1.5rem;font-weight:900;color:#f5a623;letter-spacing:0.05em;margin-bottom:6px;">
     NEEDWAY10</div>
-    <small style="color:#777;font-size:0.85rem;">10% OFF acima de R$200 — Clique p/ copiar</small>
+    <small style="color:#777;font-size:0.85rem;background:rgba(255,255,255,0.8);padding:2px 8px;border-radius:4px;display:inline-block;font-weight:bold;">10% OFF acima de R$200 — Clique p/ copiar</small>
    </div>
    </div>
   </div>
   </div>
  </section>
+ <script>
+  (function(){
+    var b = window.AdminBanners.slice().reverse().find(function(x){ return x.position === 'coupon'; });
+    if(b) {
+      if(b.title) document.getElementById('couponTitle').innerHTML = b.title;
+      if(b.subtitle) document.getElementById('couponSubtitle').innerHTML = b.subtitle;
+      
+      var bgVal = b.image ? 'url('+b.image+') center/cover no-repeat' : b.bg;
+      if(b.image || b.bg) {
+        if(b.couponStyle === 'button') {
+          var btns = document.querySelectorAll('.coupon-btn');
+          btns.forEach(function(btn){
+            btn.style.background = bgVal;
+            if(b.image) { 
+              btn.querySelector('div').style.color = '#fff'; 
+              btn.querySelector('div').style.textShadow = '0 2px 4px rgba(0,0,0,0.8)';
+            }
+          });
+        } else {
+          var wrap = document.getElementById('couponBannerWrapper');
+          wrap.insertAdjacentHTML('afterbegin', '<div style="position:absolute;inset:0;background:'+bgVal+';opacity:0.9;z-index:1;"></div>');
+          wrap.style.borderTop = 'none';
+          document.getElementById('couponTitle').style.color = '#fff';
+          document.getElementById('couponSubtitle').style.color = '#eee';
+        }
+      }
+    }
+  })();
+ </script>
 
 
 
  <!-- ── Best Sellers ── -->
  <section class="section section--darker bestsellers reveal" id="bestsellersSection">
   <div class="container">
-   <div class="promo-wide-banner" style="background-image: url('img/produtos/default.jpg'); background-size: cover; background-position: center;">
+   <div class="promo-wide-banner" id="promoMaisVendidos" style="background-image: url('img/produtos/default.jpg'); background-size: cover; background-position: center;">
     <div class="promo-wide-banner__bg"></div>
     <div class="promo-wide-banner__content">
-     <h2 class="promo-wide-banner__title">MAIS <span class="highlight">VENDIDOS</span></h2>
-     <p class="promo-wide-banner__subtitle">Os favoritos da galera que já conquistaram todo o Brasil.</p>
-     <div class="promo-wide-banner__badges">
+     <h2 class="promo-wide-banner__title" id="pmTitle">MAIS <span class="highlight">VENDIDOS</span></h2>
+     <p class="promo-wide-banner__subtitle" id="pmSubtitle">Os favoritos da galera que já conquistaram todo o Brasil.</p>
+     <div class="promo-wide-banner__badges" id="pmBadges">
        <span class="promo-wide-banner__badge"><svg viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M5 13l4 4L19 7"></path></svg> QUALIDADE CONSOLIDADA</span>
        <span class="promo-wide-banner__badge"><svg viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M5 13l4 4L19 7"></path></svg> COMPRA SEGURA</span>
      </div>
     </div>
    </div>
+   <script>
+    (function(){
+      var b = window.AdminBanners.slice().reverse().find(function(x){ return x.position === 'mais_vendidos'; });
+      if(b) {
+        var el = document.getElementById('promoMaisVendidos');
+        if(b.image) { el.style.backgroundImage = 'url('+b.image+')'; }
+        else if(b.bg) { el.style.background = b.bg; el.style.backgroundImage = 'none'; }
+        if(b.title) document.getElementById('pmTitle').innerHTML = b.title;
+        if(b.subtitle) document.getElementById('pmSubtitle').innerHTML = b.subtitle;
+        if(b.ctaText) document.getElementById('pmBadges').innerHTML = '<a href="'+(b.ctaLink||'#')+'" class="btn btn--primary">'+b.ctaText+'</a>';
+      }
+    })();
+   </script>
    <div class="grid grid--products" id="bestSellersGrid"></div>
   <div style="text-align: center; margin-top: var(--space-xl);">
    <a href="mais-vendidos.html" class="btn btn--outline">Ver Todos os Produtos</a>
@@ -332,31 +376,89 @@
  <!-- ── Outlet Banner ── -->
  <section class="section section--dark reveal">
   <div class="container">
-  <div class="outlet-banner">
-   <h2 class="outlet-banner__title"><span class="highlight">Outlet</span> — Até 50% OFF</h2>
-   <p class="outlet-banner__subtitle">Ofertas por tempo limitado. Quando acabar, acabou!</p>
+  <div class="outlet-banner" id="promoOutlet">
+   <h2 class="outlet-banner__title" id="outTitle"><span class="highlight">Outlet</span> — Até 50% OFF</h2>
+   <p class="outlet-banner__subtitle" id="outSubtitle">Ofertas por tempo limitado. Quando acabar, acabou!</p>
    <div class="countdown" id="outletCountdown"></div>
-   <div style="margin-top: var(--space-xl);">
-   <a href="outlet.html" class="btn btn--gold btn--lg">Ver Ofertas do Outlet</a>
+   <div style="margin-top: var(--space-xl);" id="outBtnWrap">
+   <a href="outlet.html" class="btn btn--gold btn--lg" id="outBtn">Ver Ofertas do Outlet</a>
    </div>
   </div>
+   <script>
+    (function(){
+      var b = window.AdminBanners.slice().reverse().find(function(x){ return x.position === 'outlet'; });
+      if(b) {
+        var el = document.getElementById('promoOutlet');
+        if(b.image) { el.style.background = 'url('+b.image+') center/cover no-repeat'; }
+        else if(b.bg) { el.style.background = b.bg; }
+        if(b.title) document.getElementById('outTitle').innerHTML = b.title;
+        if(b.subtitle) document.getElementById('outSubtitle').innerHTML = b.subtitle;
+        if(b.ctaText) document.getElementById('outBtn').innerHTML = b.ctaText;
+        if(b.ctaLink) document.getElementById('outBtn').href = b.ctaLink;
+        if(b.outletDate) window.NeedwayOutletDate = b.outletDate;
+      }
+      
+      // Countdown Logic
+      var cd = document.getElementById('outletCountdown');
+      if(window.NeedwayOutletDate && cd) {
+        var targetObj = new Date(window.NeedwayOutletDate).getTime();
+        if(!isNaN(targetObj)) {
+            var updateTimer = setInterval(function(){
+              var now = new Date().getTime();
+              var diff = targetObj - now;
+              if(diff < 0) { 
+                clearInterval(updateTimer); 
+                cd.innerHTML = '<div style="font-size:1.5rem;font-weight:bold;color:var(--primary);">OFERTA ENCERRADA</div>'; 
+                return; 
+              }
+              var d = Math.floor(diff / (1000 * 60 * 60 * 24));
+              var h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+              var m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+              var s = Math.floor((diff % (1000 * 60)) / 1000);
+              cd.innerHTML = 
+                '<div style="display:inline-block;margin:0 8px;text-align:center;"><div style="font-size:2rem;font-weight:bold;color:var(--accent-gold);background:rgba(0,0,0,0.5);padding:8px 16px;border-radius:8px;">'+(d<10?'0'+d:d)+'</div><div style="font-size:0.75rem;margin-top:4px;color:#aaa;">DIAS</div></div>' +
+                '<div style="display:inline-block;margin:0 8px;text-align:center;"><div style="font-size:2rem;font-weight:bold;color:var(--accent-gold);background:rgba(0,0,0,0.5);padding:8px 16px;border-radius:8px;">'+(h<10?'0'+h:h)+'</div><div style="font-size:0.75rem;margin-top:4px;color:#aaa;">HORAS</div></div>' +
+                '<div style="display:inline-block;margin:0 8px;text-align:center;"><div style="font-size:2rem;font-weight:bold;color:var(--accent-gold);background:rgba(0,0,0,0.5);padding:8px 16px;border-radius:8px;">'+(m<10?'0'+m:m)+'</div><div style="font-size:0.75rem;margin-top:4px;color:#aaa;">MIN</div></div>' +
+                '<div style="display:inline-block;margin:0 8px;text-align:center;"><div style="font-size:2rem;font-weight:bold;color:var(--accent-gold);background:rgba(0,0,0,0.5);padding:8px 16px;border-radius:8px;">'+(s<10?'0'+s:s)+'</div><div style="font-size:0.75rem;margin-top:4px;color:#aaa;">SEG</div></div>';
+            }, 1000);
+        } else {
+             cd.style.display = 'none';
+        }
+      } else if (cd) {
+          cd.style.display = 'none';
+      }
+    })();
+   </script>
   </div>
  </section>
 
  <!-- ── Launches ── -->
  <section class="section section--darker reveal" style="padding-top: var(--space-3xl);">
   <div class="container">
-   <div class="promo-wide-banner" style="background-image: url('img/produtos/default.jpg'); background-size: cover; background-position: center;">
+   <div class="promo-wide-banner" id="promoLancamentos" style="background-image: url('img/produtos/default.jpg'); background-size: cover; background-position: center;">
     <div class="promo-wide-banner__bg"></div>
     <div class="promo-wide-banner__content">
-     <h2 class="promo-wide-banner__title">NOVOS <span class="highlight">LANÇAMENTOS</span></h2>
-     <p class="promo-wide-banner__subtitle">A força que você precisa na construção e na recuperação dos músculos</p>
-     <div class="promo-wide-banner__badges">
+     <h2 class="promo-wide-banner__title" id="plTitle">NOVOS <span class="highlight">LANÇAMENTOS</span></h2>
+     <p class="promo-wide-banner__subtitle" id="plSubtitle">A força que você precisa na construção e na recuperação dos músculos</p>
+     <div class="promo-wide-banner__badges" id="plBadges">
        <span class="promo-wide-banner__badge"><svg viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M5 13l4 4L19 7"></path></svg> APROVADO EM TODOS OS LAUDOS</span>
        <span class="promo-wide-banner__badge"><svg viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M5 13l4 4L19 7"></path></svg> COMPRE COM CONFIANÇA</span>
      </div>
     </div>
    </div>
+   <script>
+    (function(){
+      var b = window.AdminBanners.slice().reverse().find(function(x){ return x.position === 'lancamentos'; });
+      if(b) {
+        var el = document.getElementById('promoLancamentos');
+        if(b.image) { el.style.backgroundImage = 'url('+b.image+')'; }
+        else if(b.bg) { el.style.background = b.bg; el.style.backgroundImage = 'none'; }
+        if(b.title) document.getElementById('plTitle').innerHTML = b.title;
+        if(b.subtitle) document.getElementById('plSubtitle').innerHTML = b.subtitle;
+        if(b.ctaText) document.getElementById('plBadges').innerHTML = '<a href="'+(b.ctaLink||'#')+'" class="btn btn--primary">'+b.ctaText+'</a>';
+      }
+    })();
+   </script>
    <div class="grid grid--products" id="launchesGrid"></div>
   </div>
  </section>

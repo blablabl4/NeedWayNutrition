@@ -608,6 +608,30 @@
     </div>
     <div class="admin-form-grid">
       <div class="input-group span-2">
+        <div class="field-label">Posição do Banner no Site <span class="info-tip"><span class="tip-icon">i</span><span class="tip-bubble">Define onde este banner será exibido na página inicial do site. Banners específicos substituem qualquer banner anterior da mesma posição.</span></span></div>
+        <select class="input" id="bPosition" onchange="if(typeof toggleBannerExtras === 'function'){toggleBannerExtras()}">
+          <option value="hero">Carrossel Principal (Hero)</option>
+          <option value="mais_vendidos">Acima de Mais Vendidos</option>
+          <option value="lancamentos">Acima de Novos Lançamentos</option>
+          <option value="outlet">Seção Promocional Menor (Outlet)</option>
+          <option value="coupon">Seção de Cupons</option>
+        </select>
+      </div>
+
+      <div class="input-group span-2" id="bCouponWrapper" style="display:none; background:rgba(255,165,0,0.05); padding:12px; border:1px solid rgba(255,165,0,0.2); border-radius:8px; margin-bottom:8px;">
+        <div class="field-label" style="color:var(--accent-gold);">Aplicação da Imagem/Cor (Cupons) <span class="info-tip"><span class="tip-icon">i</span><span class="tip-bubble">Controla onde a imagem enviada aparecerá na seção de Cupons.</span></span></div>
+        <select class="input" id="bCouponStyle">
+          <option value="section">No Fundo da Seção Inteira</option>
+          <option value="button">Apenas como Fundo dos Botões Tracejados</option>
+        </select>
+      </div>
+      
+      <div class="input-group span-2" id="bOutletWrapper" style="display:none; background:rgba(255,165,0,0.05); padding:12px; border:1px solid rgba(255,165,0,0.2); border-radius:8px; margin-bottom:8px;">
+        <div class="field-label" style="color:var(--accent-gold);">Fim da Promoção (Opcional - Outlet) <span class="info-tip"><span class="tip-icon">i</span><span class="tip-bubble">Data e hora para o contador regressivo. Deixe em branco para ocultar o contador.</span></span></div>
+        <input type="datetime-local" class="input" id="bOutletDate">
+      </div>
+
+      <div class="input-group span-2">
         <div class="field-label">Título Principal <span class="info-tip"><span class="tip-icon">i</span><span class="tip-bubble">Texto grande e chamativo que aparece sobre o banner. Ex: "Performance Sem Limites".</span></span></div>
         <input type="text" class="input" id="bTitle" placeholder="Ex: Performance Sem Limites">
       </div>

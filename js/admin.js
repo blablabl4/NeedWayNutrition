@@ -361,18 +361,34 @@ function deleteProduct(id) {
 // ── Banners ──
 var editingBannerId = null;
 
+function toggleBannerExtras() {
+  const pos = document.getElementById('bPosition').value;
+  const couponWrap = document.getElementById('bCouponWrapper');
+  const outletWrap = document.getElementById('bOutletWrapper');
+  if(couponWrap) couponWrap.style.display = (pos === 'coupon') ? 'flex' : 'none';
+  if(outletWrap) outletWrap.style.display = (pos === 'outlet') ? 'flex' : 'none';
+}
+
 function loadBanners() {
   const banners = getBanners();
   const c = document.getElementById('bannersContainer');
+  const posLabels = { hero: 'Hero Carousel', mais_vendidos: 'Mais Vendidos', lancamentos: 'Lançamentos', outlet: 'Outlet', coupon: 'Cupons' };
   c.innerHTML = banners.length === 0 ? '<div class="admin-empty"><p>Nenhum banner cadastrado.</p></div>'
-    : banners.map(function(b){ return '<div class="banner-card"><div class="banner-card__preview" style="background:' + (b.bg||'#111') + ';">' + (b.image ? '<img src="'+b.image+'" style="width:100%;height:100%;object-fit:cover;">' : '<span>Sem foto</span>') + '</div><div class="banner-card__info"><div class="banner-card__title">' + (b.title||'Sem título') + '</div><div class="banner-card__sub">' + (b.subtitle||'') + ' &mdash; Botão: <em>' + (b.ctaText||'') + '</em></div><div style="font-size:var(--fs-xs);color:var(--text-muted);margin-top:4px;">Link: ' + (b.ctaLink||'-') + '</div></div><div class="banner-card__actions"><label class="admin-toggle"><input type="checkbox" ' + (b.active?'checked':'') + ' onchange="toggleBanner(' + b.id + ',this.checked)"><div class="admin-toggle__track"></div></label><button class="btn-icon" onclick="editBanner(' + b.id + ')"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button><button class="btn-icon danger" onclick="deleteBanner(' + b.id + ')"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg></button></div></div>'; }).join('');
+    : banners.map(function(b){ 
+      var pLabel = posLabels[b.position||'hero'] || 'Hero';
+      var badgeHtml = '<span style="display:inline-block; font-size:10px; background:var(--accent-gold); color:#000; padding:2px 6px; border-radius:4px; margin-bottom:4px; font-weight:bold;">' + pLabel.toUpperCase() + '</span><br>';
+      return '<div class="banner-card"><div class="banner-card__preview" style="background:' + (b.bg||'#111') + ';">' + (b.image ? '<img src="'+b.image+'" style="width:100%;height:100%;object-fit:cover;">' : '<span>Sem foto</span>') + '</div><div class="banner-card__info"><div class="banner-card__title">' + badgeHtml + (b.title||'Sem título') + '</div><div class="banner-card__sub">' + (b.subtitle||'') + ' &mdash; Botão: <em>' + (b.ctaText||'') + '</em></div><div style="font-size:var(--fs-xs);color:var(--text-muted);margin-top:4px;">Link: ' + (b.ctaLink||'-') + '</div></div><div class="banner-card__actions"><label class="admin-toggle"><input type="checkbox" ' + (b.active?'checked':'') + ' onchange="toggleBanner(' + b.id + ',this.checked)"><div class="admin-toggle__track"></div></label><button class="btn-icon" onclick="editBanner(' + b.id + ')"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button><button class="btn-icon danger" onclick="deleteBanner(' + b.id + ')"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg></button></div></div>'; 
+    }).join('');
 }
 
 function newBanner() {
   editingBannerId = null;
   bannerImageData = null;
-  ['bTitle','bSubtitle','bCtaText','bCtaLink'].forEach(function(id){ var el = document.getElementById(id); if(el) el.value = ''; });
+  ['bTitle','bSubtitle','bCtaText','bCtaLink','bOutletDate'].forEach(function(id){ var el = document.getElementById(id); if(el) el.value = ''; });
   document.getElementById('bBg').value = '#1a1a2e';
+  var pSel = document.getElementById('bPosition'); if(pSel) pSel.value = 'hero';
+  var cSel = document.getElementById('bCouponStyle'); if(cSel) cSel.value = 'section';
+  toggleBannerExtras();
   var zone = document.getElementById('bUploadZone');
   if(zone) zone.classList.remove('has-image');
   var prev = document.getElementById('bImagePreview');
@@ -392,6 +408,11 @@ function editBanner(id) {
   document.getElementById('bCtaText').value = b.ctaText || '';
   document.getElementById('bCtaLink').value = b.ctaLink || '';
   document.getElementById('bBg').value = b.bg || '#1a1a2e';
+  var pSel = document.getElementById('bPosition'); if(pSel) pSel.value = b.position || 'hero';
+  var cSel = document.getElementById('bCouponStyle'); if(cSel) cSel.value = b.couponStyle || 'section';
+  var outD = document.getElementById('bOutletDate'); if(outD) outD.value = b.outletDate || '';
+  toggleBannerExtras();
+  
   var zone = document.getElementById('bUploadZone');
   var prev = document.getElementById('bImagePreview');
   var ph = document.getElementById('bUploadPlaceholder');
@@ -416,7 +437,11 @@ function saveBanner() {
   b.ctaText = document.getElementById('bCtaText').value;
   b.ctaLink = document.getElementById('bCtaLink').value;
   b.bg = document.getElementById('bBg').value;
+  b.position = document.getElementById('bPosition').value;
+  b.couponStyle = document.getElementById('bCouponStyle').value;
+  b.outletDate = document.getElementById('bOutletDate').value;
   b.image = bannerImageData || b.image || '';
+  
   if (editingBannerId) {
     var idx = banners.findIndex(function(x){ return x.id === editingBannerId; });
     banners[idx] = b;
