@@ -110,57 +110,53 @@
      <!-- Right: Floating Buy Modal -->
      <div class="pdp__info">
       
-      <div class="pdp__buy-modal" style="background:var(--bg-dark); border:1px solid rgba(255,255,255,0.05); box-shadow:0 10px 40px rgba(0,0,0,0.4); padding:var(--space-xl); border-radius:8px; gap:var(--space-sm);">
-       <h1 class="pdp__name" id="pdpName" style="font-size:1.6rem; margin:0;">Carregando...</h1>
-       <a href="#tab-nutri" style="font-size:0.8rem; color:var(--text-muted); text-decoration:underline; border-bottom:none; margin-bottom:var(--space-xs);" onclick="document.querySelector('[data-tab=\'tab-nutri\']').click();">veja a tabela nutricional</a>
-       <p style="font-size:0.9rem; font-weight:700; text-transform:uppercase; margin-bottom:var(--space-xs);">Qualidade Internacional<br>E Preço de Fábrica</p>
+      <div class="pdp__buy-modal" style="padding:var(--space-xl); border-radius:var(--radius-lg); gap:var(--space-sm); border: 1px solid var(--glass-border);">
+       <h1 class="pdp__name" id="pdpName" style="font-size:1.6rem; margin-bottom:var(--space-sm);">Carregando...</h1>
+       
+       <div class="pdp__rating" id="pdpRating" style="margin-bottom:var(--space-xs);"></div>
 
        <!-- Price Block -->
-       <div class="pdp__price-block" style="padding:0; margin:0;">
-       <div class="pdp__price-row" style="margin:0; gap:var(--space-sm); align-items:baseline;">
-        <span class="pdp__price-current" id="pdpPrice" style="color:#00c853; font-size:2.2rem;">R$ 0,00</span>
-        <span style="font-weight:700; color:#00c853; font-size:1rem;">(Cada)</span>
-       </div>
-       <div style="font-size:0.85rem; font-weight:900; text-transform:uppercase; margin-bottom:var(--space-xs);">NO BOLETO OU PIX</div>
-       <span class="pdp__price-installment" id="pdpInstallment" style="font-size:0.8rem; line-height:1.2; display:block;"></span>
-       <a href="#pdpInstallment" style="font-size:0.75rem; color:var(--text-muted); text-decoration:underline;">Saiba como pagar</a>
+       <div class="pdp__price-block" style="padding:0; margin:0; display:flex; flex-direction:column; gap:4px;">
+        <span class="pdp__price-original" id="pdpPriceOriginal" style="display:none;"></span>
+        <div class="pdp__price-row" style="margin:0; gap:var(--space-sm); align-items:baseline;">
+         <span class="pdp__price-current" id="pdpPrice" style="color:var(--primary); font-size:2.2rem;">R$ 0,00</span>
+        </div>
+        <div class="pdp__price-pix" id="pdpPricePix" style="font-size:0.9rem; font-weight:700; color:var(--success); display:inline-block; margin-bottom:0; background:none; padding:0; border:none;"></div>
+        <span class="pdp__price-installment" id="pdpInstallment" style="font-size:0.85rem; color:var(--text-muted); line-height:1.2;"></span>
        </div>
 
        <!-- Variations -->
        <div class="pdp__variations" id="pdpVariations" style="margin-top:var(--space-md);"></div>
 
        <!-- Buy Actions -->
-       <div class="pdp__buy" style="display:flex; flex-direction:column; gap:var(--space-sm); margin-top:var(--space-sm);">
+       <div class="pdp__buy" style="display:flex; flex-direction:column; gap:var(--space-sm); margin-top:var(--space-md);">
         <div style="display:flex; gap:var(--space-xs); width: 100%;">
-          <div class="qty-selector" style="flex:0 0 80px; display:none;" id="qtyWrapperCondensed">
+          <div class="qty-selector" style="flex:0 0 80px; display:flex;" id="qtyWrapperCondensed">
            <button class="qty-selector__btn" onclick="changeQty(-1)">−</button>
            <input class="qty-selector__input" type="number" id="pdpQty" value="1" min="1" readonly>
            <button class="qty-selector__btn" onclick="changeQty(1)">+</button>
           </div>
-          <button class="btn btn--lg" id="pdpBuyBtn" onclick="addToCart()" aria-label="Comprar" style="flex:1; background:#1b7c25; color:#fff; font-weight:800; font-size:1.2rem; letter-spacing:1px; display:flex; justify-content:space-between; align-items:center; padding:0 24px; border:none; height:54px;">
+          <button class="btn btn--lg" id="pdpBuyBtn" onclick="addToCart()" aria-label="Comprar" style="flex:1; background:var(--success); color:#111; font-weight:800; font-size:1.2rem; letter-spacing:1px; display:flex; justify-content:space-between; align-items:center; padding:0 24px; border:none; height:54px;">
             COMPRAR
             <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
           </button>
         </div>
-        <div style="display:flex; align-items:center; gap:8px; font-size:0.9rem; font-weight:bold; margin-top:4px;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff" style="background:#111; border-radius:50%; padding:2px;"><path d="M20.285 6.707l-11.293 11.293-5.285-5.285 1.414-1.414 3.871 3.871 9.879-9.879z"/></svg>
-          EM ESTOQUE. Envio imediato!
+        <div style="display:flex; align-items:center; gap:8px; font-size:0.85rem; font-weight:600; color:var(--success); margin-top:8px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          Em Estoque. Envio Imediato!
         </div>
        </div>
 
-       <!-- Trust Badges (Simplificados simulando a ref) -->
-       <div style="display:flex; align-items:center; justify-content:space-between; gap:var(--space-xs); margin-top:var(--space-lg); border-top:1px solid rgba(255,255,255,0.05); padding-top:var(--space-md);">
-        <img src="https://trust-selos-api.clearsale.com.br/selos/B8B8F3C5-1B89-4D88-81D6-83D69A3C7B5D" alt="ClearSale" style="height:35px; filter:grayscale(1) contrast(2);">
-        <div style="text-align:center; line-height:1;"><span style="font-weight:900; font-size:1.1rem; color:#fff;">ebit</span><br><span style="font-size:0.6rem; color:#00e5ff;">EXCELENTE</span></div>
-        <div style="text-align:center; line-height:1;"><span style="font-weight:900; font-size:1.1rem; color:#fff;">eureciclo</span></div>
-        <div style="text-align:center; line-height:1;"><span style="font-size:0.6rem; background:#00c853; color:#fff; padding:2px 4px; border-radius:2px; font-weight:bold;">SITE BLINDADO</span><br><span style="font-size:0.7rem;">Auditoria</span></div>
+       <!-- Secure -->
+       <div style="display:flex; align-items:center; gap:var(--space-xs); margin-top:var(--space-lg); border-top:1px solid var(--glass-border); padding-top:var(--space-md); color:var(--text-muted); font-size:0.75rem;">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Ambiente 100% Seguro
        </div>
 
-       <!-- Stock (Oculto pro JS não quebrar) -->
+       <!-- Brand / Stock (invisiveis para ancoragem do js de fallback se precisar) -->
        <div class="stock-status" id="pdpStock" style="display:none;"></div>
-       <span class="pdp__price-pix" id="pdpPricePix" style="display:none;"></span>
        <span class="pdp__brand" id="pdpBrand" style="display:none;"></span>
-       <div class="pdp__rating" id="pdpRating" style="display:none;"></div>
+       <span class="badge badge--discount" id="pdpDiscount" style="display:none;"></span>
 
       </div> <!-- End of buy-modal -->
 
