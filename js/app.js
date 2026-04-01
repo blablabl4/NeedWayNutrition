@@ -249,6 +249,7 @@ function initCarousel(selector) {
 
  // Create dots with progress bar
  if (dotsContainer) {
+  dotsContainer.innerHTML = '';
   slides.forEach((_, i) => {
    const dot = document.createElement('button');
    dot.className = `carousel__dot ${i === 0 ? 'active' : ''}`;
