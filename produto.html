@@ -164,25 +164,6 @@
 
       </div> <!-- End of buy-modal -->
 
-      <!-- Divider -->
-      <hr class="divider">
-
-      <!-- Tabs -->
-      <div id="pdpTabs">
-       <div class="tabs">
-        <button class="tabs__tab active" data-tab="tab-desc">Descrição</button>
-        <button class="tabs__tab" data-tab="tab-nutri">Nutricional</button>
-        <button class="tabs__tab" data-tab="tab-reviews">Avaliações</button>
-       </div>
-       <div class="tabs__content active" id="tab-desc">
-        <div id="pdpDescription"></div>
-       </div>
-       <div class="tabs__content" id="tab-nutri">
-        <div id="pdpNutrition"></div>
-       </div>
-       <div class="tabs__content" id="tab-reviews">
-        <div id="pdpReviews"></div>
-       </div>
       </div>
      </div>
     </div>
@@ -190,6 +171,27 @@
   </div>
 
   <div class="container container--fluid" style="max-width: 1540px; margin-top: var(--space-3xl);">
+   
+   <!-- Product Details Tabs -->
+   <section class="pdp-details-section" style="margin-bottom: var(--space-3xl);">
+    <div id="pdpTabs" style="max-width: 1000px; margin: 0 auto; background: var(--bg-surface); padding: var(--space-xl); border-radius: 8px; border: 1px solid var(--glass-border);">
+     <div class="tabs" style="justify-content: center; gap: var(--space-lg); margin-bottom: var(--space-xl);">
+      <button class="tabs__tab active" data-tab="tab-desc" style="font-size:1.1rem; padding:10px 20px;">Descrição</button>
+      <button class="tabs__tab" data-tab="tab-nutri" style="font-size:1.1rem; padding:10px 20px;">Nutricional</button>
+      <button class="tabs__tab" data-tab="tab-reviews" style="font-size:1.1rem; padding:10px 20px;">Avaliações</button>
+     </div>
+     <div class="tabs__content active" id="tab-desc">
+      <div id="pdpDescription"></div>
+     </div>
+     <div class="tabs__content" id="tab-nutri">
+      <div id="pdpNutrition"></div>
+     </div>
+     <div class="tabs__content" id="tab-reviews">
+      <div id="pdpReviews"></div>
+     </div>
+    </div>
+   </section>
+
    <!-- Related Products -->
    <section class="related-products reveal">
     <h2 class="section-title">Produtos <span class="highlight">Relacionados</span></h2>
