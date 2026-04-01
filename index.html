@@ -507,36 +507,6 @@
   </div>
  </section>
 
- <!-- ── Launches ── -->
- <section class="section section--darker reveal" style="padding-top: var(--space-3xl);">
-  <div class="container">
-   <div class="promo-wide-banner" id="promoLancamentos" style="background-image: url('img/produtos/default.jpg'); background-size: cover; background-position: center;">
-    <div class="promo-wide-banner__bg"></div>
-    <div class="promo-wide-banner__content">
-     <h2 class="promo-wide-banner__title" id="plTitle">NOVOS <span class="highlight">LANÇAMENTOS</span></h2>
-     <p class="promo-wide-banner__subtitle" id="plSubtitle">A força que você precisa na construção e na recuperação dos músculos</p>
-     <div class="promo-wide-banner__badges" id="plBadges">
-       <span class="promo-wide-banner__badge"><svg viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M5 13l4 4L19 7"></path></svg> APROVADO EM TODOS OS LAUDOS</span>
-       <span class="promo-wide-banner__badge"><svg viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M5 13l4 4L19 7"></path></svg> COMPRE COM CONFIANÇA</span>
-     </div>
-    </div>
-   </div>
-   <script>
-    (function(){
-      var b = window.AdminBanners.slice().reverse().find(function(x){ return x.position === 'lancamentos'; });
-      if(b) {
-        var el = document.getElementById('promoLancamentos');
-        if(b.image) { el.style.backgroundImage = 'url('+b.image+')'; }
-        else if(b.bg) { el.style.background = b.bg; el.style.backgroundImage = 'none'; }
-        if(b.title) document.getElementById('plTitle').innerHTML = b.title;
-        if(b.subtitle) document.getElementById('plSubtitle').innerHTML = b.subtitle;
-        if(b.ctaText) document.getElementById('plBadges').innerHTML = '<a href="'+(b.ctaLink||'#')+'" class="btn btn--primary">'+b.ctaText+'</a>';
-      }
-    })();
-   </script>
-   <div class="grid grid--products" id="launchesGrid"></div>
-  </div>
- </section>
  <!-- ── Modality Shelves (Vestuário) ── -->
  <section class="section section--dark reveal">
   <div class="container">
@@ -609,6 +579,36 @@
    </div>
   </div>
 
+  </div>
+ </section>
+ <!-- ── Launches ── -->
+ <section class="section section--darker reveal" style="padding-top: var(--space-3xl);">
+  <div class="container">
+   <div class="promo-wide-banner" id="promoLancamentos" style="background-image: url('img/produtos/default.jpg'); background-size: cover; background-position: center;">
+    <div class="promo-wide-banner__bg"></div>
+    <div class="promo-wide-banner__content">
+     <h2 class="promo-wide-banner__title" id="plTitle">NOVOS <span class="highlight">LANÇAMENTOS</span></h2>
+     <p class="promo-wide-banner__subtitle" id="plSubtitle">A força que você precisa na construção e na recuperação dos músculos</p>
+     <div class="promo-wide-banner__badges" id="plBadges">
+       <span class="promo-wide-banner__badge"><svg viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M5 13l4 4L19 7"></path></svg> APROVADO EM TODOS OS LAUDOS</span>
+       <span class="promo-wide-banner__badge"><svg viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M5 13l4 4L19 7"></path></svg> COMPRE COM CONFIANÇA</span>
+     </div>
+    </div>
+   </div>
+   <script>
+    (function(){
+      var b = window.AdminBanners.slice().reverse().find(function(x){ return x.position === 'lancamentos'; });
+      if(b) {
+        var el = document.getElementById('promoLancamentos');
+        if(b.image) { el.style.backgroundImage = 'url('+b.image+')'; }
+        else if(b.bg) { el.style.background = b.bg; el.style.backgroundImage = 'none'; }
+        if(b.title) document.getElementById('plTitle').innerHTML = b.title;
+        if(b.subtitle) document.getElementById('plSubtitle').innerHTML = b.subtitle;
+        if(b.ctaText) document.getElementById('plBadges').innerHTML = '<a href="'+(b.ctaLink||'#')+'" class="btn btn--primary">'+b.ctaText+'</a>';
+      }
+    })();
+   </script>
+   <div class="grid grid--products" id="launchesGrid"></div>
   </div>
  </section>
  <!-- ── About Needway ── -->
