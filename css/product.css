@@ -6,10 +6,14 @@
 /* ── PDP Layout ── */
 .pdp {
     display: grid;
-    grid-template-columns: 260px 1fr 480px;
-    gap: var(--space-2xl);
+    /* Lado esquerdo (260px), Galeria (expande), Lado Direito (-20% de 480px = ~380px) */
+    grid-template-columns: 260px 1fr 380px;
+    gap: var(--space-3xl); /* Aumentado gap para empurrar laterais mais pra borda */
     padding: var(--space-2xl) 0;
     align-items: center;
+    width: 100%;
+    max-width: 1440px; /* Expande um pouco além do container padrão para encostar na borda */
+    margin: 0 auto;
 }
 
 /* ── Left: Benefits ── */
