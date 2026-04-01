@@ -132,13 +132,13 @@
 
      <!-- Quantity + Buy -->
      <div class="pdp__buy">
-      <div class="qty-selector">
+      <div class="qty-selector" style="flex:1;">
        <button class="qty-selector__btn" onclick="changeQty(-1)">−</button>
        <input class="qty-selector__input" type="number" id="pdpQty" value="1" min="1" readonly>
        <button class="qty-selector__btn" onclick="changeQty(1)">+</button>
       </div>
-      <button class="btn btn--primary btn--lg" id="pdpBuyBtn" onclick="addToCart()" style="flex:1;">
-        Adicionar ao Carrinho
+      <button class="btn btn--primary btn--icon btn--lg" id="pdpBuyBtn" onclick="addToCart()" aria-label="Adicionar ao Carrinho">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
       </button>
       <button class="btn btn--icon btn--dark" id="pdpFavBtn" onclick="toggleFavPDP()"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
      </div>
