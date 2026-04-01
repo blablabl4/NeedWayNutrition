@@ -442,12 +442,20 @@
     }
 
     /* Product Detail Page */
-    .product-detail {
+    .pdp {
         grid-template-columns: 1fr !important;
+        margin-left: 0;
+        margin-right: 0;
+        gap: var(--space-xl);
     }
 
-    .product-detail__gallery {
-        max-height: 400px;
+    .pdp__main-image {
+        height: 350px;
+        font-size: 5rem;
+    }
+    
+    .pdp__buy-modal {
+        padding: var(--space-lg);
     }
 
     /* Carousel */
