@@ -75,20 +75,46 @@
 
             <!-- PDP Grid -->
             <div class="pdp" id="pdpContent">
-                <!-- Gallery -->
-                <div class="pdp__gallery">
-                    <div class="pdp__main-image" id="pdpMainImage"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4M4 7l8 4M4 7v10l8 4m0-10v10"/></svg></div>
-                    <div class="pdp__thumbs" id="pdpThumbs"></div>
+                
+                <!-- Left: Benefits -->
+                <div class="pdp__benefits desktop-only" style="align-self: flex-start; margin-top: 10%;">
+                    <h2 class="pdp__benefits-title">Dose Diária de<br>Alta Performance</h2>
+                    <ul class="pdp__benefits-list">
+                        <li>
+                            <div class="icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+                            <span>Qualidade Internacional Garantida</span>
+                        </li>
+                        <li>
+                            <div class="icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+                            <span>Rápida Absorção no Organismo</span>
+                        </li>
+                        <li>
+                            <div class="icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg></div>
+                            <span>Matéria-Prima Premium Importada</span>
+                        </li>
+                        <li>
+                            <div class="icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg></div>
+                            <span>Complementa Perfeitamente a Dieta</span>
+                        </li>
+                    </ul>
                 </div>
 
-                <!-- Info -->
-                <div class="pdp__info">
-                    <span class="pdp__brand" id="pdpBrand">Needway Nutrition</span>
-                    <h1 class="pdp__name" id="pdpName">Carregando...</h1>
-                    <div class="pdp__rating" id="pdpRating"></div>
+                <!-- Center: Massive Gallery -->
+                <div class="pdp__gallery">
+                    <div class="pdp__main-image" id="pdpMainImage"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4M4 7l8 4M4 7v10l8 4m0-10v10"/></svg></div>
+                    <div class="pdp__thumbs" id="pdpThumbs" style="justify-content:center;"></div>
+                </div>
 
-                    <!-- Price Block -->
-                    <div class="pdp__price-block">
+                <!-- Right: Floating Buy Modal -->
+                <div class="pdp__info">
+                    
+                    <div class="pdp__buy-modal">
+                        <span class="pdp__brand" id="pdpBrand">Needway Nutrition</span>
+                        <h1 class="pdp__name" id="pdpName">Carregando...</h1>
+                        <div class="pdp__rating" id="pdpRating"></div>
+
+                        <!-- Price Block -->
+                        <div class="pdp__price-block">
                         <span class="pdp__price-original" id="pdpPriceOriginal"></span>
                         <div class="pdp__price-row">
                             <span class="pdp__price-current" id="pdpPrice">R$ 0,00</span>
@@ -127,6 +153,7 @@
                         </div>
                         <div class="pdp__shipping-results" id="pdpShippingResults" style="display:none;"></div>
                     </div>
+                    </div> <!-- End of buy-modal -->
 
                     <!-- Divider -->
                     <hr class="divider">
