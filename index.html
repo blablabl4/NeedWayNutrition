@@ -280,28 +280,28 @@
  <section class="section" style="padding:var(--space-2xl) 0; background-color: #f2f2f2;" id="couponBannerSection">
   <div class="container">
   <div id="couponBannerWrapper" style="display:flex;flex-wrap:wrap;gap:var(--space-xl);justify-content:center;align-items:center;background:#fff;border-top:3px solid #e55c00;padding:var(--space-2xl);box-shadow:0 10px 30px rgba(0,0,0,0.05); border-radius:4px; position:relative; overflow:hidden;">
-   <div style="flex:1;min-width:250px;text-align:center; display:flex; flex-direction:column; justify-content:center; position:relative; z-index:2;">
+   <div class="hide-on-mobile" style="flex:1;min-width:250px;text-align:center; display:flex; flex-direction:column; justify-content:center; position:relative; z-index:2;">
     <h3 id="couponTitle" style="font-family:var(--font-heading);font-size:1.8rem;text-transform:uppercase;color:#111;margin:0;letter-spacing:0.02em;">Use seu <span style="font-weight:900;">Cupom</span></h3>
     <p id="couponSubtitle" style="font-size:1rem;color:#777;margin-top:6px;">Digite no carrinho ou checkout</p>
    </div>
-   <div style="display:flex;gap:var(--space-xl);flex-wrap:wrap;justify-content:center;flex:2; position:relative; z-index:2;">
+   <div style="display:flex;gap:var(--space-md);flex-wrap:wrap;justify-content:center;flex:2; position:relative; z-index:2; width: 100%;">
    <div class="coupon-btn"
-    style="background:#fff;border:2px dashed #e55c00;padding:var(--space-md) var(--space-xl);text-align:center;cursor:pointer;min-width:240px;flex:1;border-radius:2px; transition:transform 0.2s ease, opacity 0.2s ease;"
+    style="background:#f97316;border:2px dashed rgba(255,255,255,0.5);padding:var(--space-md) var(--space-xl);text-align:center;cursor:pointer;min-width:240px;flex:1;border-radius:4px; transition:transform 0.2s ease, opacity 0.2s ease;"
     onmouseover="this.style.transform='scale(1.02)'; this.style.opacity='0.9';"
     onmouseout="this.style.transform='scale(1)'; this.style.opacity='1';"
     onclick="navigator.clipboard.writeText('PRIMEIRA15');this.querySelector('small').textContent='✓ Código Copiado!'">
-    <div style="font-family:var(--font-heading);font-size:1.5rem;font-weight:900;color:#e55c00;letter-spacing:0.05em;margin-bottom:6px;">
+    <div style="font-family:var(--font-heading);font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:0.05em;margin-bottom:6px;text-shadow:0 1px 2px rgba(0,0,0,0.2);">
     PRIMEIRA15</div>
-    <small style="color:#777;font-size:0.85rem;background:rgba(255,255,255,0.8);padding:2px 8px;border-radius:4px;display:inline-block;font-weight:bold;">15% OFF na 1ª compra — Clique p/ copiar</small>
+    <small style="color:#111;font-size:0.85rem;background:rgba(255,255,255,0.9);padding:2px 8px;border-radius:4px;display:inline-block;font-weight:bold;">15% OFF na 1ª compra — Clique p/ copiar</small>
    </div>
    <div class="coupon-btn"
-    style="background:#fff;border:2px dashed #f5a623;padding:var(--space-md) var(--space-xl);text-align:center;cursor:pointer;min-width:240px;flex:1;border-radius:2px; transition:transform 0.2s ease, opacity 0.2s ease;"
+    style="background:#eab308;border:2px dashed rgba(255,255,255,0.5);padding:var(--space-md) var(--space-xl);text-align:center;cursor:pointer;min-width:240px;flex:1;border-radius:4px; transition:transform 0.2s ease, opacity 0.2s ease;"
     onmouseover="this.style.transform='scale(1.02)'; this.style.opacity='0.9';"
     onmouseout="this.style.transform='scale(1)'; this.style.opacity='1';"
     onclick="navigator.clipboard.writeText('NEEDWAY10');this.querySelector('small').textContent='✓ Código Copiado!'">
-    <div style="font-family:var(--font-heading);font-size:1.5rem;font-weight:900;color:#f5a623;letter-spacing:0.05em;margin-bottom:6px;">
+    <div style="font-family:var(--font-heading);font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:0.05em;margin-bottom:6px;text-shadow:0 1px 2px rgba(0,0,0,0.2);">
     NEEDWAY10</div>
-    <small style="color:#777;font-size:0.85rem;background:rgba(255,255,255,0.8);padding:2px 8px;border-radius:4px;display:inline-block;font-weight:bold;">10% OFF acima de R$200 — Clique p/ copiar</small>
+    <small style="color:#111;font-size:0.85rem;background:rgba(255,255,255,0.9);padding:2px 8px;border-radius:4px;display:inline-block;font-weight:bold;">10% OFF acima de R$200 — Clique p/ copiar</small>
    </div>
    </div>
   </div>

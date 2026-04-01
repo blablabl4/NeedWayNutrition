@@ -532,9 +532,9 @@
 
 .modalities-showcase__products {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     overflow-x: auto;
-    padding-bottom: var(--space-md);
+    padding-bottom: var(--space-xl);
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
 }

@@ -390,10 +390,9 @@
 
     /* Coupon Popup */
     .coupon-popup {
-        left: var(--space-md);
-        right: var(--space-md);
-        bottom: var(--space-md);
-        max-width: none;
+        max-width: 95%;
+        margin: 0 auto;
+        padding: var(--space-xl);
     }
 
     /* Sidebar Filters */
