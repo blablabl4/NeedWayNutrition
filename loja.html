@@ -2,336 +2,336 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Loja Needway Nutrition — Todos os suplementos de alta performance em um só lugar.">
-    <title>Loja | Needway Nutrition</title>
-    <link rel="icon" type="image/png" href="icone sem fundo.png">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <style>
-        .shop-layout {
-            display: flex;
-            gap: var(--space-2xl);
-            padding: var(--space-xl) 0;
-        }
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta name="description"
+  content="Loja Needway Nutrition — Todos os suplementos de alta performance em um só lugar.">
+ <title>Loja | Needway Nutrition</title>
+ <link rel="icon" type="image/png" href="icone sem fundo.png">
+ <link rel="stylesheet" href="css/variables.css">
+ <link rel="stylesheet" href="css/reset.css">
+ <link rel="stylesheet" href="css/global.css">
+ <link rel="stylesheet" href="css/layout.css">
+ <link rel="stylesheet" href="css/components.css">
+ <link rel="stylesheet" href="css/responsive.css">
+ <style>
+  .shop-layout {
+   display: flex;
+   gap: var(--space-2xl);
+   padding: var(--space-xl) 0;
+  }
 
-        .shop-main {
-            flex: 1;
-            min-width: 0;
-        }
+  .shop-main {
+   flex: 1;
+   min-width: 0;
+  }
 
-        .shop-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: var(--space-md);
-            margin-bottom: var(--space-xl);
-        }
+  .shop-header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   flex-wrap: wrap;
+   gap: var(--space-md);
+   margin-bottom: var(--space-xl);
+  }
 
-        .shop-header__count {
-            font-size: var(--fs-sm);
-            color: var(--text-muted);
-        }
+  .shop-header__count {
+   font-size: var(--fs-sm);
+   color: var(--text-muted);
+  }
 
-        .shop-header__sort select {
-            padding: 8px 16px;
-            background: var(--bg-dark);
-            border: 1px solid var(--glass-border);
-            border-radius: var(--radius-md);
-            color: var(--text-light);
-            font-size: var(--fs-sm);
-        }
+  .shop-header__sort select {
+   padding: 8px 16px;
+   background: var(--bg-dark);
+   border: 1px solid var(--glass-border);
+   border-radius: var(--radius-md);
+   color: var(--text-light);
+   font-size: var(--fs-sm);
+  }
 
-        .mobile-filter-btn {
-            display: none;
-        }
+  .mobile-filter-btn {
+   display: none;
+  }
 
-        @media(max-width:768px) {
-            .mobile-filter-btn {
-                display: flex;
-            }
+  @media(max-width:768px) {
+   .mobile-filter-btn {
+    display: flex;
+   }
 
-            .shop-layout {
-                flex-direction: column;
-            }
-        }
-    </style>
+   .shop-layout {
+    flex-direction: column;
+   }
+  }
+ </style>
 </head>
 
 <body>
-    <!-- TOP BAR -->
-    <div class="topbar">
-        <div class="topbar__track">
-            <span class="topbar__item"><span class="icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span> <strong>Frete Grátis</strong> acima de R$250</span>
-            <span class="topbar__item"><span class="icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></span> <strong>PIX com 10% OFF</strong></span>
-            <span class="topbar__item"><span class="icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span> Entrega rápida <strong>todo Brasil</strong></span>
-            <span class="topbar__item"><span class="icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></span> Compra <strong>100% segura</strong></span>
-        </div>
-    </div>
+ <!-- TOP BAR -->
+ <div class="topbar">
+  <div class="topbar__track">
+   <span class="topbar__item"><span class="icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span> <strong>Frete Grátis</strong> acima de R$250</span>
+   <span class="topbar__item"><span class="icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></span> <strong>PIX com 10% OFF</strong></span>
+   <span class="topbar__item"><span class="icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span> Entrega rápida <strong>todo Brasil</strong></span>
+   <span class="topbar__item"><span class="icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></span> Compra <strong>100% segura</strong></span>
+  </div>
+ </div>
 
-    <!-- HEADER -->
-    <header class="header" id="header">
-        <div class="header__inner">
-            <button class="menu-toggle mobile-only" aria-label="Menu"><span></span><span></span><span></span></button>
-            <a href="index.html" class="header__logo"><img src="logo sem fundo.png" alt="Needway Nutrition"></a>
-            <div class="header__search desktop-only" id="headerSearch">
-                <input type="text" class="header__search-input" id="searchInput"
-                    placeholder="Busque por whey, creatina, pré-treino..." autocomplete="off">
-                <button class="header__search-btn" aria-label="Buscar"
-                    onclick="document.getElementById('searchInput').value&&(window.location.href='busca.html?q='+encodeURIComponent(document.getElementById('searchInput').value))"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
-                <div class="search-dropdown" id="searchDropdown"></div>
-            </div>
-            <div class="header__actions">
-                <a href="login.html" class="header__action"><span class="header__action-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><span
-                        class="desktop-only">Entrar</span></a>
-                <a href="favoritos.html" class="header__action"><span class="header__action-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span><span
-                        class="desktop-only">Favoritos</span></a>
-                <button class="header__action" onclick="Cart.toggleMiniCart()"><span
-                        class="header__action-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></span><span class="desktop-only">Carrinho</span><span
-                        class="header__action-badge cart-count" style="display:none;">0</span></button>
-            </div>
-        </div>
-    </header>
+ <!-- HEADER -->
+ <header class="header" id="header">
+  <div class="header__inner">
+   <button class="menu-toggle mobile-only" aria-label="Menu"><span></span><span></span><span></span></button>
+   <a href="index.html" class="header__logo"><img src="logo sem fundo.png" alt="Needway Nutrition"></a>
+   <div class="header__search desktop-only" id="headerSearch">
+    <input type="text" class="header__search-input" id="searchInput"
+     placeholder="Busque por whey, creatina, pré-treino..." autocomplete="off">
+    <button class="header__search-btn" aria-label="Buscar"
+     onclick="document.getElementById('searchInput').value&&(window.location.href='busca.html?q='+encodeURIComponent(document.getElementById('searchInput').value))"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
+    <div class="search-dropdown" id="searchDropdown"></div>
+   </div>
+   <div class="header__actions">
+    <a href="login.html" class="header__action"><span class="header__action-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><span
+      class="desktop-only">Entrar</span></a>
+    <a href="favoritos.html" class="header__action"><span class="header__action-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span><span
+      class="desktop-only">Favoritos</span></a>
+    <button class="header__action" onclick="Cart.toggleMiniCart()"><span
+      class="header__action-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></span><span class="desktop-only">Carrinho</span><span
+      class="header__action-badge cart-count" style="display:none;">0</span></button>
+   </div>
+  </div>
+ </header>
 
-    <nav class="nav" id="mainNav">
-        <div class="nav__inner">
-            <a href="loja.html" class="nav__link active">Categorias</a>
-            <a href="lancamentos.html" class="nav__link">Lançamentos</a>
-            <a href="mais-vendidos.html" class="nav__link">Mais Vendidos</a>
-            <a href="outlet.html" class="nav__link" style="color:var(--accent-gold);">Outlet</a>
-        </div>
-    </nav>
+ <nav class="nav" id="mainNav">
+  <div class="nav__inner">
+   <a href="loja.html" class="nav__link active">Categorias</a>
+   <a href="lancamentos.html" class="nav__link">Lançamentos</a>
+   <a href="mais-vendidos.html" class="nav__link">Mais Vendidos</a>
+   <a href="outlet.html" class="nav__link" style="color:var(--accent-gold);">Outlet</a>
+  </div>
+ </nav>
 
-    <main class="page-content">
-        <div class="container">
-            <div class="breadcrumb">
-                <a href="index.html">Início</a><span class="breadcrumb__separator">›</span><span
-                    class="breadcrumb__current" id="shopTitle">Loja</span>
-            </div>
+ <main class="page-content">
+  <div class="container">
+   <div class="breadcrumb">
+    <a href="index.html">Início</a><span class="breadcrumb__separator">›</span><span
+     class="breadcrumb__current" id="shopTitle">Loja</span>
+   </div>
 
-            <h1 class="heading heading--2" id="shopHeading" style="margin-bottom:var(--space-lg);">Todos os <span
-                    class="highlight">Produtos</span></h1>
+   <h1 class="heading heading--2" id="shopHeading" style="margin-bottom:var(--space-lg);">Todos os <span
+     class="highlight">Produtos</span></h1>
 
-            <div class="shop-layout">
-                <!-- Sidebar Filters -->
-                <aside class="sidebar-filter" id="sidebarFilter">
-                    <div class="sidebar-filter__group">
-                        <h3 class="sidebar-filter__title">Categorias</h3>
-                        <div id="filterCategories"></div>
-                    </div>
-                    <div class="sidebar-filter__group">
-                        <h3 class="sidebar-filter__title">Preço</h3>
-                        <div class="price-range">
-                            <div class="price-range__values"><span>R$ 0</span><span>R$ 350</span></div>
-                            <input type="range" min="0" max="350" value="350"
-                                style="width:100%;accent-color:var(--primary);" oninput="filterByPrice(this.value)">
-                            <div
-                                style="text-align:center;font-size:var(--fs-sm);color:var(--primary);margin-top:var(--space-xs);">
-                                Até: <strong id="priceMaxLabel">R$ 350</strong></div>
-                        </div>
-                    </div>
-                    <div class="sidebar-filter__group">
-                        <h3 class="sidebar-filter__title">Objetivo</h3>
-                        <div id="filterObjectives"></div>
-                    </div>
-                    <div class="sidebar-filter__group">
-                        <h3 class="sidebar-filter__title">Avaliação</h3>
-                        <div class="sidebar-filter__option" onclick="filterByRating(4)"><span class="stars"
-                                style="font-size:var(--fs-sm);">★★★★<span class="star-empty">★</span></span> <span
-                                style="margin-left:var(--space-sm);">& acima</span></div>
-                        <div class="sidebar-filter__option" onclick="filterByRating(3)"><span class="stars"
-                                style="font-size:var(--fs-sm);">★★★<span class="star-empty">★★</span></span> <span
-                                style="margin-left:var(--space-sm);">& acima</span></div>
-                    </div>
-                    <button class="btn btn--outline btn--sm btn--full" onclick="clearFilters()"
-                        style="margin-top:var(--space-lg);">Limpar Filtros</button>
-                </aside>
-
-                <!-- Main Products -->
-                <div class="shop-main">
-                    <div class="shop-header">
-                        <div>
-                            <button class="btn btn--dark btn--sm mobile-filter-btn"
-                                onclick="document.getElementById('sidebarFilter').classList.toggle('active');document.getElementById('overlay').classList.toggle('active');">☰
-                                Filtros</button>
-                            <span class="shop-header__count" id="productCount">0 produtos</span>
-                        </div>
-                        <div class="shop-header__sort">
-                            <select onchange="sortProducts(this.value)" id="sortSelect">
-                                <option value="relevance">Relevância</option>
-                                <option value="price-asc">Menor Preço</option>
-                                <option value="price-desc">Maior Preço</option>
-                                <option value="name">Nome A-Z</option>
-                                <option value="best-seller">Mais Vendidos</option>
-                                <option value="rating">Melhor Avaliação</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="grid grid--products" id="productsGrid"></div>
-                    <div class="pagination" id="pagination"></div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="footer__grid">
-            <div class="footer__brand"><img src="logo sem fundo.png" alt="Needway Nutrition">
-                <p>Suplementos de alta performance.</p>
-            </div>
-            <div class="footer__column">
-                <h4>Institucional</h4><a href="sobre.html">Sobre</a><a href="blog.html">Blog</a><a
-                    href="fale-conosco.html">Contato</a>
-            </div>
-            <div class="footer__column">
-                <h4>Ajuda</h4><a href="trocas.html">Trocas</a><a href="politica-entrega.html">Entrega</a><a
-                    href="politica-privacidade.html">Privacidade</a>
-            </div>
-            <div class="footer__column">
-                <h4>Conta</h4><a href="login.html">Entrar</a><a href="meus-pedidos.html">Pedidos</a><a
-                    href="favoritos.html">Favoritos</a>
-            </div>
-        </div>
-        <div class="footer__bottom">
-            <div class="footer__bottom-inner"><span class="footer__copyright">© 2026 Needway Nutrition.</span></div>
-        </div>
-    </footer>
-
-    <aside class="minicart" id="minicart">
-        <div class="minicart__header">
-            <h3 class="minicart__title">🛒 Carrinho</h3><button onclick="Cart.toggleMiniCart()"
-                style="color:var(--text-muted);font-size:var(--fs-xl);">✕</button>
-        </div>
-        <div class="minicart__progress">
-            <div class="minicart__progress-text" id="minicartProgressText"></div>
-            <div class="minicart__progress-bar">
-                <div class="minicart__progress-fill" id="minicartProgressFill" style="width:0%;"></div>
-            </div>
-        </div>
-        <div class="minicart__items" id="minicartItems"></div>
-        <div class="minicart__footer">
-            <div class="minicart__total"><span>Total:</span><span class="minicart__total-value" id="minicartTotal">R$
-                    0,00</span></div><a href="carrinho.html" class="btn btn--primary btn--full"
-                style="margin-bottom:var(--space-sm);">Ver Carrinho</a><a href="checkout.html"
-                class="btn btn--gold btn--full">Finalizar</a>
-        </div>
+   <div class="shop-layout">
+    <!-- Sidebar Filters -->
+    <aside class="sidebar-filter" id="sidebarFilter">
+     <div class="sidebar-filter__group">
+      <h3 class="sidebar-filter__title">Categorias</h3>
+      <div id="filterCategories"></div>
+     </div>
+     <div class="sidebar-filter__group">
+      <h3 class="sidebar-filter__title">Preço</h3>
+      <div class="price-range">
+       <div class="price-range__values"><span>R$ 0</span><span>R$ 350</span></div>
+       <input type="range" min="0" max="350" value="350"
+        style="width:100%;accent-color:var(--primary);" oninput="filterByPrice(this.value)">
+       <div
+        style="text-align:center;font-size:var(--fs-sm);color:var(--primary);margin-top:var(--space-xs);">
+        Até: <strong id="priceMaxLabel">R$ 350</strong></div>
+      </div>
+     </div>
+     <div class="sidebar-filter__group">
+      <h3 class="sidebar-filter__title">Objetivo</h3>
+      <div id="filterObjectives"></div>
+     </div>
+     <div class="sidebar-filter__group">
+      <h3 class="sidebar-filter__title">Avaliação</h3>
+      <div class="sidebar-filter__option" onclick="filterByRating(4)"><span class="stars"
+        style="font-size:var(--fs-sm);">★★★★<span class="star-empty">★</span></span> <span
+        style="margin-left:var(--space-sm);">& acima</span></div>
+      <div class="sidebar-filter__option" onclick="filterByRating(3)"><span class="stars"
+        style="font-size:var(--fs-sm);">★★★<span class="star-empty">★★</span></span> <span
+        style="margin-left:var(--space-sm);">& acima</span></div>
+     </div>
+     <button class="btn btn--outline btn--sm btn--full" onclick="clearFilters()"
+      style="margin-top:var(--space-lg);">Limpar Filtros</button>
     </aside>
-    <div class="overlay" id="overlay"></div>
-    <a href="https://wa.me/5511970799084" target="_blank" class="whatsapp-float" aria-label="WhatsApp"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
 
-    <script src="js/data.js"></script>
-    <script src="js/cart.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/theme.js"></script>
-    <script>
-        let filteredProducts = [...NeedwayData.products];
-        let activeFilters = { categories: [], maxPrice: 350, minRating: 0 };
+    <!-- Main Products -->
+    <div class="shop-main">
+     <div class="shop-header">
+      <div>
+       <button class="btn btn--dark btn--sm mobile-filter-btn"
+        onclick="document.getElementById('sidebarFilter').classList.toggle('active');document.getElementById('overlay').classList.toggle('active');">☰
+        Filtros</button>
+       <span class="shop-header__count" id="productCount">0 produtos</span>
+      </div>
+      <div class="shop-header__sort">
+       <select onchange="sortProducts(this.value)" id="sortSelect">
+        <option value="relevance">Relevância</option>
+        <option value="price-asc">Menor Preço</option>
+        <option value="price-desc">Maior Preço</option>
+        <option value="name">Nome A-Z</option>
+        <option value="best-seller">Mais Vendidos</option>
+        <option value="rating">Melhor Avaliação</option>
+       </select>
+      </div>
+     </div>
+     <div class="grid grid--products" id="productsGrid"></div>
+     <div class="pagination" id="pagination"></div>
+    </div>
+   </div>
+  </div>
+ </main>
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const params = new URLSearchParams(window.location.search);
-            const cat = params.get('cat');
-            const obj = params.get('obj');
+ <!-- FOOTER -->
+ <footer class="footer">
+  <div class="footer__grid">
+   <div class="footer__brand"><img src="logo sem fundo.png" alt="Needway Nutrition">
+    <p>Suplementos de alta performance.</p>
+   </div>
+   <div class="footer__column">
+    <h4>Institucional</h4><a href="sobre.html">Sobre</a><a href="blog.html">Blog</a><a
+     href="fale-conosco.html">Contato</a>
+   </div>
+   <div class="footer__column">
+    <h4>Ajuda</h4><a href="trocas.html">Trocas</a><a href="politica-entrega.html">Entrega</a><a
+     href="politica-privacidade.html">Privacidade</a>
+   </div>
+   <div class="footer__column">
+    <h4>Conta</h4><a href="login.html">Entrar</a><a href="meus-pedidos.html">Pedidos</a><a
+     href="favoritos.html">Favoritos</a>
+   </div>
+  </div>
+  <div class="footer__bottom">
+   <div class="footer__bottom-inner"><span class="footer__copyright"> 2026 Needway Nutrition.</span></div>
+  </div>
+ </footer>
 
-            // Build filter UI
-            document.getElementById('filterCategories').innerHTML = NeedwayData.categories.map(c => `
-        <div class="sidebar-filter__option" onclick="toggleCategoryFilter('${c.id}', this)">
-          <div class="sidebar-filter__checkbox" id="chk-${c.id}"></div>
-          <span>${c.icon} ${c.name} (${c.count})</span>
-        </div>`).join('');
+ <aside class="minicart" id="minicart">
+  <div class="minicart__header">
+   <h3 class="minicart__title"> Carrinho</h3><button onclick="Cart.toggleMiniCart()"
+    style="color:var(--text-muted);font-size:var(--fs-xl);">✕</button>
+  </div>
+  <div class="minicart__progress">
+   <div class="minicart__progress-text" id="minicartProgressText"></div>
+   <div class="minicart__progress-bar">
+    <div class="minicart__progress-fill" id="minicartProgressFill" style="width:0%;"></div>
+   </div>
+  </div>
+  <div class="minicart__items" id="minicartItems"></div>
+  <div class="minicart__footer">
+   <div class="minicart__total"><span>Total:</span><span class="minicart__total-value" id="minicartTotal">R$
+     0,00</span></div><a href="carrinho.html" class="btn btn--primary btn--full"
+    style="margin-bottom:var(--space-sm);">Ver Carrinho</a><a href="checkout.html"
+    class="btn btn--gold btn--full">Finalizar</a>
+  </div>
+ </aside>
+ <div class="overlay" id="overlay"></div>
+ <a href="https://wa.me/5511970799084" target="_blank" class="whatsapp-float" aria-label="WhatsApp"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
 
-            document.getElementById('filterObjectives').innerHTML = NeedwayData.objectives.map(o => `
-        <div class="sidebar-filter__option" onclick="toggleObjectiveFilter('${o.id}')">
-          <span>${o.icon} ${o.name}</span>
-        </div>`).join('');
+ <script src="js/data.js"></script>
+ <script src="js/cart.js"></script>
+ <script src="js/app.js"></script>
+ <script src="js/theme.js"></script>
+ <script>
+  let filteredProducts = [...NeedwayData.products];
+  let activeFilters = { categories: [], maxPrice: 350, minRating: 0 };
 
-            // Pre-filter by URL params
-            if (cat) {
-                activeFilters.categories = [cat];
-                const catObj = NeedwayData.categories.find(c => c.id === cat);
-                if (catObj) {
-                    document.getElementById('shopHeading').innerHTML = `${catObj.icon} <span class="highlight">${catObj.name}</span>`;
-                    document.getElementById('shopTitle').textContent = catObj.name;
-                    document.title = `${catObj.name} | Needway Nutrition`;
-                }
-                document.getElementById(`chk-${cat}`)?.classList.add('checked');
-            }
+  document.addEventListener('DOMContentLoaded', () => {
+   const params = new URLSearchParams(window.location.search);
+   const cat = params.get('cat');
+   const obj = params.get('obj');
 
-            applyFilters();
-            initSearch();
-        });
+   // Build filter UI
+   document.getElementById('filterCategories').innerHTML = NeedwayData.categories.map(c => `
+  <div class="sidebar-filter__option" onclick="toggleCategoryFilter('${c.id}', this)">
+   <div class="sidebar-filter__checkbox" id="chk-${c.id}"></div>
+   <span>${c.icon} ${c.name} (${c.count})</span>
+  </div>`).join('');
 
-        function toggleCategoryFilter(catId, el) {
-            const idx = activeFilters.categories.indexOf(catId);
-            if (idx >= 0) { activeFilters.categories.splice(idx, 1); } else { activeFilters.categories.push(catId); }
-            document.getElementById(`chk-${catId}`)?.classList.toggle('checked');
-            applyFilters();
-        }
+   document.getElementById('filterObjectives').innerHTML = NeedwayData.objectives.map(o => `
+  <div class="sidebar-filter__option" onclick="toggleObjectiveFilter('${o.id}')">
+   <span>${o.icon} ${o.name}</span>
+  </div>`).join('');
 
-        function toggleObjectiveFilter(objId) {
-            // Simple toggle: filter by tags
-            applyFilters();
-        }
+   // Pre-filter by URL params
+   if (cat) {
+    activeFilters.categories = [cat];
+    const catObj = NeedwayData.categories.find(c => c.id === cat);
+    if (catObj) {
+     document.getElementById('shopHeading').innerHTML = `${catObj.icon} <span class="highlight">${catObj.name}</span>`;
+     document.getElementById('shopTitle').textContent = catObj.name;
+     document.title = `${catObj.name} | Needway Nutrition`;
+    }
+    document.getElementById(`chk-${cat}`)?.classList.add('checked');
+   }
 
-        function filterByPrice(maxPrice) {
-            activeFilters.maxPrice = parseInt(maxPrice);
-            document.getElementById('priceMaxLabel').textContent = formatPrice(activeFilters.maxPrice);
-            applyFilters();
-        }
+   applyFilters();
+   initSearch();
+  });
 
-        function filterByRating(minRating) {
-            activeFilters.minRating = minRating;
-            applyFilters();
-        }
+  function toggleCategoryFilter(catId, el) {
+   const idx = activeFilters.categories.indexOf(catId);
+   if (idx >= 0) { activeFilters.categories.splice(idx, 1); } else { activeFilters.categories.push(catId); }
+   document.getElementById(`chk-${catId}`)?.classList.toggle('checked');
+   applyFilters();
+  }
 
-        function clearFilters() {
-            activeFilters = { categories: [], maxPrice: 350, minRating: 0 };
-            document.querySelectorAll('.sidebar-filter__checkbox').forEach(c => c.classList.remove('checked'));
-            document.getElementById('shopHeading').innerHTML = 'Todos os <span class="highlight">Produtos</span>';
-            applyFilters();
-        }
+  function toggleObjectiveFilter(objId) {
+   // Simple toggle: filter by tags
+   applyFilters();
+  }
 
-        function applyFilters() {
-            filteredProducts = NeedwayData.products.filter(p => {
-                if (activeFilters.categories.length > 0 && !activeFilters.categories.includes(p.category)) return false;
-                if (p.price > activeFilters.maxPrice) return false;
-                if (p.rating < activeFilters.minRating) return false;
-                return true;
-            });
-            sortProducts(document.getElementById('sortSelect')?.value || 'relevance');
-        }
+  function filterByPrice(maxPrice) {
+   activeFilters.maxPrice = parseInt(maxPrice);
+   document.getElementById('priceMaxLabel').textContent = formatPrice(activeFilters.maxPrice);
+   applyFilters();
+  }
 
-        function sortProducts(sortBy) {
-            switch (sortBy) {
-                case 'price-asc': filteredProducts.sort((a, b) => a.price - b.price); break;
-                case 'price-desc': filteredProducts.sort((a, b) => b.price - a.price); break;
-                case 'name': filteredProducts.sort((a, b) => a.name.localeCompare(b.name)); break;
-                case 'best-seller': filteredProducts.sort((a, b) => b.sold - a.sold); break;
-                case 'rating': filteredProducts.sort((a, b) => b.rating - a.rating); break;
-                default: filteredProducts.sort((a, b) => b.sold - a.sold); break;
-            }
-            renderProducts();
-        }
+  function filterByRating(minRating) {
+   activeFilters.minRating = minRating;
+   applyFilters();
+  }
 
-        function renderProducts() {
-            const grid = document.getElementById('productsGrid');
-            const count = document.getElementById('productCount');
-            count.textContent = `${filteredProducts.length} produto${filteredProducts.length !== 1 ? 's' : ''}`;
+  function clearFilters() {
+   activeFilters = { categories: [], maxPrice: 350, minRating: 0 };
+   document.querySelectorAll('.sidebar-filter__checkbox').forEach(c => c.classList.remove('checked'));
+   document.getElementById('shopHeading').innerHTML = 'Todos os <span class="highlight">Produtos</span>';
+   applyFilters();
+  }
 
-            if (filteredProducts.length === 0) {
-                grid.innerHTML = `<div style="grid-column:1/-1;" class="empty-state"><div class="empty-state__icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div><h3 class="empty-state__title">Nenhum produto encontrado</h3><p class="empty-state__text">Tente ajustar os filtros ou explorar outras categorias.</p><a href="loja.html" class="btn btn--outline">Ver Todos</a></div>`;
-                return;
-            }
-            grid.innerHTML = filteredProducts.map(renderProductCard).join('');
-        }
-    </script>
+  function applyFilters() {
+   filteredProducts = NeedwayData.products.filter(p => {
+    if (activeFilters.categories.length > 0 && !activeFilters.categories.includes(p.category)) return false;
+    if (p.price > activeFilters.maxPrice) return false;
+    if (p.rating < activeFilters.minRating) return false;
+    return true;
+   });
+   sortProducts(document.getElementById('sortSelect')?.value || 'relevance');
+  }
+
+  function sortProducts(sortBy) {
+   switch (sortBy) {
+    case 'price-asc': filteredProducts.sort((a, b) => a.price - b.price); break;
+    case 'price-desc': filteredProducts.sort((a, b) => b.price - a.price); break;
+    case 'name': filteredProducts.sort((a, b) => a.name.localeCompare(b.name)); break;
+    case 'best-seller': filteredProducts.sort((a, b) => b.sold - a.sold); break;
+    case 'rating': filteredProducts.sort((a, b) => b.rating - a.rating); break;
+    default: filteredProducts.sort((a, b) => b.sold - a.sold); break;
+   }
+   renderProducts();
+  }
+
+  function renderProducts() {
+   const grid = document.getElementById('productsGrid');
+   const count = document.getElementById('productCount');
+   count.textContent = `${filteredProducts.length} produto${filteredProducts.length !== 1 ? 's' : ''}`;
+
+   if (filteredProducts.length === 0) {
+    grid.innerHTML = `<div style="grid-column:1/-1;" class="empty-state"><div class="empty-state__icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div><h3 class="empty-state__title">Nenhum produto encontrado</h3><p class="empty-state__text">Tente ajustar os filtros ou explorar outras categorias.</p><a href="loja.html" class="btn btn--outline">Ver Todos</a></div>`;
+    return;
+   }
+   grid.innerHTML = filteredProducts.map(renderProductCard).join('');
+  }
+ </script>
 </body>
 
 </html>

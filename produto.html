@@ -2,404 +2,404 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Produto Needway Nutrition — Suplementos de alta performance.">
-    <title>Produto | Needway Nutrition</title>
-    <link rel="icon" type="image/png" href="icone sem fundo.png">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/product.css">
-    <link rel="stylesheet" href="css/responsive.css">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta name="description" content="Produto Needway Nutrition — Suplementos de alta performance.">
+ <title>Produto | Needway Nutrition</title>
+ <link rel="icon" type="image/png" href="icone sem fundo.png">
+ <link rel="stylesheet" href="css/variables.css">
+ <link rel="stylesheet" href="css/reset.css">
+ <link rel="stylesheet" href="css/global.css">
+ <link rel="stylesheet" href="css/layout.css">
+ <link rel="stylesheet" href="css/components.css">
+ <link rel="stylesheet" href="css/product.css">
+ <link rel="stylesheet" href="css/responsive.css">
 </head>
 
 <body>
 
-    <!-- TOP BAR -->
-    <div class="topbar">
-        <div class="topbar__track">
-            <span class="topbar__item"><span class="icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span> <strong>Frete Grátis</strong> acima de R$250</span>
-            <span class="topbar__item"><span class="icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></span> <strong>PIX com 10% OFF</strong></span>
-            <span class="topbar__item"><span class="icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span> Entrega rápida <strong>todo Brasil</strong></span>
-            <span class="topbar__item"><span class="icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></span> Compra <strong>100% segura</strong></span>
-        </div>
+ <!-- TOP BAR -->
+ <div class="topbar">
+  <div class="topbar__track">
+   <span class="topbar__item"><span class="icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span> <strong>Frete Grátis</strong> acima de R$250</span>
+   <span class="topbar__item"><span class="icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></span> <strong>PIX com 10% OFF</strong></span>
+   <span class="topbar__item"><span class="icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span> Entrega rápida <strong>todo Brasil</strong></span>
+   <span class="topbar__item"><span class="icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></span> Compra <strong>100% segura</strong></span>
+  </div>
+ </div>
+
+ <!-- HEADER -->
+ <header class="header" id="header">
+  <div class="header__inner">
+   <button class="menu-toggle mobile-only" aria-label="Menu"><span></span><span></span><span></span></button>
+   <a href="index.html" class="header__logo"><img src="logo sem fundo.png" alt="Needway Nutrition"></a>
+   <div class="header__search desktop-only" id="headerSearch">
+    <input type="text" class="header__search-input" id="searchInput"
+     placeholder="Busque por whey, creatina, pré-treino..." autocomplete="off">
+    <button class="header__search-btn" aria-label="Buscar"
+     onclick="document.getElementById('searchInput').value&&(window.location.href='busca.html?q='+encodeURIComponent(document.getElementById('searchInput').value))"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
+    <div class="search-dropdown" id="searchDropdown"></div>
+   </div>
+   <div class="header__actions">
+    <a href="login.html" class="header__action"><span class="header__action-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><span
+      class="desktop-only">Entrar</span></a>
+    <a href="favoritos.html" class="header__action"><span class="header__action-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span><span
+      class="desktop-only">Favoritos</span></a>
+    <button class="header__action" onclick="Cart.toggleMiniCart()"><span
+      class="header__action-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></span><span class="desktop-only">Carrinho</span><span
+      class="header__action-badge cart-count" style="display:none;">0</span></button>
+   </div>
+  </div>
+ </header>
+
+ <!-- NAV -->
+ <nav class="nav" id="mainNav">
+  <div class="nav__inner">
+   <a href="loja.html" class="nav__link">Categorias</a>
+   <a href="lancamentos.html" class="nav__link">Lançamentos</a>
+   <a href="mais-vendidos.html" class="nav__link">Mais Vendidos</a>
+   <a href="outlet.html" class="nav__link" style="color: var(--accent-gold);">Outlet</a>
+  </div>
+ </nav>
+
+ <main class="page-content">
+  <div class="container">
+   <!-- Breadcrumb -->
+   <div class="breadcrumb" id="pdpBreadcrumb">
+    <a href="index.html">Início</a>
+    <span class="breadcrumb__separator">›</span>
+    <a href="loja.html">Loja</a>
+    <span class="breadcrumb__separator">›</span>
+    <span class="breadcrumb__current" id="breadcrumbCategory">Categoria</span>
+   </div>
+
+   <!-- PDP Grid -->
+   <div class="pdp" id="pdpContent">
+    
+    <!-- Left: Benefits -->
+    <div class="pdp__benefits desktop-only" style="align-self: flex-start; margin-top: 10%;">
+     <h2 class="pdp__benefits-title">Dose Diária de<br>Alta Performance</h2>
+     <ul class="pdp__benefits-list">
+      <li>
+       <div class="icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+       <span>Qualidade Internacional Garantida</span>
+      </li>
+      <li>
+       <div class="icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+       <span>Rápida Absorção no Organismo</span>
+      </li>
+      <li>
+       <div class="icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg></div>
+       <span>Matéria-Prima Premium Importada</span>
+      </li>
+      <li>
+       <div class="icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg></div>
+       <span>Complementa Perfeitamente a Dieta</span>
+      </li>
+     </ul>
     </div>
 
-    <!-- HEADER -->
-    <header class="header" id="header">
-        <div class="header__inner">
-            <button class="menu-toggle mobile-only" aria-label="Menu"><span></span><span></span><span></span></button>
-            <a href="index.html" class="header__logo"><img src="logo sem fundo.png" alt="Needway Nutrition"></a>
-            <div class="header__search desktop-only" id="headerSearch">
-                <input type="text" class="header__search-input" id="searchInput"
-                    placeholder="Busque por whey, creatina, pré-treino..." autocomplete="off">
-                <button class="header__search-btn" aria-label="Buscar"
-                    onclick="document.getElementById('searchInput').value&&(window.location.href='busca.html?q='+encodeURIComponent(document.getElementById('searchInput').value))"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
-                <div class="search-dropdown" id="searchDropdown"></div>
-            </div>
-            <div class="header__actions">
-                <a href="login.html" class="header__action"><span class="header__action-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><span
-                        class="desktop-only">Entrar</span></a>
-                <a href="favoritos.html" class="header__action"><span class="header__action-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span><span
-                        class="desktop-only">Favoritos</span></a>
-                <button class="header__action" onclick="Cart.toggleMiniCart()"><span
-                        class="header__action-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></span><span class="desktop-only">Carrinho</span><span
-                        class="header__action-badge cart-count" style="display:none;">0</span></button>
-            </div>
-        </div>
-    </header>
-
-    <!-- NAV -->
-    <nav class="nav" id="mainNav">
-        <div class="nav__inner">
-            <a href="loja.html" class="nav__link">Categorias</a>
-            <a href="lancamentos.html" class="nav__link">Lançamentos</a>
-            <a href="mais-vendidos.html" class="nav__link">Mais Vendidos</a>
-            <a href="outlet.html" class="nav__link" style="color: var(--accent-gold);">Outlet</a>
-        </div>
-    </nav>
-
-    <main class="page-content">
-        <div class="container">
-            <!-- Breadcrumb -->
-            <div class="breadcrumb" id="pdpBreadcrumb">
-                <a href="index.html">Início</a>
-                <span class="breadcrumb__separator">›</span>
-                <a href="loja.html">Loja</a>
-                <span class="breadcrumb__separator">›</span>
-                <span class="breadcrumb__current" id="breadcrumbCategory">Categoria</span>
-            </div>
-
-            <!-- PDP Grid -->
-            <div class="pdp" id="pdpContent">
-                
-                <!-- Left: Benefits -->
-                <div class="pdp__benefits desktop-only" style="align-self: flex-start; margin-top: 10%;">
-                    <h2 class="pdp__benefits-title">Dose Diária de<br>Alta Performance</h2>
-                    <ul class="pdp__benefits-list">
-                        <li>
-                            <div class="icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
-                            <span>Qualidade Internacional Garantida</span>
-                        </li>
-                        <li>
-                            <div class="icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
-                            <span>Rápida Absorção no Organismo</span>
-                        </li>
-                        <li>
-                            <div class="icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg></div>
-                            <span>Matéria-Prima Premium Importada</span>
-                        </li>
-                        <li>
-                            <div class="icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg></div>
-                            <span>Complementa Perfeitamente a Dieta</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Center: Massive Gallery -->
-                <div class="pdp__gallery">
-                    <div class="pdp__main-image" id="pdpMainImage"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4M4 7l8 4M4 7v10l8 4m0-10v10"/></svg></div>
-                    <div class="pdp__thumbs" id="pdpThumbs" style="justify-content:center;"></div>
-                </div>
-
-                <!-- Right: Floating Buy Modal -->
-                <div class="pdp__info">
-                    
-                    <div class="pdp__buy-modal">
-                        <span class="pdp__brand" id="pdpBrand">Needway Nutrition</span>
-                        <h1 class="pdp__name" id="pdpName">Carregando...</h1>
-                        <div class="pdp__rating" id="pdpRating"></div>
-
-                        <!-- Price Block -->
-                        <div class="pdp__price-block">
-                        <span class="pdp__price-original" id="pdpPriceOriginal"></span>
-                        <div class="pdp__price-row">
-                            <span class="pdp__price-current" id="pdpPrice">R$ 0,00</span>
-                            <span class="badge badge--discount" id="pdpDiscount" style="display:none;"></span>
-                        </div>
-                        <div class="pdp__price-pix" id="pdpPricePix">💰 R$ 0,00 no PIX (10% OFF)</div>
-                        <span class="pdp__price-installment" id="pdpInstallment"></span>
-                    </div>
-
-                    <!-- Stock -->
-                    <div class="stock-status" id="pdpStock"></div>
-
-                    <!-- Variations -->
-                    <div class="pdp__variations" id="pdpVariations"></div>
-
-                    <!-- Quantity + Buy -->
-                    <div class="pdp__buy">
-                        <div class="qty-selector">
-                            <button class="qty-selector__btn" onclick="changeQty(-1)">−</button>
-                            <input class="qty-selector__input" type="number" id="pdpQty" value="1" min="1" readonly>
-                            <button class="qty-selector__btn" onclick="changeQty(1)">+</button>
-                        </div>
-                        <button class="btn btn--primary btn--lg" id="pdpBuyBtn" onclick="addToCart()" style="flex:1;">
-                            🛒 Adicionar ao Carrinho
-                        </button>
-                        <button class="btn btn--icon btn--dark" id="pdpFavBtn" onclick="toggleFavPDP()"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
-                    </div>
-
-                    <!-- Shipping -->
-                    <div class="pdp__shipping">
-                        <div class="pdp__shipping-title"> Calcular frete e prazo</div>
-                        <div class="input-inline">
-                            <input type="text" class="input" id="pdpCep" placeholder="00000-000" maxlength="9"
-                                oninput="maskCep(this)">
-                            <button class="btn btn--primary btn--sm" onclick="calcShipping()">Calcular</button>
-                        </div>
-                        <div class="pdp__shipping-results" id="pdpShippingResults" style="display:none;"></div>
-                    </div>
-                    </div> <!-- End of buy-modal -->
-
-                    <!-- Divider -->
-                    <hr class="divider">
-
-                    <!-- Tabs -->
-                    <div id="pdpTabs">
-                        <div class="tabs">
-                            <button class="tabs__tab active" data-tab="tab-desc">Descrição</button>
-                            <button class="tabs__tab" data-tab="tab-nutri">Nutricional</button>
-                            <button class="tabs__tab" data-tab="tab-reviews">Avaliações</button>
-                        </div>
-                        <div class="tabs__content active" id="tab-desc">
-                            <div id="pdpDescription"></div>
-                        </div>
-                        <div class="tabs__content" id="tab-nutri">
-                            <div id="pdpNutrition"></div>
-                        </div>
-                        <div class="tabs__content" id="tab-reviews">
-                            <div id="pdpReviews"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Related Products -->
-            <section class="related-products reveal">
-                <h2 class="section-title">Produtos <span class="highlight">Relacionados</span></h2>
-                <div class="grid grid--products" id="relatedProducts"></div>
-            </section>
-        </div>
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="footer__grid">
-            <div class="footer__brand"><img src="logo sem fundo.png" alt="Needway Nutrition">
-                <p>Suplementos de alta performance. Qualidade garantida, preço justo.</p>
-            </div>
-            <div class="footer__column">
-                <h4>Institucional</h4><a href="sobre.html">Sobre</a><a href="blog.html">Blog</a><a
-                    href="fale-conosco.html">Contato</a><a href="faq.html">FAQ</a>
-            </div>
-            <div class="footer__column">
-                <h4>Ajuda</h4><a href="trocas.html">Trocas</a><a href="politica-entrega.html">Entrega</a><a
-                    href="formas-pagamento.html">Pagamento</a><a href="politica-privacidade.html">Privacidade</a>
-            </div>
-            <div class="footer__column">
-                <h4>Conta</h4><a href="login.html">Entrar</a><a href="meus-pedidos.html">Pedidos</a><a
-                    href="favoritos.html">Favoritos</a><a href="enderecos.html">Endereços</a>
-            </div>
-        </div>
-        <div class="footer__bottom">
-            <div class="footer__bottom-inner">
-                <span class="footer__copyright">© 2026 Needway Nutrition. Todos os direitos reservados.</span>
-                <div class="footer__payments"><span>Pagamentos:</span>
-                    <div class="footer__payment-icon">PIX</div>
-                    <div class="footer__payment-icon">VISA</div>
-                    <div class="footer__payment-icon">MC</div>
-                    <div class="footer__payment-icon">ELO</div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- MINI CART -->
-    <aside class="minicart" id="minicart">
-        <div class="minicart__header">
-            <h3 class="minicart__title">🛒 Carrinho</h3><button onclick="Cart.toggleMiniCart()"
-                style="color:var(--text-muted);font-size:var(--fs-xl);">✕</button>
-        </div>
-        <div class="minicart__progress">
-            <div class="minicart__progress-text" id="minicartProgressText"></div>
-            <div class="minicart__progress-bar">
-                <div class="minicart__progress-fill" id="minicartProgressFill" style="width:0%;"></div>
-            </div>
-        </div>
-        <div class="minicart__items" id="minicartItems"></div>
-        <div class="minicart__footer">
-            <div class="minicart__total"><span>Total:</span><span class="minicart__total-value" id="minicartTotal">R$
-                    0,00</span></div><a href="carrinho.html" class="btn btn--primary btn--full"
-                style="margin-bottom:var(--space-sm);">Ver Carrinho</a><a href="checkout.html"
-                class="btn btn--gold btn--full">Finalizar Compra</a>
-        </div>
-    </aside>
-    <div class="overlay" id="overlay"></div>
-
-    <!-- Sticky Bar -->
-    <div class="sticky-bar" id="stickyBar">
-        <div class="sticky-bar__inner">
-            <div class="sticky-bar__info"><span class="sticky-bar__name" id="stickyName"></span><span
-                    class="sticky-bar__price" id="stickyPrice"></span></div>
-            <button class="btn btn--primary" onclick="addToCart()">🛒 Adicionar</button>
-        </div>
+    <!-- Center: Massive Gallery -->
+    <div class="pdp__gallery">
+     <div class="pdp__main-image" id="pdpMainImage"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4M4 7l8 4M4 7v10l8 4m0-10v10"/></svg></div>
+     <div class="pdp__thumbs" id="pdpThumbs" style="justify-content:center;"></div>
     </div>
 
-    <a href="https://wa.me/5511970799084" target="_blank" class="whatsapp-float" aria-label="WhatsApp"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+    <!-- Right: Floating Buy Modal -->
+    <div class="pdp__info">
+     
+     <div class="pdp__buy-modal">
+      <span class="pdp__brand" id="pdpBrand">Needway Nutrition</span>
+      <h1 class="pdp__name" id="pdpName">Carregando...</h1>
+      <div class="pdp__rating" id="pdpRating"></div>
 
-    <script src="js/data.js"></script>
-    <script src="js/cart.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/theme.js"></script>
-    <script>
-        let currentProduct = null;
-        let selectedFlavor = '';
-        let selectedSize = '';
+      <!-- Price Block -->
+      <div class="pdp__price-block">
+      <span class="pdp__price-original" id="pdpPriceOriginal"></span>
+      <div class="pdp__price-row">
+       <span class="pdp__price-current" id="pdpPrice">R$ 0,00</span>
+       <span class="badge badge--discount" id="pdpDiscount" style="display:none;"></span>
+      </div>
+      <div class="pdp__price-pix" id="pdpPricePix"> R$ 0,00 no PIX (10% OFF)</div>
+      <span class="pdp__price-installment" id="pdpInstallment"></span>
+     </div>
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const params = new URLSearchParams(window.location.search);
-            const id = parseInt(params.get('id'));
-            currentProduct = NeedwayData.products.find(p => p.id === id);
+     <!-- Stock -->
+     <div class="stock-status" id="pdpStock"></div>
 
-            if (!currentProduct) { currentProduct = NeedwayData.products[0]; }
-            renderPDP(currentProduct);
-            initTabs('#pdpTabs');
-            initSearch();
-            initStickyBar();
-        });
+     <!-- Variations -->
+     <div class="pdp__variations" id="pdpVariations"></div>
 
-        function renderPDP(p) {
-            document.title = `${p.name} | Needway Nutrition`;
-            const cat = NeedwayData.categories.find(c => c.id === p.category);
+     <!-- Quantity + Buy -->
+     <div class="pdp__buy">
+      <div class="qty-selector">
+       <button class="qty-selector__btn" onclick="changeQty(-1)">−</button>
+       <input class="qty-selector__input" type="number" id="pdpQty" value="1" min="1" readonly>
+       <button class="qty-selector__btn" onclick="changeQty(1)">+</button>
+      </div>
+      <button class="btn btn--primary btn--lg" id="pdpBuyBtn" onclick="addToCart()" style="flex:1;">
+        Adicionar ao Carrinho
+      </button>
+      <button class="btn btn--icon btn--dark" id="pdpFavBtn" onclick="toggleFavPDP()"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></button>
+     </div>
 
-            // Breadcrumb
-            document.getElementById('breadcrumbCategory').innerHTML = `<a href="categoria.html?cat=${p.category}">${cat?.name || ''}</a> <span class="breadcrumb__separator">›</span> <span>${p.name}</span>`;
+     <!-- Shipping -->
+     <div class="pdp__shipping">
+      <div class="pdp__shipping-title"> Calcular frete e prazo</div>
+      <div class="input-inline">
+       <input type="text" class="input" id="pdpCep" placeholder="00000-000" maxlength="9"
+        oninput="maskCep(this)">
+       <button class="btn btn--primary btn--sm" onclick="calcShipping()">Calcular</button>
+      </div>
+      <div class="pdp__shipping-results" id="pdpShippingResults" style="display:none;"></div>
+     </div>
+     </div> <!-- End of buy-modal -->
 
-            // Main image
-            document.getElementById('pdpMainImage').innerHTML = `<div style="font-size:10rem;">${cat?.icon || ''}</div>`;
+     <!-- Divider -->
+     <hr class="divider">
 
-            // Info
-            document.getElementById('pdpBrand').textContent = p.brand;
-            document.getElementById('pdpName').textContent = p.name;
+     <!-- Tabs -->
+     <div id="pdpTabs">
+      <div class="tabs">
+       <button class="tabs__tab active" data-tab="tab-desc">Descrição</button>
+       <button class="tabs__tab" data-tab="tab-nutri">Nutricional</button>
+       <button class="tabs__tab" data-tab="tab-reviews">Avaliações</button>
+      </div>
+      <div class="tabs__content active" id="tab-desc">
+       <div id="pdpDescription"></div>
+      </div>
+      <div class="tabs__content" id="tab-nutri">
+       <div id="pdpNutrition"></div>
+      </div>
+      <div class="tabs__content" id="tab-reviews">
+       <div id="pdpReviews"></div>
+      </div>
+     </div>
+    </div>
+   </div>
 
-            // Rating
-            document.getElementById('pdpRating').innerHTML = `<span class="stars">${renderStars(p.rating)}</span><span class="pdp__rating-text">${p.rating} (${p.reviewCount.toLocaleString()} avaliações)</span>`;
+   <!-- Related Products -->
+   <section class="related-products reveal">
+    <h2 class="section-title">Produtos <span class="highlight">Relacionados</span></h2>
+    <div class="grid grid--products" id="relatedProducts"></div>
+   </section>
+  </div>
+ </main>
 
-            // Price
-            if (p.originalPrice > p.price) {
-                document.getElementById('pdpPriceOriginal').textContent = formatPrice(p.originalPrice);
-                document.getElementById('pdpDiscount').textContent = `-${p.discount}%`;
-                document.getElementById('pdpDiscount').style.display = '';
-            }
-            document.getElementById('pdpPrice').textContent = formatPrice(p.price);
-            document.getElementById('pdpPricePix').innerHTML = `💰 ${formatPrice(getPixPrice(p.price))} no PIX <span class="badge badge--success" style="margin-left:8px;">10% OFF</span>`;
-            const inst = getInstallments(p.price);
-            document.getElementById('pdpInstallment').textContent = `ou ${inst.count}x de ${formatPrice(inst.value)} sem juros`;
+ <!-- FOOTER -->
+ <footer class="footer">
+  <div class="footer__grid">
+   <div class="footer__brand"><img src="logo sem fundo.png" alt="Needway Nutrition">
+    <p>Suplementos de alta performance. Qualidade garantida, preço justo.</p>
+   </div>
+   <div class="footer__column">
+    <h4>Institucional</h4><a href="sobre.html">Sobre</a><a href="blog.html">Blog</a><a
+     href="fale-conosco.html">Contato</a><a href="faq.html">FAQ</a>
+   </div>
+   <div class="footer__column">
+    <h4>Ajuda</h4><a href="trocas.html">Trocas</a><a href="politica-entrega.html">Entrega</a><a
+     href="formas-pagamento.html">Pagamento</a><a href="politica-privacidade.html">Privacidade</a>
+   </div>
+   <div class="footer__column">
+    <h4>Conta</h4><a href="login.html">Entrar</a><a href="meus-pedidos.html">Pedidos</a><a
+     href="favoritos.html">Favoritos</a><a href="enderecos.html">Endereços</a>
+   </div>
+  </div>
+  <div class="footer__bottom">
+   <div class="footer__bottom-inner">
+    <span class="footer__copyright"> 2026 Needway Nutrition. Todos os direitos reservados.</span>
+    <div class="footer__payments"><span>Pagamentos:</span>
+     <div class="footer__payment-icon">PIX</div>
+     <div class="footer__payment-icon">VISA</div>
+     <div class="footer__payment-icon">MC</div>
+     <div class="footer__payment-icon">ELO</div>
+    </div>
+   </div>
+  </div>
+ </footer>
 
-            // Stock
-            const stock = getStockStatus(p.stock);
-            document.getElementById('pdpStock').innerHTML = `<span class="stock-status__dot"></span> ${stock.text}`;
-            document.getElementById('pdpStock').className = `stock-status ${stock.class}`;
+ <!-- MINI CART -->
+ <aside class="minicart" id="minicart">
+  <div class="minicart__header">
+   <h3 class="minicart__title"> Carrinho</h3><button onclick="Cart.toggleMiniCart()"
+    style="color:var(--text-muted);font-size:var(--fs-xl);">✕</button>
+  </div>
+  <div class="minicart__progress">
+   <div class="minicart__progress-text" id="minicartProgressText"></div>
+   <div class="minicart__progress-bar">
+    <div class="minicart__progress-fill" id="minicartProgressFill" style="width:0%;"></div>
+   </div>
+  </div>
+  <div class="minicart__items" id="minicartItems"></div>
+  <div class="minicart__footer">
+   <div class="minicart__total"><span>Total:</span><span class="minicart__total-value" id="minicartTotal">R$
+     0,00</span></div><a href="carrinho.html" class="btn btn--primary btn--full"
+    style="margin-bottom:var(--space-sm);">Ver Carrinho</a><a href="checkout.html"
+    class="btn btn--gold btn--full">Finalizar Compra</a>
+  </div>
+ </aside>
+ <div class="overlay" id="overlay"></div>
 
-            // Variations
-            let variationsHTML = '';
-            if (p.flavors.length > 0) {
-                selectedFlavor = p.flavors[0];
-                variationsHTML += `<div><div class="pdp__variation-label">Sabor: <strong id="selectedFlavorText">${selectedFlavor}</strong></div><div class="pdp__flavor-options">${p.flavors.map((f, i) => `<button class="pdp__flavor-btn ${i === 0 ? 'active' : ''}" onclick="selectFlavor('${f}', this)">${f}</button>`).join('')}</div></div>`;
-            }
-            if (p.sizes.length > 0) {
-                selectedSize = p.sizes[0];
-                variationsHTML += `<div><div class="pdp__variation-label">Tamanho</div><select class="pdp__size-select" onchange="selectedSize=this.value">${p.sizes.map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>`;
-            }
-            document.getElementById('pdpVariations').innerHTML = variationsHTML;
+ <!-- Sticky Bar -->
+ <div class="sticky-bar" id="stickyBar">
+  <div class="sticky-bar__inner">
+   <div class="sticky-bar__info"><span class="sticky-bar__name" id="stickyName"></span><span
+     class="sticky-bar__price" id="stickyPrice"></span></div>
+   <button class="btn btn--primary" onclick="addToCart()"> Adicionar</button>
+  </div>
+ </div>
 
-            // Description
-            document.getElementById('pdpDescription').innerHTML = `<p class="text-body" style="color:var(--text-muted);line-height:1.8;">${p.description}</p>`;
+ <a href="https://wa.me/5511970799084" target="_blank" class="whatsapp-float" aria-label="WhatsApp"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
 
-            // Nutrition
-            const nutritionEntries = Object.entries(p.nutritionTable);
-            if (nutritionEntries.length > 0) {
-                document.getElementById('pdpNutrition').innerHTML = `<table style="width:100%;"><thead><tr><th style="text-align:left;padding:var(--space-sm);border-bottom:1px solid var(--glass-border);color:var(--primary);">Nutriente</th><th style="text-align:right;padding:var(--space-sm);border-bottom:1px solid var(--glass-border);color:var(--primary);">Quantidade</th></tr></thead><tbody>${nutritionEntries.map(([k, v]) => `<tr><td style="padding:var(--space-sm);border-bottom:1px solid var(--glass-border);text-transform:capitalize;color:var(--text-muted);">${k.replace(/([A-Z])/g, ' $1')}</td><td style="text-align:right;padding:var(--space-sm);border-bottom:1px solid var(--glass-border);">${v}</td></tr>`).join('')}</tbody></table>`;
-            } else {
-                document.getElementById('pdpNutrition').innerHTML = '<p class="text-muted">Informações nutricionais não disponíveis para este produto.</p>';
-            }
+ <script src="js/data.js"></script>
+ <script src="js/cart.js"></script>
+ <script src="js/app.js"></script>
+ <script src="js/theme.js"></script>
+ <script>
+  let currentProduct = null;
+  let selectedFlavor = '';
+  let selectedSize = '';
 
-            // Reviews
-            const reviews = NeedwayData.reviews.filter(r => r.productId === p.id);
-            document.getElementById('pdpReviews').innerHTML = reviews.length > 0 ? reviews.map(r => `<div class="review-card"><div class="review-card__header"><div class="review-card__avatar">${r.author[0]}</div><div><div class="review-card__author">${r.author}</div><div class="stars" style="font-size:var(--fs-xs);">${renderStars(r.rating)}</div></div><span class="review-card__date" style="margin-left:auto;">${r.date}</span></div><p class="review-card__text">${r.text}</p></div>`).join('') : '<p class="text-muted">Ainda não há avaliações para este produto. Seja o primeiro!</p>';
+  document.addEventListener('DOMContentLoaded', () => {
+   const params = new URLSearchParams(window.location.search);
+   const id = parseInt(params.get('id'));
+   currentProduct = NeedwayData.products.find(p => p.id === id);
 
-            // Related Products
-            const related = NeedwayData.products.filter(pr => pr.category === p.category && pr.id !== p.id).slice(0, 4);
-            document.getElementById('relatedProducts').innerHTML = related.map(renderProductCard).join('');
+   if (!currentProduct) { currentProduct = NeedwayData.products[0]; }
+   renderPDP(currentProduct);
+   initTabs('#pdpTabs');
+   initSearch();
+   initStickyBar();
+  });
 
-            // Sticky bar
-            document.getElementById('stickyName').textContent = p.name;
-            document.getElementById('stickyPrice').textContent = formatPrice(p.price);
+  function renderPDP(p) {
+   document.title = `${p.name} | Needway Nutrition`;
+   const cat = NeedwayData.categories.find(c => c.id === p.category);
 
-            // Disable buy if out of stock
-            if (p.stock === 0) {
-                document.getElementById('pdpBuyBtn').disabled = true;
-                document.getElementById('pdpBuyBtn').textContent = 'Produto Esgotado';
-            }
-        }
+   // Breadcrumb
+   document.getElementById('breadcrumbCategory').innerHTML = `<a href="categoria.html?cat=${p.category}">${cat?.name || ''}</a> <span class="breadcrumb__separator">›</span> <span>${p.name}</span>`;
 
-        function selectFlavor(flavor, btn) {
-            selectedFlavor = flavor;
-            document.getElementById('selectedFlavorText').textContent = flavor;
-            document.querySelectorAll('.pdp__flavor-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-        }
+   // Main image
+   document.getElementById('pdpMainImage').innerHTML = `<div style="font-size:10rem;">${cat?.icon || ''}</div>`;
 
-        function changeQty(delta) {
-            const input = document.getElementById('pdpQty');
-            let val = parseInt(input.value) + delta;
-            if (val < 1) val = 1;
-            if (currentProduct && val > currentProduct.stock) val = currentProduct.stock;
-            input.value = val;
-        }
+   // Info
+   document.getElementById('pdpBrand').textContent = p.brand;
+   document.getElementById('pdpName').textContent = p.name;
 
-        function addToCart() {
-            if (!currentProduct || currentProduct.stock === 0) return;
-            const qty = parseInt(document.getElementById('pdpQty').value);
-            Cart.addItem(currentProduct.id, qty, selectedFlavor, selectedSize);
-        }
+   // Rating
+   document.getElementById('pdpRating').innerHTML = `<span class="stars">${renderStars(p.rating)}</span><span class="pdp__rating-text">${p.rating} (${p.reviewCount.toLocaleString()} avaliações)</span>`;
 
-        function toggleFavPDP() {
-            if (!currentProduct) return;
-            const btn = document.getElementById('pdpFavBtn');
-            toggleFavorite(currentProduct.id, btn);
-        }
+   // Price
+   if (p.originalPrice > p.price) {
+    document.getElementById('pdpPriceOriginal').textContent = formatPrice(p.originalPrice);
+    document.getElementById('pdpDiscount').textContent = `-${p.discount}%`;
+    document.getElementById('pdpDiscount').style.display = '';
+   }
+   document.getElementById('pdpPrice').textContent = formatPrice(p.price);
+   document.getElementById('pdpPricePix').innerHTML = ` ${formatPrice(getPixPrice(p.price))} no PIX <span class="badge badge--success" style="margin-left:8px;">10% OFF</span>`;
+   const inst = getInstallments(p.price);
+   document.getElementById('pdpInstallment').textContent = `ou ${inst.count}x de ${formatPrice(inst.value)} sem juros`;
 
-        function maskCep(input) {
-            let v = input.value.replace(/\D/g, '');
-            if (v.length > 5) v = v.slice(0, 5) + '-' + v.slice(5, 8);
-            input.value = v;
-        }
+   // Stock
+   const stock = getStockStatus(p.stock);
+   document.getElementById('pdpStock').innerHTML = `<span class="stock-status__dot"></span> ${stock.text}`;
+   document.getElementById('pdpStock').className = `stock-status ${stock.class}`;
 
-        function calcShipping() {
-            const cep = document.getElementById('pdpCep').value.replace(/\D/g, '');
-            const results = document.getElementById('pdpShippingResults');
-            if (cep.length !== 8) { Cart.showToast('CEP inválido', 'error'); return; }
-            results.style.display = 'block';
-            const total = Cart.getTotal() + (currentProduct?.price || 0);
-            const freeShipping = total >= NeedwayData.config.freeShippingMin;
-            results.innerHTML = NeedwayData.shippingOptions.map(opt => `<div class="pdp__shipping-option"><div><span class="pdp__shipping-name">${opt.name}</span><span class="pdp__shipping-days"> — ${opt.days}</span></div><span class="pdp__shipping-price">${freeShipping && opt.id !== 'express' ? '<span style="color:var(--success);font-weight:bold;">Grátis!</span>' : formatPrice(opt.price)}</span></div>`).join('');
-        }
+   // Variations
+   let variationsHTML = '';
+   if (p.flavors.length > 0) {
+    selectedFlavor = p.flavors[0];
+    variationsHTML += `<div><div class="pdp__variation-label">Sabor: <strong id="selectedFlavorText">${selectedFlavor}</strong></div><div class="pdp__flavor-options">${p.flavors.map((f, i) => `<button class="pdp__flavor-btn ${i === 0 ? 'active' : ''}" onclick="selectFlavor('${f}', this)">${f}</button>`).join('')}</div></div>`;
+   }
+   if (p.sizes.length > 0) {
+    selectedSize = p.sizes[0];
+    variationsHTML += `<div><div class="pdp__variation-label">Tamanho</div><select class="pdp__size-select" onchange="selectedSize=this.value">${p.sizes.map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>`;
+   }
+   document.getElementById('pdpVariations').innerHTML = variationsHTML;
 
-        function initStickyBar() {
-            const bar = document.getElementById('stickyBar');
-            const buyBtn = document.getElementById('pdpBuyBtn');
-            if (!bar || !buyBtn) return;
-            const observer = new IntersectionObserver(([entry]) => {
-                bar.classList.toggle('visible', !entry.isIntersecting);
-            }, { threshold: 0 });
-            observer.observe(buyBtn);
-        }
-    </script>
+   // Description
+   document.getElementById('pdpDescription').innerHTML = `<p class="text-body" style="color:var(--text-muted);line-height:1.8;">${p.description}</p>`;
+
+   // Nutrition
+   const nutritionEntries = Object.entries(p.nutritionTable);
+   if (nutritionEntries.length > 0) {
+    document.getElementById('pdpNutrition').innerHTML = `<table style="width:100%;"><thead><tr><th style="text-align:left;padding:var(--space-sm);border-bottom:1px solid var(--glass-border);color:var(--primary);">Nutriente</th><th style="text-align:right;padding:var(--space-sm);border-bottom:1px solid var(--glass-border);color:var(--primary);">Quantidade</th></tr></thead><tbody>${nutritionEntries.map(([k, v]) => `<tr><td style="padding:var(--space-sm);border-bottom:1px solid var(--glass-border);text-transform:capitalize;color:var(--text-muted);">${k.replace(/([A-Z])/g, ' $1')}</td><td style="text-align:right;padding:var(--space-sm);border-bottom:1px solid var(--glass-border);">${v}</td></tr>`).join('')}</tbody></table>`;
+   } else {
+    document.getElementById('pdpNutrition').innerHTML = '<p class="text-muted">Informações nutricionais não disponíveis para este produto.</p>';
+   }
+
+   // Reviews
+   const reviews = NeedwayData.reviews.filter(r => r.productId === p.id);
+   document.getElementById('pdpReviews').innerHTML = reviews.length > 0 ? reviews.map(r => `<div class="review-card"><div class="review-card__header"><div class="review-card__avatar">${r.author[0]}</div><div><div class="review-card__author">${r.author}</div><div class="stars" style="font-size:var(--fs-xs);">${renderStars(r.rating)}</div></div><span class="review-card__date" style="margin-left:auto;">${r.date}</span></div><p class="review-card__text">${r.text}</p></div>`).join('') : '<p class="text-muted">Ainda não há avaliações para este produto. Seja o primeiro!</p>';
+
+   // Related Products
+   const related = NeedwayData.products.filter(pr => pr.category === p.category && pr.id !== p.id).slice(0, 4);
+   document.getElementById('relatedProducts').innerHTML = related.map(renderProductCard).join('');
+
+   // Sticky bar
+   document.getElementById('stickyName').textContent = p.name;
+   document.getElementById('stickyPrice').textContent = formatPrice(p.price);
+
+   // Disable buy if out of stock
+   if (p.stock === 0) {
+    document.getElementById('pdpBuyBtn').disabled = true;
+    document.getElementById('pdpBuyBtn').textContent = 'Produto Esgotado';
+   }
+  }
+
+  function selectFlavor(flavor, btn) {
+   selectedFlavor = flavor;
+   document.getElementById('selectedFlavorText').textContent = flavor;
+   document.querySelectorAll('.pdp__flavor-btn').forEach(b => b.classList.remove('active'));
+   btn.classList.add('active');
+  }
+
+  function changeQty(delta) {
+   const input = document.getElementById('pdpQty');
+   let val = parseInt(input.value) + delta;
+   if (val < 1) val = 1;
+   if (currentProduct && val > currentProduct.stock) val = currentProduct.stock;
+   input.value = val;
+  }
+
+  function addToCart() {
+   if (!currentProduct || currentProduct.stock === 0) return;
+   const qty = parseInt(document.getElementById('pdpQty').value);
+   Cart.addItem(currentProduct.id, qty, selectedFlavor, selectedSize);
+  }
+
+  function toggleFavPDP() {
+   if (!currentProduct) return;
+   const btn = document.getElementById('pdpFavBtn');
+   toggleFavorite(currentProduct.id, btn);
+  }
+
+  function maskCep(input) {
+   let v = input.value.replace(/\D/g, '');
+   if (v.length > 5) v = v.slice(0, 5) + '-' + v.slice(5, 8);
+   input.value = v;
+  }
+
+  function calcShipping() {
+   const cep = document.getElementById('pdpCep').value.replace(/\D/g, '');
+   const results = document.getElementById('pdpShippingResults');
+   if (cep.length !== 8) { Cart.showToast('CEP inválido', 'error'); return; }
+   results.style.display = 'block';
+   const total = Cart.getTotal() + (currentProduct?.price || 0);
+   const freeShipping = total >= NeedwayData.config.freeShippingMin;
+   results.innerHTML = NeedwayData.shippingOptions.map(opt => `<div class="pdp__shipping-option"><div><span class="pdp__shipping-name">${opt.name}</span><span class="pdp__shipping-days"> — ${opt.days}</span></div><span class="pdp__shipping-price">${freeShipping && opt.id !== 'express' ? '<span style="color:var(--success);font-weight:bold;">Grátis!</span>' : formatPrice(opt.price)}</span></div>`).join('');
+  }
+
+  function initStickyBar() {
+   const bar = document.getElementById('stickyBar');
+   const buyBtn = document.getElementById('pdpBuyBtn');
+   if (!bar || !buyBtn) return;
+   const observer = new IntersectionObserver(([entry]) => {
+    bar.classList.toggle('visible', !entry.isIntersecting);
+   }, { threshold: 0 });
+   observer.observe(buyBtn);
+  }
+ </script>
 </body>
 
 </html>

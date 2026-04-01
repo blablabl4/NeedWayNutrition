@@ -2,95 +2,95 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entrar | Needway Nutrition</title>
-    <link rel="icon" type="image/png" href="icone sem fundo.png">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/cart-checkout.css">
-    <link rel="stylesheet" href="css/responsive.css">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Entrar | Needway Nutrition</title>
+ <link rel="icon" type="image/png" href="icone sem fundo.png">
+ <link rel="stylesheet" href="css/variables.css">
+ <link rel="stylesheet" href="css/reset.css">
+ <link rel="stylesheet" href="css/global.css">
+ <link rel="stylesheet" href="css/layout.css">
+ <link rel="stylesheet" href="css/components.css">
+ <link rel="stylesheet" href="css/cart-checkout.css">
+ <link rel="stylesheet" href="css/responsive.css">
 </head>
 
 <body>
-    <div class="topbar">
-        <div class="topbar__track">
-            <span class="topbar__item"><span class="icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span> <strong>Frete Grátis</strong> acima de R$250</span>
-            <span class="topbar__item"><span class="icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></span> <strong>PIX com 10% OFF</strong></span>
-        </div>
+ <div class="topbar">
+  <div class="topbar__track">
+   <span class="topbar__item"><span class="icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span> <strong>Frete Grátis</strong> acima de R$250</span>
+   <span class="topbar__item"><span class="icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></span> <strong>PIX com 10% OFF</strong></span>
+  </div>
+ </div>
+ <header class="header">
+  <div class="header__inner">
+   <a href="index.html" class="header__logo"><img src="logo sem fundo.png" alt="Needway Nutrition"></a>
+   <div class="header__actions"><a href="index.html" class="btn btn--ghost btn--sm">← Voltar à Loja</a></div>
+  </div>
+ </header>
+
+ <main class="page-content">
+  <div class="login-page">
+   <div class="login-card">
+    <!-- Login Tab -->
+    <div id="loginView">
+     <h1 class="login-card__title">Entrar na sua <span class="highlight">Conta</span></h1>
+     <div class="login-card__form">
+      <div class="input-group"><label>E-mail</label><input type="email" class="input"
+        placeholder="seu@email.com"></div>
+      <div class="input-group"><label>Senha</label><input type="password" class="input"
+        placeholder="Sua senha"></div>
+      <div style="display:flex;justify-content:flex-end;"><a href="#" class="link text-sm">Esqueci
+        minha senha</a></div>
+      <button class="btn btn--primary btn--full btn--lg" onclick="simulateLogin()">Entrar</button>
+     </div>
+     <div class="login-card__divider">ou</div>
+     <button class="btn btn--dark btn--full" onclick="showRegister()">Criar Conta</button>
     </div>
-    <header class="header">
-        <div class="header__inner">
-            <a href="index.html" class="header__logo"><img src="logo sem fundo.png" alt="Needway Nutrition"></a>
-            <div class="header__actions"><a href="index.html" class="btn btn--ghost btn--sm">← Voltar à Loja</a></div>
-        </div>
-    </header>
 
-    <main class="page-content">
-        <div class="login-page">
-            <div class="login-card">
-                <!-- Login Tab -->
-                <div id="loginView">
-                    <h1 class="login-card__title">Entrar na sua <span class="highlight">Conta</span></h1>
-                    <div class="login-card__form">
-                        <div class="input-group"><label>E-mail</label><input type="email" class="input"
-                                placeholder="seu@email.com"></div>
-                        <div class="input-group"><label>Senha</label><input type="password" class="input"
-                                placeholder="Sua senha"></div>
-                        <div style="display:flex;justify-content:flex-end;"><a href="#" class="link text-sm">Esqueci
-                                minha senha</a></div>
-                        <button class="btn btn--primary btn--full btn--lg" onclick="simulateLogin()">Entrar</button>
-                    </div>
-                    <div class="login-card__divider">ou</div>
-                    <button class="btn btn--dark btn--full" onclick="showRegister()">Criar Conta</button>
-                </div>
+    <!-- Register Tab -->
+    <div id="registerView" style="display:none;">
+     <h1 class="login-card__title">Criar <span class="highlight">Conta</span></h1>
+     <div class="login-card__form">
+      <div class="input-group"><label>Nome Completo</label><input type="text" class="input"
+        placeholder="Seu nome"></div>
+      <div class="input-group"><label>E-mail</label><input type="email" class="input"
+        placeholder="seu@email.com"></div>
+      <div class="input-group"><label>Telefone</label><input type="tel" class="input"
+        placeholder="(00) 00000-0000"></div>
+      <div class="input-group"><label>CPF</label><input type="text" class="input"
+        placeholder="000.000.000-00"></div>
+      <div class="input-group"><label>Senha</label><input type="password" class="input"
+        placeholder="Mínimo 6 caracteres"></div>
+      <div class="input-group"><label>Confirmar Senha</label><input type="password" class="input"
+        placeholder="Repita a senha"></div>
+      <label
+       style="display:flex;align-items:flex-start;gap:var(--space-sm);font-size:var(--fs-xs);color:var(--text-muted);">
+       <input type="checkbox" style="margin-top:2px;accent-color:var(--primary);">
+       Li e aceito os <a href="termos.html" class="link">Termos de Uso</a> e <a
+        href="politica-privacidade.html" class="link">Política de Privacidade</a>
+      </label>
+      <button class="btn btn--primary btn--full btn--lg">Criar Conta</button>
+     </div>
+     <div class="login-card__divider">ou</div>
+     <button class="btn btn--dark btn--full" onclick="showLogin()">Já tenho conta</button>
+    </div>
+   </div>
+  </div>
+ </main>
 
-                <!-- Register Tab -->
-                <div id="registerView" style="display:none;">
-                    <h1 class="login-card__title">Criar <span class="highlight">Conta</span></h1>
-                    <div class="login-card__form">
-                        <div class="input-group"><label>Nome Completo</label><input type="text" class="input"
-                                placeholder="Seu nome"></div>
-                        <div class="input-group"><label>E-mail</label><input type="email" class="input"
-                                placeholder="seu@email.com"></div>
-                        <div class="input-group"><label>Telefone</label><input type="tel" class="input"
-                                placeholder="(00) 00000-0000"></div>
-                        <div class="input-group"><label>CPF</label><input type="text" class="input"
-                                placeholder="000.000.000-00"></div>
-                        <div class="input-group"><label>Senha</label><input type="password" class="input"
-                                placeholder="Mínimo 6 caracteres"></div>
-                        <div class="input-group"><label>Confirmar Senha</label><input type="password" class="input"
-                                placeholder="Repita a senha"></div>
-                        <label
-                            style="display:flex;align-items:flex-start;gap:var(--space-sm);font-size:var(--fs-xs);color:var(--text-muted);">
-                            <input type="checkbox" style="margin-top:2px;accent-color:var(--primary);">
-                            Li e aceito os <a href="termos.html" class="link">Termos de Uso</a> e <a
-                                href="politica-privacidade.html" class="link">Política de Privacidade</a>
-                        </label>
-                        <button class="btn btn--primary btn--full btn--lg">Criar Conta</button>
-                    </div>
-                    <div class="login-card__divider">ou</div>
-                    <button class="btn btn--dark btn--full" onclick="showLogin()">Já tenho conta</button>
-                </div>
-            </div>
-        </div>
-    </main>
+ <footer class="footer" style="margin-top:auto;">
+  <div class="footer__bottom">
+   <div class="footer__bottom-inner"><span class="footer__copyright"> 2026 Needway Nutrition.</span></div>
+  </div>
+ </footer>
 
-    <footer class="footer" style="margin-top:auto;">
-        <div class="footer__bottom">
-            <div class="footer__bottom-inner"><span class="footer__copyright">© 2026 Needway Nutrition.</span></div>
-        </div>
-    </footer>
-
-    <script>
-        function showRegister() { document.getElementById('loginView').style.display = 'none'; document.getElementById('registerView').style.display = 'block'; }
-        function showLogin() { document.getElementById('loginView').style.display = 'block'; document.getElementById('registerView').style.display = 'none'; }
-        function simulateLogin() { window.location.href = 'minha-conta.html'; }
-    </script>
-  <script src="js/theme.js"></script>
+ <script>
+  function showRegister() { document.getElementById('loginView').style.display = 'none'; document.getElementById('registerView').style.display = 'block'; }
+  function showLogin() { document.getElementById('loginView').style.display = 'block'; document.getElementById('registerView').style.display = 'none'; }
+  function simulateLogin() { window.location.href = 'minha-conta.html'; }
+ </script>
+ <script src="js/theme.js"></script>
 </body>
 
 </html>

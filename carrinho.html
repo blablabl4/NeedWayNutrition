@@ -2,246 +2,246 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrinho | Needway Nutrition</title>
-    <link rel="icon" type="image/png" href="icone sem fundo.png">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/cart-checkout.css">
-    <link rel="stylesheet" href="css/responsive.css">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Carrinho | Needway Nutrition</title>
+ <link rel="icon" type="image/png" href="icone sem fundo.png">
+ <link rel="stylesheet" href="css/variables.css">
+ <link rel="stylesheet" href="css/reset.css">
+ <link rel="stylesheet" href="css/global.css">
+ <link rel="stylesheet" href="css/layout.css">
+ <link rel="stylesheet" href="css/components.css">
+ <link rel="stylesheet" href="css/cart-checkout.css">
+ <link rel="stylesheet" href="css/responsive.css">
 </head>
 
 <body>
-    <!-- TOP BAR -->
-    <div class="topbar">
-        <div class="topbar__track">
-            <span class="topbar__item"><span class="icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span> <strong>Frete Grátis</strong> acima de R$250</span>
-            <span class="topbar__item"><span class="icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></span> <strong>PIX com 10% OFF</strong></span>
-            <span class="topbar__item"><span class="icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span> Entrega rápida</span>
-        </div>
+ <!-- TOP BAR -->
+ <div class="topbar">
+  <div class="topbar__track">
+   <span class="topbar__item"><span class="icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span> <strong>Frete Grátis</strong> acima de R$250</span>
+   <span class="topbar__item"><span class="icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></span> <strong>PIX com 10% OFF</strong></span>
+   <span class="topbar__item"><span class="icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span> Entrega rápida</span>
+  </div>
+ </div>
+
+ <header class="header" id="header">
+  <div class="header__inner">
+   <button class="menu-toggle mobile-only" aria-label="Menu"><span></span><span></span><span></span></button>
+   <a href="index.html" class="header__logo"><img src="logo sem fundo.png" alt="Needway Nutrition"></a>
+   <div class="header__search desktop-only"><input type="text" class="header__search-input" id="searchInput"
+     placeholder="Buscar..." autocomplete="off"><button class="header__search-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
+    <div class="search-dropdown" id="searchDropdown"></div>
+   </div>
+   <div class="header__actions">
+    <a href="login.html" class="header__action"><span class="header__action-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span></a>
+    <a href="favoritos.html" class="header__action"><span class="header__action-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span></a>
+    <button class="header__action" onclick="Cart.toggleMiniCart()"><span
+      class="header__action-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></span><span class="header__action-badge cart-count"
+      style="display:none;">0</span></button>
+   </div>
+  </div>
+ </header>
+
+ <main class="page-content">
+  <div class="container">
+   <div class="breadcrumb"><a href="index.html">Início</a><span class="breadcrumb__separator">›</span><span
+     class="breadcrumb__current">Carrinho</span></div>
+
+   <h1 class="heading heading--2" style="margin-bottom:var(--space-lg);">Meu <span
+     class="highlight">Carrinho</span></h1>
+
+   <!-- Free Shipping Progress -->
+   <div class="shipping-progress" id="shippingProgress">
+    <div class="shipping-progress__text" id="shippingProgressText"> Frete grátis em compras acima de
+     R$250!</div>
+    <div class="shipping-progress__bar">
+     <div class="shipping-progress__fill" id="shippingProgressFill" style="width:0%;"></div>
+    </div>
+   </div>
+
+   <div class="cart-page">
+    <!-- Cart Items -->
+    <div class="cart-page__items" id="cartItems">
+     <div class="empty-state">
+      <div class="empty-state__icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></div>
+      <h3 class="empty-state__title">Carrinho vazio</h3>
+      <p class="empty-state__text">Adicione produtos para começar!</p><a href="loja.html"
+       class="btn btn--primary">Explorar Loja</a>
+     </div>
     </div>
 
-    <header class="header" id="header">
-        <div class="header__inner">
-            <button class="menu-toggle mobile-only" aria-label="Menu"><span></span><span></span><span></span></button>
-            <a href="index.html" class="header__logo"><img src="logo sem fundo.png" alt="Needway Nutrition"></a>
-            <div class="header__search desktop-only"><input type="text" class="header__search-input" id="searchInput"
-                    placeholder="Buscar..." autocomplete="off"><button class="header__search-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
-                <div class="search-dropdown" id="searchDropdown"></div>
-            </div>
-            <div class="header__actions">
-                <a href="login.html" class="header__action"><span class="header__action-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span></a>
-                <a href="favoritos.html" class="header__action"><span class="header__action-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span></a>
-                <button class="header__action" onclick="Cart.toggleMiniCart()"><span
-                        class="header__action-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></span><span class="header__action-badge cart-count"
-                        style="display:none;">0</span></button>
-            </div>
-        </div>
-    </header>
+    <!-- Summary -->
+    <div class="cart-summary" id="cartSummary">
+     <h3 class="cart-summary__title">Resumo do Pedido</h3>
+     <div class="cart-summary__row"><span>Subtotal</span><span id="summarySubtotal">R$ 0,00</span></div>
+     <div class="cart-summary__row"><span>Frete</span><span id="summaryShipping">Calcular</span></div>
 
-    <main class="page-content">
-        <div class="container">
-            <div class="breadcrumb"><a href="index.html">Início</a><span class="breadcrumb__separator">›</span><span
-                    class="breadcrumb__current">Carrinho</span></div>
+     <!-- Coupon -->
+     <div class="cart-summary__coupon">
+      <div class="input-inline">
+       <input type="text" class="input" id="couponInput" placeholder="Cupom de desconto"
+        style="text-transform:uppercase;">
+       <button class="btn btn--dark btn--sm" onclick="applyCouponCart()">Aplicar</button>
+      </div>
+      <div id="couponResult" style="margin-top:var(--space-sm);font-size:var(--fs-sm);"></div>
+     </div>
 
-            <h1 class="heading heading--2" style="margin-bottom:var(--space-lg);">Meu <span
-                    class="highlight">Carrinho</span></h1>
+     <div class="cart-summary__row" id="discountRow" style="display:none;color:var(--success);">
+      <span>Desconto</span><span id="summaryDiscount">- R$ 0,00</span>
+     </div>
 
-            <!-- Free Shipping Progress -->
-            <div class="shipping-progress" id="shippingProgress">
-                <div class="shipping-progress__text" id="shippingProgressText">🚚 Frete grátis em compras acima de
-                    R$250!</div>
-                <div class="shipping-progress__bar">
-                    <div class="shipping-progress__fill" id="shippingProgressFill" style="width:0%;"></div>
-                </div>
-            </div>
+     <div class="cart-summary__row cart-summary__row--pix"><span>Total no PIX (10% OFF)</span><span
+       id="summaryPix">R$ 0,00</span></div>
 
-            <div class="cart-page">
-                <!-- Cart Items -->
-                <div class="cart-page__items" id="cartItems">
-                    <div class="empty-state">
-                        <div class="empty-state__icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></div>
-                        <h3 class="empty-state__title">Carrinho vazio</h3>
-                        <p class="empty-state__text">Adicione produtos para começar!</p><a href="loja.html"
-                            class="btn btn--primary">Explorar Loja</a>
-                    </div>
-                </div>
+     <div class="cart-summary__row cart-summary__row--total"><span>Total</span><span
+       class="cart-summary__value" id="summaryTotal">R$ 0,00</span></div>
 
-                <!-- Summary -->
-                <div class="cart-summary" id="cartSummary">
-                    <h3 class="cart-summary__title">Resumo do Pedido</h3>
-                    <div class="cart-summary__row"><span>Subtotal</span><span id="summarySubtotal">R$ 0,00</span></div>
-                    <div class="cart-summary__row"><span>Frete</span><span id="summaryShipping">Calcular</span></div>
+     <div class="cart-summary__actions">
+      <a href="checkout.html" class="btn btn--primary btn--full btn--lg" id="checkoutBtn">Finalizar
+       Compra</a>
+      <a href="loja.html" class="btn btn--ghost btn--full">← Continuar Comprando</a>
+     </div>
+    </div>
+   </div>
 
-                    <!-- Coupon -->
-                    <div class="cart-summary__coupon">
-                        <div class="input-inline">
-                            <input type="text" class="input" id="couponInput" placeholder="Cupom de desconto"
-                                style="text-transform:uppercase;">
-                            <button class="btn btn--dark btn--sm" onclick="applyCouponCart()">Aplicar</button>
-                        </div>
-                        <div id="couponResult" style="margin-top:var(--space-sm);font-size:var(--fs-sm);"></div>
-                    </div>
+   <!-- Upsell -->
+   <section style="margin-top:var(--space-3xl);">
+    <h2 class="section-title">Quem comprou, levou <span class="highlight">também</span></h2>
+    <div class="grid grid--products" id="upsellGrid"></div>
+   </section>
+  </div>
+ </main>
 
-                    <div class="cart-summary__row" id="discountRow" style="display:none;color:var(--success);">
-                        <span>Desconto</span><span id="summaryDiscount">- R$ 0,00</span>
-                    </div>
+ <footer class="footer">
+  <div class="footer__grid">
+   <div class="footer__brand"><img src="logo sem fundo.png" alt="Needway Nutrition">
+    <p>Suplementos de alta performance.</p>
+   </div>
+   <div class="footer__column">
+    <h4>Institucional</h4><a href="sobre.html">Sobre</a><a href="blog.html">Blog</a><a
+     href="fale-conosco.html">Contato</a>
+   </div>
+   <div class="footer__column">
+    <h4>Ajuda</h4><a href="trocas.html">Trocas</a><a href="politica-entrega.html">Entrega</a><a
+     href="politica-privacidade.html">Privacidade</a>
+   </div>
+   <div class="footer__column">
+    <h4>Conta</h4><a href="login.html">Entrar</a><a href="meus-pedidos.html">Pedidos</a><a
+     href="favoritos.html">Favoritos</a>
+   </div>
+  </div>
+  <div class="footer__bottom">
+   <div class="footer__bottom-inner"><span class="footer__copyright"> 2026 Needway Nutrition.</span></div>
+  </div>
+ </footer>
+ <div class="overlay" id="overlay"></div>
+ <a href="https://wa.me/5511970799084" target="_blank" class="whatsapp-float" aria-label="WhatsApp"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
 
-                    <div class="cart-summary__row cart-summary__row--pix"><span>Total no PIX (10% OFF)</span><span
-                            id="summaryPix">R$ 0,00</span></div>
+ <script src="js/data.js"></script>
+ <script src="js/cart.js"></script>
+ <script src="js/app.js"></script>
+ <script src="js/theme.js"></script>
+ <script>
+  let appliedCoupon = null;
 
-                    <div class="cart-summary__row cart-summary__row--total"><span>Total</span><span
-                            class="cart-summary__value" id="summaryTotal">R$ 0,00</span></div>
+  document.addEventListener('DOMContentLoaded', () => {
+   renderCartPage();
+   renderUpsell();
+   initSearch();
+   window.addEventListener('cartUpdated', renderCartPage);
+  });
 
-                    <div class="cart-summary__actions">
-                        <a href="checkout.html" class="btn btn--primary btn--full btn--lg" id="checkoutBtn">Finalizar
-                            Compra</a>
-                        <a href="loja.html" class="btn btn--ghost btn--full">← Continuar Comprando</a>
-                    </div>
-                </div>
-            </div>
+  function renderCartPage() {
+   const items = Cart.getItems();
+   const container = document.getElementById('cartItems');
 
-            <!-- Upsell -->
-            <section style="margin-top:var(--space-3xl);">
-                <h2 class="section-title">Quem comprou, levou <span class="highlight">também</span></h2>
-                <div class="grid grid--products" id="upsellGrid"></div>
-            </section>
-        </div>
-    </main>
+   if (items.length === 0) {
+    container.innerHTML = '<div class="empty-state"><div class="empty-state__icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></div><h3 class="empty-state__title">Carrinho vazio</h3><p class="empty-state__text">Adicione produtos para começar!</p><a href="loja.html" class="btn btn--primary">Explorar Loja</a></div>';
+    updateSummary();
+    return;
+   }
 
-    <footer class="footer">
-        <div class="footer__grid">
-            <div class="footer__brand"><img src="logo sem fundo.png" alt="Needway Nutrition">
-                <p>Suplementos de alta performance.</p>
-            </div>
-            <div class="footer__column">
-                <h4>Institucional</h4><a href="sobre.html">Sobre</a><a href="blog.html">Blog</a><a
-                    href="fale-conosco.html">Contato</a>
-            </div>
-            <div class="footer__column">
-                <h4>Ajuda</h4><a href="trocas.html">Trocas</a><a href="politica-entrega.html">Entrega</a><a
-                    href="politica-privacidade.html">Privacidade</a>
-            </div>
-            <div class="footer__column">
-                <h4>Conta</h4><a href="login.html">Entrar</a><a href="meus-pedidos.html">Pedidos</a><a
-                    href="favoritos.html">Favoritos</a>
-            </div>
-        </div>
-        <div class="footer__bottom">
-            <div class="footer__bottom-inner"><span class="footer__copyright">© 2026 Needway Nutrition.</span></div>
-        </div>
-    </footer>
-    <div class="overlay" id="overlay"></div>
-    <a href="https://wa.me/5511970799084" target="_blank" class="whatsapp-float" aria-label="WhatsApp"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+   container.innerHTML = items.map(item => {
+    const cat = NeedwayData.categories.find(c => {
+     const prod = NeedwayData.products.find(p => p.id === item.productId);
+     return prod && c.id === prod.category;
+    });
+    return `
+   <div class="cart-item">
+   <div class="cart-item__image">${cat?.icon || ''}</div>
+   <div class="cart-item__info">
+    <a href="produto.html?id=${item.productId}" class="cart-item__name">${item.name}</a>
+    <span class="cart-item__variant">${[item.flavor, item.size].filter(Boolean).join(' · ')}</span>
+    <div class="cart-item__bottom">
+    <div class="qty-selector">
+     <button class="qty-selector__btn" onclick="updateCartQty('${item.key}', ${item.quantity - 1})">−</button>
+     <input class="qty-selector__input" type="number" value="${item.quantity}" readonly>
+     <button class="qty-selector__btn" onclick="updateCartQty('${item.key}', ${item.quantity + 1})">+</button>
+    </div>
+    <span class="cart-item__price">${formatPrice(item.price * item.quantity)}</span>
+    <button class="cart-item__remove" onclick="Cart.removeItem('${item.key}')">🗑 Remover</button>
+    </div>
+   </div>
+   </div>`;
+   }).join('');
 
-    <script src="js/data.js"></script>
-    <script src="js/cart.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/theme.js"></script>
-    <script>
-        let appliedCoupon = null;
+   updateSummary();
+  }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            renderCartPage();
-            renderUpsell();
-            initSearch();
-            window.addEventListener('cartUpdated', renderCartPage);
-        });
+  function updateCartQty(key, qty) {
+   if (qty < 1) { Cart.removeItem(key); return; }
+   Cart.updateQuantity(key, qty);
+   renderCartPage();
+  }
 
-        function renderCartPage() {
-            const items = Cart.getItems();
-            const container = document.getElementById('cartItems');
+  function updateSummary() {
+   const total = Cart.getTotal();
+   const pix = Cart.getPixTotal();
+   const remaining = Cart.getFreeShippingRemaining();
+   const progress = Cart.getFreeShippingProgress();
 
-            if (items.length === 0) {
-                container.innerHTML = '<div class="empty-state"><div class="empty-state__icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></div><h3 class="empty-state__title">Carrinho vazio</h3><p class="empty-state__text">Adicione produtos para começar!</p><a href="loja.html" class="btn btn--primary">Explorar Loja</a></div>';
-                updateSummary();
-                return;
-            }
+   document.getElementById('summarySubtotal').textContent = formatPrice(total);
+   document.getElementById('summaryPix').textContent = formatPrice(pix);
+   document.getElementById('summaryTotal').textContent = formatPrice(total);
+   document.getElementById('summaryShipping').textContent = remaining === 0 ? 'Grátis! 🎉' : 'A calcular';
 
-            container.innerHTML = items.map(item => {
-                const cat = NeedwayData.categories.find(c => {
-                    const prod = NeedwayData.products.find(p => p.id === item.productId);
-                    return prod && c.id === prod.category;
-                });
-                return `
-          <div class="cart-item">
-            <div class="cart-item__image">${cat?.icon || ''}</div>
-            <div class="cart-item__info">
-              <a href="produto.html?id=${item.productId}" class="cart-item__name">${item.name}</a>
-              <span class="cart-item__variant">${[item.flavor, item.size].filter(Boolean).join(' · ')}</span>
-              <div class="cart-item__bottom">
-                <div class="qty-selector">
-                  <button class="qty-selector__btn" onclick="updateCartQty('${item.key}', ${item.quantity - 1})">−</button>
-                  <input class="qty-selector__input" type="number" value="${item.quantity}" readonly>
-                  <button class="qty-selector__btn" onclick="updateCartQty('${item.key}', ${item.quantity + 1})">+</button>
-                </div>
-                <span class="cart-item__price">${formatPrice(item.price * item.quantity)}</span>
-                <button class="cart-item__remove" onclick="Cart.removeItem('${item.key}')">🗑 Remover</button>
-              </div>
-            </div>
-          </div>`;
-            }).join('');
+   document.getElementById('shippingProgressFill').style.width = progress + '%';
+   document.getElementById('shippingProgressText').textContent = remaining > 0
+    ? ` Falta ${formatPrice(remaining)} para frete grátis!`
+    : '🎉 Você ganhou frete grátis!';
 
-            updateSummary();
-        }
+   if (appliedCoupon) {
+    const discount = Cart.getCouponDiscount(appliedCoupon);
+    document.getElementById('discountRow').style.display = 'flex';
+    document.getElementById('summaryDiscount').textContent = `- ${formatPrice(discount)}`;
+    document.getElementById('summaryTotal').textContent = formatPrice(total - discount);
+   }
 
-        function updateCartQty(key, qty) {
-            if (qty < 1) { Cart.removeItem(key); return; }
-            Cart.updateQuantity(key, qty);
-            renderCartPage();
-        }
+   document.getElementById('checkoutBtn').classList.toggle('btn--disabled', Cart.getCount() === 0);
+  }
 
-        function updateSummary() {
-            const total = Cart.getTotal();
-            const pix = Cart.getPixTotal();
-            const remaining = Cart.getFreeShippingRemaining();
-            const progress = Cart.getFreeShippingProgress();
+  function applyCouponCart() {
+   const code = document.getElementById('couponInput').value.trim();
+   if (!code) return;
+   const result = Cart.applyCoupon(code);
+   const el = document.getElementById('couponResult');
+   if (result.success) {
+    appliedCoupon = result.coupon;
+    el.innerHTML = `<span style="color:var(--success);"> ${result.message}</span>`;
+   } else {
+    appliedCoupon = null;
+    el.innerHTML = `<span style="color:var(--danger);">❌ ${result.message}</span>`;
+   }
+   updateSummary();
+  }
 
-            document.getElementById('summarySubtotal').textContent = formatPrice(total);
-            document.getElementById('summaryPix').textContent = formatPrice(pix);
-            document.getElementById('summaryTotal').textContent = formatPrice(total);
-            document.getElementById('summaryShipping').textContent = remaining === 0 ? 'Grátis! 🎉' : 'A calcular';
-
-            document.getElementById('shippingProgressFill').style.width = progress + '%';
-            document.getElementById('shippingProgressText').textContent = remaining > 0
-                ? `🚚 Falta ${formatPrice(remaining)} para frete grátis!`
-                : '🎉 Você ganhou frete grátis!';
-
-            if (appliedCoupon) {
-                const discount = Cart.getCouponDiscount(appliedCoupon);
-                document.getElementById('discountRow').style.display = 'flex';
-                document.getElementById('summaryDiscount').textContent = `- ${formatPrice(discount)}`;
-                document.getElementById('summaryTotal').textContent = formatPrice(total - discount);
-            }
-
-            document.getElementById('checkoutBtn').classList.toggle('btn--disabled', Cart.getCount() === 0);
-        }
-
-        function applyCouponCart() {
-            const code = document.getElementById('couponInput').value.trim();
-            if (!code) return;
-            const result = Cart.applyCoupon(code);
-            const el = document.getElementById('couponResult');
-            if (result.success) {
-                appliedCoupon = result.coupon;
-                el.innerHTML = `<span style="color:var(--success);"> ${result.message}</span>`;
-            } else {
-                appliedCoupon = null;
-                el.innerHTML = `<span style="color:var(--danger);">❌ ${result.message}</span>`;
-            }
-            updateSummary();
-        }
-
-        function renderUpsell() {
-            const grid = document.getElementById('upsellGrid');
-            const upsell = NeedwayData.products.sort((a, b) => b.sold - a.sold).slice(0, 4);
-            grid.innerHTML = upsell.map(renderProductCard).join('');
-        }
-    </script>
+  function renderUpsell() {
+   const grid = document.getElementById('upsellGrid');
+   const upsell = NeedwayData.products.sort((a, b) => b.sold - a.sold).slice(0, 4);
+   grid.innerHTML = upsell.map(renderProductCard).join('');
+  }
+ </script>
 </body>
 
 </html>
