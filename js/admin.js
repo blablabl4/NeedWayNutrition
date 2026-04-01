@@ -367,6 +367,13 @@ function toggleBannerExtras() {
   const outletWrap = document.getElementById('bOutletWrapper');
   if(couponWrap) couponWrap.style.display = (pos === 'coupon') ? 'flex' : 'none';
   if(outletWrap) outletWrap.style.display = (pos === 'outlet') ? 'flex' : 'none';
+  
+  const sizeTip = document.getElementById('bImageSizeTip');
+  if(sizeTip) {
+    if(pos === 'hero') sizeTip.innerHTML = 'JPG, PNG, WEBP — recomendado 1920x600px';
+    else if(pos === 'coupon') sizeTip.innerHTML = 'JPG, PNG, WEBP — recomendado 1200x300px (ou 600x200px pro botão)';
+    else sizeTip.innerHTML = 'JPG, PNG, WEBP — recomendado 1400x400px';
+  }
 }
 
 function loadBanners() {
