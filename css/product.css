@@ -6,8 +6,8 @@
 /* ── PDP Layout ── */
 .pdp {
     display: grid;
-    /* Lado esquerdo (260px), Galeria (expande), Lado Direito (-20% de 480px = ~380px) */
-    grid-template-columns: 260px 1fr 380px;
+    /* Lado esquerdo (260px), Galeria (expande), Lado Direito (-30% total = ~340px) */
+    grid-template-columns: 260px 1fr 340px;
     gap: var(--space-3xl); /* Aumentado gap para empurrar laterais mais pra borda */
     padding: var(--space-2xl) 0;
     align-items: center;
@@ -100,24 +100,21 @@
     margin-top: var(--space-xl);
 }
 
-.pdp__thumb {
-    width: 60px;
-    height: 60px;
-    background: var(--bg-dark);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-sm);
-    overflow: hidden;
+.pdp__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--glass-border);
+    border: none;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    transition: border-color var(--duration-fast);
+    transition: all 0.2s;
+    padding: 0;
 }
 
-.pdp__thumb.active,
-.pdp__thumb:hover {
-    border-color: var(--primary);
+.pdp__dot.active,
+.pdp__dot:hover {
+    background: var(--primary);
+    transform: scale(1.2);
 }
 
 /* ── Right: Floating Info Modal ── */

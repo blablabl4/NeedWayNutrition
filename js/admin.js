@@ -97,6 +97,18 @@ function loadProductImageSlot(slot, url) {
   if (ph) ph.style.display = url ? 'none' : 'flex';
 }
 
+function removeProductImage(event, slot) {
+  event.stopPropagation();
+  productImages[slot] = null;
+  const zone = document.getElementById('pImg' + slot + 'Zone');
+  if (zone) {
+    const input = zone.querySelector('input[type="file"]');
+    if (input) input.value = '';
+  }
+  loadProductImageSlot(slot, null);
+  toast('Imagem removida do painel', 'info');
+}
+
 async function handleCategoryImage(file) {
   if (!file) return;
   try {

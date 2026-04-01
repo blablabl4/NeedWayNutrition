@@ -219,27 +219,44 @@
     }
 
     /* Benefits Bar */
+    /* Benefits Bar em Linha Única com Scroll */
     .benefits-bar__grid {
-        grid-template-columns: 1fr 1fr;
-        gap: var(--space-sm);
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: var(--space-md);
+        padding-bottom: 8px;
+        scrollbar-width: none;
     }
-
+    .benefits-bar__grid::-webkit-scrollbar { display: none; }
+    
     .benefits-bar__item {
-        gap: var(--space-sm);
+        flex: 0 0 auto;
+        min-width: 90px;
+        gap: var(--space-xs);
+        text-align: center;
     }
 
     .benefits-bar__icon {
-        width: 36px;
-        height: 36px;
-        font-size: var(--fs-md);
+        width: 44px;
+        height: 44px;
+        font-size: var(--fs-lg);
+        margin: 0 auto;
     }
 
     .benefits-bar__text {
-        font-size: var(--fs-xs);
+        font-size: 11px;
     }
 
     .benefits-bar__text span {
         display: none;
+    }
+
+    /* Badges Promocionais Mobile */
+    .promo-wide-banner__badge {
+        font-size: 0.65rem !important;
+        padding: 6px 12px !important;
+        white-space: nowrap;
     }
 
     /* Newsletter — stack input + button on mobile */
