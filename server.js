@@ -46,6 +46,7 @@ app.use(express.static(path.join(__dirname, 'public')));
     try { await db.query(`ALTER TABLE coupons ADD COLUMN IF NOT EXISTS expires VARCHAR(50)`); } catch(e) {}
     try { await db.query(`ALTER TABLE categories ADD COLUMN IF NOT EXISTS active BOOLEAN DEFAULT true`); } catch(e) {}
     try { await db.query(`ALTER TABLE categories ADD COLUMN IF NOT EXISTS image TEXT`); } catch(e) {}
+    try { await db.query(`ALTER TABLE products ADD COLUMN IF NOT EXISTS badges JSONB DEFAULT '[]'`); } catch(e) {}
     console.log('All tables ready');
   } catch(e) { console.error('Table creation error:', e.message); }
 })();
@@ -80,14 +81,7 @@ app.get('/api/products', async (req, res) => {
       tags: row.tags || [],
       flavors: row.flavors || [],
       sizes: row.sizes || [],
-      badges: (function() {
-        let b = [];
-        if (row.is_new) b.push('new');
-        if (row.is_outlet) b.push('outlet');
-        if (row.sold > 1500 && !row.is_outlet) b.push('hot');
-        else if (row.sold > 500 && !row.is_outlet) b.push('best-seller');
-        return b;
-      })()
+      badges: row.badges || []
     }));
     res.json(products);
   } catch (error) {
@@ -277,9 +271,9 @@ app.put('/api/products/:id', async (req, res) => {
         original_price = $5, price = $6, discount = $7, stock = $8,
         description = $9, nutrition_table = $10, images = $11,
         is_new = $12, is_outlet = $13, tags = $14,
-        flavors = $15, sizes = $16, sold = $17
-      WHERE id = $18`,
-      [p.name, p.slug || '', p.category || '', p.brand || '', p.originalPrice || 0, p.price || 0, p.discount || 0, p.stock || 0, p.description || '', JSON.stringify(p.nutritionTable || {}), JSON.stringify(p.images || []), p.isNew || false, p.isOutlet || false, JSON.stringify(p.tags || []), JSON.stringify(p.flavors || []), JSON.stringify(p.sizes || []), p.sold || 0, req.params.id]
+        flavors = $15, sizes = $16, sold = $17, badges = $18
+      WHERE id = $19`,
+      [p.name, p.slug || '', p.category || '', p.brand || '', p.originalPrice || 0, p.price || 0, p.discount || 0, p.stock || 0, p.description || '', JSON.stringify(p.nutritionTable || {}), JSON.stringify(p.images || []), p.isNew || false, p.isOutlet || false, JSON.stringify(p.tags || []), JSON.stringify(p.flavors || []), JSON.stringify(p.sizes || []), p.sold || 0, JSON.stringify(p.badges || []), req.params.id]
     );
     res.json({ success: true });
   } catch (err) {
@@ -292,9 +286,9 @@ app.post('/api/products', async (req, res) => {
   try {
     const p = req.body;
     await db.query(
-      `INSERT INTO products (name, slug, category_slug, brand, original_price, price, discount, stock, description, nutrition_table, images, is_new, is_outlet, tags, flavors, sizes, rating, review_count, sold)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)`,
-      [p.name, p.slug || '', p.category || '', p.brand || '', p.originalPrice || 0, p.price || 0, p.discount || 0, p.stock || 0, p.description || '', JSON.stringify(p.nutritionTable || {}), JSON.stringify(p.images || []), p.isNew || false, p.isOutlet || false, JSON.stringify(p.tags || []), JSON.stringify(p.flavors || []), JSON.stringify(p.sizes || []), p.rating || 5.0, p.reviewCount || 0, p.sold || 0]
+      `INSERT INTO products (name, slug, category_slug, brand, original_price, price, discount, stock, description, nutrition_table, images, is_new, is_outlet, tags, flavors, sizes, rating, review_count, sold, badges)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20)`,
+      [p.name, p.slug || '', p.category || '', p.brand || '', p.originalPrice || 0, p.price || 0, p.discount || 0, p.stock || 0, p.description || '', JSON.stringify(p.nutritionTable || {}), JSON.stringify(p.images || []), p.isNew || false, p.isOutlet || false, JSON.stringify(p.tags || []), JSON.stringify(p.flavors || []), JSON.stringify(p.sizes || []), p.rating || 5.0, p.reviewCount || 0, p.sold || 0, JSON.stringify(p.badges || [])]
     );
     res.json({ success: true });
   } catch (err) {
