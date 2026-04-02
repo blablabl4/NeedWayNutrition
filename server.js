@@ -39,9 +39,9 @@ app.get('/api/products', async (req, res) => {
       images: row.images,
       isNew: row.is_new,
       isOutlet: row.is_outlet,
-      tags: row.tags,
-      flavors: row.flavors,
-      sizes: row.sizes,
+      tags: row.tags || [],
+      flavors: row.flavors || [],
+      sizes: row.sizes || [],
       badges: (function() {
         let b = [];
         if (row.is_new) b.push('new');

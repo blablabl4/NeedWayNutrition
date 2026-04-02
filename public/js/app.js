@@ -397,10 +397,10 @@ function renderProductCard(product) {
   </div>
   <button class="product-card__favorite" onclick="event.preventDefault(); event.stopPropagation(); toggleFavorite(${product.id}, this);" aria-label="Favoritar"></button>
   <div class="product-card__quick-add">
-   <button class="btn btn--primary btn--sm btn--full quick-add__full" onclick="event.preventDefault(); event.stopPropagation(); Cart.addItem(${product.id}, 1, '${product.flavors[0] || ''}', '${product.sizes[0] || ''}');">
+   <button class="btn btn--primary btn--sm btn--full quick-add__full" onclick="event.preventDefault(); event.stopPropagation(); Cart.addItem(${product.id}, 1, '${(product.flavors || [])[0] || ''}', '${(product.sizes || [])[0] || ''}');">
    ${CART_SVG} Adicionar
    </button>
-   <button class="btn btn--primary btn--sm quick-add__icon" onclick="event.preventDefault(); event.stopPropagation(); Cart.addItem(${product.id}, 1, '${product.flavors[0] || ''}', '${product.sizes[0] || ''}');" aria-label="Adicionar">
+   <button class="btn btn--primary btn--sm quick-add__icon" onclick="event.preventDefault(); event.stopPropagation(); Cart.addItem(${product.id}, 1, '${(product.flavors || [])[0] || ''}', '${(product.sizes || [])[0] || ''}');" aria-label="Adicionar">
    ${CART_SVG}
    </button>
   </div>
