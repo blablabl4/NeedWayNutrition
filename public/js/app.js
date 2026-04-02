@@ -368,7 +368,7 @@ function initCountdown(selector, targetDate) {
 
 // ── Product Card Renderer ──
 function renderProductCard(product) {
- const badgesHTML = product.badges.map(b => {
+ const badgesHTML = (product.badges || []).map(b => {
   const info = getBadgeInfo(b);
   return `<span class="badge ${info.class}">${info.text}</span>`;
  }).join('');

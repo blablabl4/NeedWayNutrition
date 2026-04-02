@@ -41,7 +41,15 @@ app.get('/api/products', async (req, res) => {
       isOutlet: row.is_outlet,
       tags: row.tags,
       flavors: row.flavors,
-      sizes: row.sizes
+      sizes: row.sizes,
+      badges: (function() {
+        let b = [];
+        if (row.is_new) b.push('new');
+        if (row.is_outlet) b.push('outlet');
+        if (row.sold > 1500 && !row.is_outlet) b.push('hot');
+        else if (row.sold > 500 && !row.is_outlet) b.push('best-seller');
+        return b;
+      })()
     }));
     res.json(products);
   } catch (error) {
