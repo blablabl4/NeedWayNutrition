@@ -232,10 +232,12 @@
  <script src="js/app.js"></script>
  <script src="js/theme.js"></script>
  <script>
-  let filteredProducts = [...NeedwayData.products];
+  let filteredProducts = [];
   let activeFilters = { categories: [], maxPrice: 350, minRating: 0 };
 
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', async () => {
+   if (typeof loadNeedwayData === 'function') await loadNeedwayData();
+   filteredProducts = [...NeedwayData.products];
    const params = new URLSearchParams(window.location.search);
    const cat = params.get('cat');
    const obj = params.get('obj');

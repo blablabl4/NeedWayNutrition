@@ -73,7 +73,8 @@
  <script src="js/app.js"></script>
  <script src="js/theme.js"></script>
  <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', async () => {
+   if (typeof loadNeedwayData === 'function') await loadNeedwayData();
    const params = new URLSearchParams(window.location.search);
    const q = params.get('q') || '';
    document.getElementById('searchQuery').textContent = q;

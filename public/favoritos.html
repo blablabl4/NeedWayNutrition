@@ -78,7 +78,8 @@
  <script src="js/app.js"></script>
  <script src="js/theme.js"></script>
  <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', async () => {
+   if (typeof loadNeedwayData === 'function') await loadNeedwayData();
    const favs = getFavorites();
    const grid = document.getElementById('favGrid');
    const count = document.getElementById('favCount');

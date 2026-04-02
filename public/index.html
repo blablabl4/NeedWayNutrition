@@ -797,7 +797,8 @@
  <script src="js/theme.js"></script>
  <script>
  // ── Initialize Homepage ──
- document.addEventListener('DOMContentLoaded', () => {
+ document.addEventListener('DOMContentLoaded', async () => {
+  if (typeof loadNeedwayData === 'function') await loadNeedwayData();
   renderBestSellers();
   renderLaunches();
   renderModalities();

@@ -85,7 +85,8 @@
  <script src="js/theme.js"></script>
  <script>
 
- document.addEventListener('DOMContentLoaded', () => {
+ document.addEventListener('DOMContentLoaded', async () => {
+   if (typeof loadNeedwayData === 'function') await loadNeedwayData();
   const products = NeedwayData.products.filter(p => p.category === 'kits');
   const grid = document.getElementById('productsGrid');
   if (products.length === 0) { grid.innerHTML = '<p class="text-muted" style="text-align:center;grid-column:1/-1;">Nenhum kit disponível no momento.</p>'; return; }

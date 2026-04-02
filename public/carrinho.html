@@ -145,7 +145,8 @@
  <script>
   let appliedCoupon = null;
 
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', async () => {
+   if (typeof loadNeedwayData === 'function') await loadNeedwayData();
    renderCartPage();
    renderUpsell();
    initSearch();

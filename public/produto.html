@@ -270,7 +270,8 @@
   let selectedFlavor = '';
   let selectedSize = '';
 
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', async () => {
+   if (typeof loadNeedwayData === 'function') await loadNeedwayData();
    const params = new URLSearchParams(window.location.search);
    const id = parseInt(params.get('id'));
    currentProduct = NeedwayData.products.find(p => p.id === id);
