@@ -254,6 +254,8 @@
    div.innerHTML = '<div style="width:100%;height:100%;' + bgStyle + '"></div>' + contentHtml;
    track.appendChild(div);
   });
+  // Sinalizar que banners estão prontos para as outras seções usarem
+  document.dispatchEvent(new Event('bannersReady'));
  })();
  </script>
 
@@ -390,7 +392,7 @@
     <div class="modalities-showcase__overlay"></div>
    </div>
    <script>
-    (function(){
+    document.addEventListener('bannersReady', function(){
       var b = window.AdminBanners;
       if(!b) return;
       ['mod_top_1','mod_top_2','mod_top_3','mod_top_4'].forEach(function(pos) {
@@ -400,7 +402,7 @@
           if(img) img.src = banner.image;
         }
       });
-    })();
+    });
    </script>
    
    <!-- Interactive Overlay Tabs -->
@@ -478,7 +480,7 @@
     </div>
    </div>
    <script>
-    (function(){
+    document.addEventListener('bannersReady', function(){
       var b = window.AdminBanners.slice().reverse().find(function(x){ return x.position === 'mais_vendidos'; });
       if(b) {
         var el = document.getElementById('promoMaisVendidos');
@@ -492,7 +494,7 @@
              document.getElementById('pmBg').style.display = 'none';
         }
       }
-    })();
+    });
    </script>
    <div class="grid grid--products" id="bestSellersGrid"></div>
   <div style="text-align: center; margin-top: var(--space-xl);">
@@ -513,7 +515,7 @@
    </div>
   </div>
    <script>
-    (function(){
+    document.addEventListener('bannersReady', function(){
       var b = window.AdminBanners.slice().reverse().find(function(x){ return x.position === 'outlet'; });
       if(b) {
         var el = document.getElementById('promoOutlet');
@@ -570,7 +572,7 @@
       } else if (cd) {
           cd.style.display = 'none';
       }
-    })();
+    });
    </script>
   </div>
  </section>
@@ -590,7 +592,7 @@
     <div class="modalities-showcase__overlay"></div>
    </div>
    <script>
-    (function(){
+    document.addEventListener('bannersReady', function(){
       var b = window.AdminBanners;
       if(!b) return;
       ['mod_bot_1','mod_bot_2','mod_bot_3','mod_bot_4'].forEach(function(pos) {
@@ -599,11 +601,11 @@
           var img = document.getElementById(pos);
           if(img) {
              img.src = banner.image;
-             img.style.filter = 'none'; // remove the default hue rotate for custom images
+             img.style.filter = 'none';
           }
         }
       });
-    })();
+    });
    </script>
    
    <!-- Interactive Overlay Tabs -->
@@ -680,7 +682,7 @@
      </div>
     </div>
     <script>
-     (function(){
+     document.addEventListener('bannersReady', function(){
        var b = window.AdminBanners.slice().reverse().find(function(x){ return x.position === 'lancamentos'; });
        if(b) {
          var el = document.getElementById('promoLancamentos');
@@ -694,7 +696,7 @@
              document.getElementById('plBg').style.display = 'none';
          }
        }
-     })();
+     });
     </script>
    <div class="grid grid--products" id="launchesGrid"></div>
   </div>
