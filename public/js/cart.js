@@ -167,6 +167,45 @@ const Cart = {
     ? `Falta ${formatPrice(remaining)} para frete grátis! `
     : '🎉 Parabéns! Você ganhou frete grátis!';
   }
+
+  // ── Render Upsell Items ──
+  const upsellContainer = document.getElementById('minicartUpsellItems');
+  const upsellWrapper = document.getElementById('minicartUpsell');
+  if (upsellContainer && upsellWrapper) {
+    if (items.length === 0) {
+      upsellWrapper.style.display = 'none';
+      return;
+    }
+    
+    // Find products not currently in the cart to suggest
+    const cartProductIds = items.map(i => i.productId);
+    // Prefer smaller/cheaper products like vitamins, shakers if possible (just based on low price for high conversion)
+    const suggestions = (NeedwayData.products || [])
+      .filter(p => !cartProductIds.includes(p.id) && p.stock > 0)
+      .sort((a, b) => a.price - b.price) // Cheapest first
+      .slice(0, 4);
+
+    if (suggestions.length > 0) {
+      upsellWrapper.style.display = 'block';
+      upsellContainer.innerHTML = suggestions.map(s => {
+        const flavor = (s.flavors && s.flavors.length > 0) ? s.flavors[0] : '';
+        const size = (s.sizes && s.sizes.length > 0) ? s.sizes[0] : '';
+        const imgUrl = (s.images && s.images[0]) ? s.images[0] : 'img/produtos/default.jpg';
+        return `
+        <div style="min-width: 130px; max-width: 130px; background: #25252b; border-radius: 8px; padding: 8px; display: flex; flex-direction: column; scroll-snap-align: start;">
+          <div style="width: 100%; aspect-ratio: 1; background: #fff; border-radius: 4px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 6px;">
+            <img src="${imgUrl}" alt="${s.name}" style="max-width: 90%; max-height: 90%; object-fit: contain; mix-blend-mode: multiply;">
+          </div>
+          <div style="font-size: 0.75rem; font-weight: bold; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-bottom: 2px;" title="${s.name}">${s.name}</div>
+          <div style="color: var(--accent-gold); font-weight: 800; font-size: 0.85rem; margin-bottom: 8px;">${formatPrice(s.price)}</div>
+          <button class="btn btn--primary btn--sm" style="padding: 4px; font-size: 0.75rem; width: 100%; border-radius: 4px; border:0; background: var(--primary);" onclick="Cart.addItem(${s.id}, 1, '${flavor}', '${size}')">+ Adicionar</button>
+        </div>
+        `;
+      }).join('');
+    } else {
+      upsellWrapper.style.display = 'none';
+    }
+  }
  },
 
  showToast(message, type = 'success') {
