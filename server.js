@@ -106,10 +106,10 @@ app.get('/api/categories', async (req, res) => {
 app.post('/api/categories', async (req, res) => {
   try {
     const c = req.body;
-    const slug = c.slug || c.id || c.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-');
+    const slug = c.slug || c.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-');
     await db.query(
-      `INSERT INTO categories (id, name, slug, count, image, active) VALUES ($1, $2, $3, $4, $5, $6)`,
-      [slug, c.name, slug, c.count || 0, c.image || '', c.active !== false]
+      `INSERT INTO categories (name, slug, count, image, active) VALUES ($1, $2, $3, $4, $5)`,
+      [c.name, slug, c.count || 0, c.image || '', c.active !== false]
     );
     res.json({ success: true });
   } catch (err) {
