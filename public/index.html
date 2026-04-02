@@ -232,15 +232,22 @@
    var cta2 = (s.ctaText2 && s.ctaLink2) ? '<a href="' + s.ctaLink2 + '" class="btn btn--outline btn--lg">' + s.ctaText2 + '</a>' : '';
    var div = document.createElement('div');
    div.className = 'carousel__slide hero__slide';
-   div.innerHTML =
-    '<div style="width:100%;height:100%;' + bgStyle + '"></div>' +
-    '<div class="hero__overlay"></div>' +
-    '<div class="hero__content">' +
-    '<span class="hero__subtitle" ' + subtitleColor + '>' + s.subtitle + '</span>' +
-    '<h1 class="hero__title">' + s.title + '</h1>' +
-    (s.desc ? '<p class="hero__desc">' + s.desc + '</p>' : '') +
-    '<div class="hero__actions"><a href="' + s.ctaLink + '" class="btn btn--primary btn--lg">' + s.ctaText + '</a>' + cta2 + '</div>' +
-    '</div>';
+   
+   var isEmpty = (!s.title && !s.subtitle && !s.desc && !s.ctaText);
+   
+   var contentHtml = '';
+   if (!isEmpty) {
+     contentHtml = 
+       '<div class="hero__overlay"></div>' +
+       '<div class="hero__content" style="align-items: flex-end; text-align: right;">' +
+       (s.subtitle ? '<span class="hero__subtitle" ' + subtitleColor + '>' + s.subtitle + '</span>' : '') +
+       (s.title ? '<h1 class="hero__title">' + s.title + '</h1>' : '') +
+       (s.desc ? '<p class="hero__desc">' + s.desc + '</p>' : '') +
+       (s.ctaText ? '<div class="hero__actions" style="justify-content: flex-end;"><a href="' + s.ctaLink + '" class="btn btn--primary btn--lg">' + s.ctaText + '</a>' + cta2 + '</div>' : '') +
+       '</div>';
+   }
+   
+   div.innerHTML = '<div style="width:100%;height:100%;' + bgStyle + '"></div>' + contentHtml;
    track.appendChild(div);
   });
  })();
@@ -418,11 +425,11 @@
  <section class="section section--darker bestsellers reveal" id="bestsellersSection">
   <div class="container">
    <div class="promo-wide-banner" id="promoMaisVendidos" style="background-image: url('img/produtos/default.jpg'); background-size: cover; background-position: center;">
-    <div class="promo-wide-banner__bg"></div>
-    <div class="promo-wide-banner__content">
+    <div class="promo-wide-banner__bg" id="pmBg"></div>
+    <div class="promo-wide-banner__content" id="pmContentWrapper" style="align-items: flex-end; text-align: right;">
      <h2 class="promo-wide-banner__title" id="pmTitle">MAIS <span class="highlight">VENDIDOS</span></h2>
      <p class="promo-wide-banner__subtitle" id="pmSubtitle">Os favoritos da galera que já conquistaram todo o Brasil.</p>
-     <div class="promo-wide-banner__badges" id="pmBadges">
+     <div class="promo-wide-banner__badges" id="pmBadges" style="justify-content: flex-end;">
        <span class="promo-wide-banner__badge"><svg viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M5 13l4 4L19 7"></path></svg> QUALIDADE CONSOLIDADA</span>
        <span class="promo-wide-banner__badge"><svg viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M5 13l4 4L19 7"></path></svg> COMPRA SEGURA</span>
      </div>
@@ -435,9 +442,13 @@
         var el = document.getElementById('promoMaisVendidos');
         if(b.image) { el.style.backgroundImage = 'url('+b.image+')'; }
         else if(b.bg) { el.style.background = b.bg; el.style.backgroundImage = 'none'; }
-        if(b.title) document.getElementById('pmTitle').innerHTML = b.title;
-        if(b.subtitle) document.getElementById('pmSubtitle').innerHTML = b.subtitle;
-        if(b.ctaText) document.getElementById('pmBadges').innerHTML = '<a href="'+(b.ctaLink||'#')+'" class="btn btn--primary">'+b.ctaText+'</a>';
+        if(b.title !== undefined) document.getElementById('pmTitle').innerHTML = b.title;
+        if(b.subtitle !== undefined) document.getElementById('pmSubtitle').innerHTML = b.subtitle;
+        if(b.ctaText !== undefined) document.getElementById('pmBadges').innerHTML = b.ctaText ? '<a href="'+(b.ctaLink||'#')+'" class="btn btn--primary">'+b.ctaText+'</a>' : '';
+        if(!b.title && !b.subtitle && !b.ctaText) {
+             document.getElementById('pmContentWrapper').style.display = 'none';
+             document.getElementById('pmBg').style.display = 'none';
+        }
       }
     })();
    </script>
@@ -451,10 +462,10 @@
  <!-- ── Outlet Banner ── -->
  <section class="section section--dark reveal">
   <div class="container">
-  <div class="outlet-banner" id="promoOutlet">
+  <div class="outlet-banner" id="promoOutlet" style="display:flex; flex-direction:column; align-items: flex-end; text-align: right; justify-content: center; position: relative;">
    <h2 class="outlet-banner__title" id="outTitle"><span class="highlight">Outlet</span> — Até 50% OFF</h2>
    <p class="outlet-banner__subtitle" id="outSubtitle">Ofertas por tempo limitado. Quando acabar, acabou!</p>
-   <div class="countdown" id="outletCountdown"></div>
+   <div class="countdown" id="outletCountdown" style="justify-content: flex-end; width:100%;"></div>
    <div style="margin-top: var(--space-xl);" id="outBtnWrap">
    <a href="outlet.html" class="btn btn--gold btn--lg" id="outBtn">Ver Ofertas do Outlet</a>
    </div>
@@ -464,12 +475,27 @@
       var b = window.AdminBanners.slice().reverse().find(function(x){ return x.position === 'outlet'; });
       if(b) {
         var el = document.getElementById('promoOutlet');
-        if(b.image) { el.style.background = 'url('+b.image+') center/cover no-repeat'; }
+        if(b.image) { el.style.background = 'url('+b.image+') center/cover no-repeat'; el.style.boxShadow = 'none'; }
         else if(b.bg) { el.style.background = b.bg; }
-        if(b.title) document.getElementById('outTitle').innerHTML = b.title;
-        if(b.subtitle) document.getElementById('outSubtitle').innerHTML = b.subtitle;
+        
+        if(b.title !== undefined) document.getElementById('outTitle').innerHTML = b.title;
+        else if(b.title === '') document.getElementById('outTitle').style.display = 'none';
+        
+        if(b.subtitle !== undefined) document.getElementById('outSubtitle').innerHTML = b.subtitle;
+        else if(b.subtitle === '') document.getElementById('outSubtitle').style.display = 'none';
+        
         if(b.ctaText) document.getElementById('outBtn').innerHTML = b.ctaText;
         if(b.ctaLink) document.getElementById('outBtn').href = b.ctaLink;
+        
+        if (!b.ctaText && b.ctaText !== undefined) document.getElementById('outBtnWrap').style.display = 'none';
+        
+        if (!b.title && !b.subtitle && !b.ctaText) {
+            // Completely empty overlay
+            document.getElementById('outTitle').style.display = 'none';
+            document.getElementById('outSubtitle').style.display = 'none';
+            document.getElementById('outBtnWrap').style.display = 'none';
+        }
+        
         if(b.outletDate) window.NeedwayOutletDate = b.outletDate;
       }
       
@@ -585,29 +611,33 @@
  <section class="section section--darker reveal" style="padding-top: var(--space-3xl);">
   <div class="container">
    <div class="promo-wide-banner" id="promoLancamentos" style="background-image: url('img/produtos/default.jpg'); background-size: cover; background-position: center;">
-    <div class="promo-wide-banner__bg"></div>
-    <div class="promo-wide-banner__content">
-     <h2 class="promo-wide-banner__title" id="plTitle">NOVOS <span class="highlight">LANÇAMENTOS</span></h2>
-     <p class="promo-wide-banner__subtitle" id="plSubtitle">A força que você precisa na construção e na recuperação dos músculos</p>
-     <div class="promo-wide-banner__badges" id="plBadges">
-       <span class="promo-wide-banner__badge"><svg viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M5 13l4 4L19 7"></path></svg> APROVADO EM TODOS OS LAUDOS</span>
-       <span class="promo-wide-banner__badge"><svg viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M5 13l4 4L19 7"></path></svg> COMPRE COM CONFIANÇA</span>
+      <div class="promo-wide-banner__bg" id="plBg"></div>
+     <div class="promo-wide-banner__content" id="plContentWrapper" style="align-items: flex-end; text-align: right;">
+      <h2 class="promo-wide-banner__title" id="plTitle">NOVOS <span class="highlight">LANÇAMENTOS</span></h2>
+      <p class="promo-wide-banner__subtitle" id="plSubtitle">A força que você precisa na construção e na recuperação dos músculos</p>
+      <div class="promo-wide-banner__badges" id="plBadges" style="justify-content: flex-end;">
+        <span class="promo-wide-banner__badge"><svg viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M5 13l4 4L19 7"></path></svg> APROVADO EM TODOS OS LAUDOS</span>
+        <span class="promo-wide-banner__badge"><svg viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M5 13l4 4L19 7"></path></svg> COMPRE COM CONFIANÇA</span>
+      </div>
      </div>
     </div>
-   </div>
-   <script>
-    (function(){
-      var b = window.AdminBanners.slice().reverse().find(function(x){ return x.position === 'lancamentos'; });
-      if(b) {
-        var el = document.getElementById('promoLancamentos');
-        if(b.image) { el.style.backgroundImage = 'url('+b.image+')'; }
-        else if(b.bg) { el.style.background = b.bg; el.style.backgroundImage = 'none'; }
-        if(b.title) document.getElementById('plTitle').innerHTML = b.title;
-        if(b.subtitle) document.getElementById('plSubtitle').innerHTML = b.subtitle;
-        if(b.ctaText) document.getElementById('plBadges').innerHTML = '<a href="'+(b.ctaLink||'#')+'" class="btn btn--primary">'+b.ctaText+'</a>';
-      }
-    })();
-   </script>
+    <script>
+     (function(){
+       var b = window.AdminBanners.slice().reverse().find(function(x){ return x.position === 'lancamentos'; });
+       if(b) {
+         var el = document.getElementById('promoLancamentos');
+         if(b.image) { el.style.backgroundImage = 'url('+b.image+')'; }
+         else if(b.bg) { el.style.background = b.bg; el.style.backgroundImage = 'none'; }
+         if(b.title !== undefined) document.getElementById('plTitle').innerHTML = b.title;
+         if(b.subtitle !== undefined) document.getElementById('plSubtitle').innerHTML = b.subtitle;
+         if(b.ctaText !== undefined) document.getElementById('plBadges').innerHTML = b.ctaText ? '<a href="'+(b.ctaLink||'#')+'" class="btn btn--primary">'+b.ctaText+'</a>' : '';
+         if(!b.title && !b.subtitle && !b.ctaText) {
+             document.getElementById('plContentWrapper').style.display = 'none';
+             document.getElementById('plBg').style.display = 'none';
+         }
+       }
+     })();
+    </script>
    <div class="grid grid--products" id="launchesGrid"></div>
   </div>
  </section>
