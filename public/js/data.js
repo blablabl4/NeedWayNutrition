@@ -87,6 +87,19 @@ function getInstallments(price) {
  return { count, value: price / count };
 }
 
+function formatPrice(value) {
+ return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value || 0);
+}
+
+function renderStars(rating) {
+ rating = Math.round(rating || 0);
+ let html = '';
+ for (let i = 1; i <= 5; i++) {
+  html += i <= rating ? '★' : '☆';
+ }
+ return html;
+}
+
 // ── Async Fetch Function ──
 window.loadNeedwayData = async function() {
     try {
