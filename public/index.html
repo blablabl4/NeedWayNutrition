@@ -329,11 +329,15 @@
       }
     }
 
-    var coupons = [];
-    try { var raw = localStorage.getItem('needway-coupons-override'); if(raw) coupons = JSON.parse(raw); } catch(e) {}
+    var rawCoupons = null;
+    try { rawCoupons = localStorage.getItem('needway-coupons-override'); } catch(e) {}
     
     function renderCoupons(cList) {
-      if(!cList || !cList.length) return;
+      if(!cList || !cList.length) {
+        var grid = document.getElementById('dynamicCouponGrid');
+        if(grid) grid.innerHTML = '';
+        return;
+      }
       var html = '';
       cList.filter(function(c){ return c.show_banner !== false; }).forEach(function(c) {
         var color = c.color || '#f97316';
@@ -353,8 +357,8 @@
       applyBannerStyles();
     }
 
-    if (coupons.length > 0) {
-      renderCoupons(coupons);
+    if (rawCoupons !== null) {
+      renderCoupons(JSON.parse(rawCoupons));
     } else {
       fetch('/api/coupons').then(function(r){ return r.json(); }).then(function(data){ renderCoupons(data); }).catch(function(){});
     }

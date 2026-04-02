@@ -648,7 +648,7 @@ function newCategory() {
 }
 
 function editCategory(id) {
-  const c = getCategories().find(function(x){ return x.id === id; });
+  const c = getCategories().find(function(x){ return x.id == id; });
   if (!c) return;
   editingCategoryId = id;
   categoryImageData = c.image || null;
@@ -667,7 +667,7 @@ function saveCategory() {
   if (!name) { toast('Digite o nome da categoria', 'error'); return; }
   const id = editingCategoryId || name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
   const obj = { id, name, slug: id, image: categoryImageData || '', active: true, count: 0 };
-  if (editingCategoryId) { var idx = cats.findIndex(function(x){ return x.id===editingCategoryId; }); cats[idx] = Object.assign({}, cats[idx], obj); }
+  if (editingCategoryId) { var idx = cats.findIndex(function(x){ return x.id == editingCategoryId; }); cats[idx] = Object.assign({}, cats[idx], obj); }
   else cats.push(obj);
   saveCategories(cats); closeModal('categoryModal'); loadCategories();
   toast(editingCategoryId ? 'Categoria atualizada!' : 'Categoria criada!');
@@ -675,13 +675,13 @@ function saveCategory() {
 
 function toggleCategory(id, active) {
   const cats = getCategories();
-  const c = cats.find(function(x){ return x.id===id; });
+  const c = cats.find(function(x){ return x.id == id; });
   if (c) { c.active = active; saveCategories(cats); toast(active?'Categoria ativada':'Categoria desativada'); }
 }
 
 function deleteCategory(id) {
   if (!confirm('Excluir esta categoria?')) return;
-  saveCategories(getCategories().filter(function(c){ return c.id!==id; }));
+  saveCategories(getCategories().filter(function(c){ return c.id != id; }));
   loadCategories(); toast('Categoria excluída');
 }
 

@@ -406,14 +406,14 @@ function renderProductCard(product) {
   </div>
   </a>
   <div class="product-card__body">
-  <span class="product-card__category">${NeedwayData.categories.find(c => c.id === product.category)?.name || ''}</span>
+  <span class="product-card__category">${NeedwayData.categories.find(c => c.slug === product.category || c.id == product.category)?.name || ''}</span>
   <a href="produto.html?id=${product.id}" class="product-card__name">${product.name}</a>
   <div class="product-card__rating">
-   <span class="stars">${renderStars(product.rating)}</span>
-   <span class="product-card__rating-count">(${product.reviewCount.toLocaleString()})</span>
+   <span class="stars">${renderStars(product.rating || 5)}</span>
+   <span class="product-card__rating-count">(${ (product.reviewCount || 0).toLocaleString() })</span>
   </div>
   <div class="product-card__price-wrap">
-   ${product.originalPrice > product.price ? `<span class="product-card__price-original">${formatPrice(product.originalPrice)}</span>` : ''}
+   ${(product.originalPrice && product.originalPrice > product.price) ? `<span class="product-card__price-original">${formatPrice(product.originalPrice)}</span>` : ''}
    <span class="product-card__price">${formatPrice(product.price)}</span>
    <span class="product-card__price-pix">${formatPrice(pix)} no PIX</span>
    <span class="product-card__price-installment">ou ${inst.count}x de ${formatPrice(inst.value)} s/ juros</span>
