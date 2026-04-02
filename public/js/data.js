@@ -123,19 +123,13 @@ window.loadNeedwayData = async function() {
 // ── Admin Override: merge localStorage edits on top of static data ──
 (function applyAdminOverrides() {
  try {
-  // Limpeza forçada do cache legado
+  // Limpeza de caches legados que não são mais usados
   localStorage.removeItem('needway-products-override');
-  localStorage.removeItem('needway_cart'); // APAGA O CARRINHO FANTASMA DA DEMO
-  const prodOverride = null;
-  if (prodOverride) NeedwayData.products = JSON.parse(prodOverride);
+  localStorage.removeItem('needway-coupons-override');
 
-  // Categories
+  // Categories (still localStorage-based for now)
   const catOverride = localStorage.getItem('needway-categories-override');
   if (catOverride) NeedwayData.categories = JSON.parse(catOverride);
-
-  // Coupons
-  const couponOverride = localStorage.getItem('needway-coupons-override');
-  if (couponOverride) NeedwayData.coupons = JSON.parse(couponOverride);
 
   // Settings
   const settings = localStorage.getItem('needway-settings');

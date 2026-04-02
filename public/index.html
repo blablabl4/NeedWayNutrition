@@ -329,9 +329,8 @@
       }
     }
 
-    var rawCoupons = null;
-    try { rawCoupons = localStorage.getItem('needway-coupons-override'); } catch(e) {}
-    
+
+
     function renderCoupons(cList) {
       if(!cList || !cList.length) {
         var grid = document.getElementById('dynamicCouponGrid');
@@ -357,11 +356,8 @@
       applyBannerStyles();
     }
 
-    if (rawCoupons !== null) {
-      renderCoupons(JSON.parse(rawCoupons));
-    } else {
-      fetch('/api/coupons').then(function(r){ return r.json(); }).then(function(data){ renderCoupons(data); }).catch(function(){});
-    }
+    // Sempre carregar cupons da API (PostgreSQL)
+    fetch('/api/coupons').then(function(r){ return r.json(); }).then(function(data){ renderCoupons(data); }).catch(function(){});
   })();
  </script>
 

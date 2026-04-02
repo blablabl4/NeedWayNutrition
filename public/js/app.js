@@ -381,8 +381,9 @@ function renderProductCard(product) {
 
  const PRODUCT_PLACEHOLDER_SVG = `<img src="logo sem fundo.png" style="width:60%; opacity:0.1; object-fit:contain; filter:grayscale(100%); pointer-events:none;" alt="Needway">`;
 
- const heroImageHTML = product.images && product.images.length > 0
-  ? `<img src="${product.images[0]}" alt="${product.name}" style="width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;">`
+ const validImages = (product.images || []).filter(i => i && !i.includes('default.jpg'));
+ const heroImageHTML = validImages.length > 0
+  ? `<img src="${validImages[0]}" alt="${product.name}" style="width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;" onerror="this.style.display='none';this.parentElement.innerHTML='${PRODUCT_PLACEHOLDER_SVG.replace(/'/g, "\\'")}';">`
   : PRODUCT_PLACEHOLDER_SVG;
 
  return `

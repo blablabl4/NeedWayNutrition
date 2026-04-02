@@ -21,23 +21,29 @@ function getProducts() {
 }
 function saveProducts(arr) { localStorage.setItem('needway-products-override', JSON.stringify(arr)); }
 
-function getBanners() {
-  const s = localStorage.getItem('needway-banners');
-  return s ? JSON.parse(s) : [
-    { id: 1, title: 'Performance Sem Limites', subtitle: 'Whey Protein de Alta Performance', ctaText: 'Comprar Agora', ctaLink: 'produto.html?id=1', image: '', bg: '#1a1a2e', active: true },
-    { id: 2, title: 'Creatina Pura', subtitle: '100% Monohidratada, Zero Impurezas', ctaText: 'Ver Produto', ctaLink: 'produto.html?id=2', image: '', bg: '#0f1923', active: true },
-  ];
+// ── In-memory cache (loaded from API) ──
+var _banners = [];
+var _coupons = [];
+var _bannersLoaded = false;
+var _couponsLoaded = false;
+
+async function fetchBanners() {
+  try { const r = await fetch('/api/banners'); _banners = await r.json(); _bannersLoaded = true; } catch(e) { console.error(e); }
+  return _banners;
 }
-function saveBanners(arr) { localStorage.setItem('needway-banners', JSON.stringify(arr)); }
+function getBanners() { return _banners; }
+function saveBanners(arr) { _banners = arr; /* local cache only, individual saves go through API */ }
+
+async function fetchCoupons() {
+  try { const r = await fetch('/api/coupons'); _coupons = await r.json(); _couponsLoaded = true; } catch(e) { console.error(e); }
+  return _coupons;
+}
+function getCoupons() { return _coupons; }
+function saveCoupons(arr) { _coupons = arr; }
+
 function getOrders() { return JSON.parse(localStorage.getItem('needway-orders') || '[]'); }
 function saveOrders(arr) { localStorage.setItem('needway-orders', JSON.stringify(arr)); }
 function getLeads() { return JSON.parse(localStorage.getItem('needway-leads') || '[]'); }
-function getCoupons() {
-  const o = localStorage.getItem('needway-coupons-override');
-  if (o) return JSON.parse(o);
-  return getNeedwayData()?.coupons || [];
-}
-function saveCoupons(arr) { localStorage.setItem('needway-coupons-override', JSON.stringify(arr)); }
 function getCategories() {
   const o = localStorage.getItem('needway-categories-override');
   if (o) return JSON.parse(o);
@@ -393,7 +399,8 @@ function toggleBannerExtras() {
   }
 }
 
-function loadBanners() {
+async function loadBanners() {
+  await fetchBanners();
   const banners = getBanners();
   const c = document.getElementById('bannersContainer');
   const posLabels = { 
@@ -437,7 +444,7 @@ function newBanner() {
 }
 
 function editBanner(id) {
-  const b = getBanners().find(function(x){ return x.id === id; });
+  const b = getBanners().find(function(x){ return x.id == id; });
   if (!b) return;
   editingBannerId = id;
   bannerImageData = b.image || null;
@@ -466,10 +473,8 @@ function editBanner(id) {
   openModal('bannerModal');
 }
 
-function saveBanner() {
-  const banners = getBanners();
-  var b = editingBannerId ? banners.find(function(x){ return x.id === editingBannerId; }) : {};
-  if (!b) b = {};
+async function saveBanner() {
+  var b = {};
   b.title = document.getElementById('bTitle').value;
   b.subtitle = document.getElementById('bSubtitle').value;
   b.ctaText = document.getElementById('bCtaText').value;
@@ -477,30 +482,46 @@ function saveBanner() {
   b.bg = document.getElementById('bBg').value;
   b.position = document.getElementById('bPosition').value;
   b.couponStyle = document.getElementById('bCouponStyle').value;
-  b.outletDate = document.getElementById('bOutletDate').value;
-  b.image = bannerImageData || b.image || '';
-  
-  if (editingBannerId) {
-    var idx = banners.findIndex(function(x){ return x.id === editingBannerId; });
-    banners[idx] = b;
-  } else { b.id = Date.now(); b.active = true; banners.push(b); }
-  saveBanners(banners);
-  closeModal('bannerModal');
-  loadBanners();
-  toast(editingBannerId ? 'Banner atualizado!' : 'Banner criado!');
+  b.image = bannerImageData || '';
+  b.active = true;
+
+  try {
+    if (editingBannerId) {
+      // Manter imagem anterior se não trocou
+      if (!bannerImageData) {
+        var old = getBanners().find(function(x){ return x.id == editingBannerId; });
+        if (old) b.image = old.image || '';
+      }
+      await fetch('/api/banners/' + editingBannerId, { method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(b) });
+    } else {
+      await fetch('/api/banners', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(b) });
+    }
+    closeModal('bannerModal');
+    await loadBanners();
+    toast(editingBannerId ? 'Banner atualizado!' : 'Banner criado!');
+  } catch(e) {
+    console.error(e);
+    toast('Erro ao salvar banner', 'error');
+  }
 }
 
-function toggleBanner(id, active) {
-  const banners = getBanners();
-  const b = banners.find(function(x){ return x.id === id; });
-  if (b) { b.active = active; saveBanners(banners); toast(active ? 'Banner ativado' : 'Banner desativado'); }
+async function toggleBanner(id, active) {
+  var b = getBanners().find(function(x){ return x.id == id; });
+  if (!b) return;
+  b.active = active;
+  try {
+    await fetch('/api/banners/' + id, { method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(b) });
+    toast(active ? 'Banner ativado' : 'Banner desativado');
+  } catch(e) { toast('Erro', 'error'); }
 }
 
-function deleteBanner(id) {
+async function deleteBanner(id) {
   if (!confirm('Excluir este banner?')) return;
-  saveBanners(getBanners().filter(function(b){ return b.id !== id; }));
-  loadBanners();
-  toast('Banner excluído');
+  try {
+    await fetch('/api/banners/' + id, { method: 'DELETE' });
+    await loadBanners();
+    toast('Banner excluído');
+  } catch(e) { toast('Erro ao excluir', 'error'); }
 }
 
 // ── Pedidos ──
@@ -570,12 +591,13 @@ function exportLeadsCSV() {
 // ── Cupons ──
 var editingCouponId = null;
 
-function loadCoupons() {
+async function loadCoupons() {
+  await fetchCoupons();
   const coupons = getCoupons();
   const typeLabel = { percent: 'Desconto %', fixed: 'Valor Fixo', shipping: 'Frete Grátis' };
   document.getElementById('couponsTable').innerHTML = coupons.length === 0
     ? '<tr><td colspan="6" style="text-align:center;padding:var(--space-2xl);color:var(--text-muted);">Nenhum cupom cadastrado</td></tr>'
-    : coupons.map(function(c){ return '<tr><td><strong>' + c.code + '</strong></td><td><span class="badge badge--dark">' + (typeLabel[c.type]||c.type) + '</span></td><td>' + (c.type==='percent'?c.value+'% de desconto':c.type==='shipping'?'Frete Grátis':fmtPrice(c.value)+' de desconto') + '</td><td>' + fmtPrice(c.minOrder||0) + '</td><td>' + (c.expires||'Sem prazo') + '</td><td><div class="admin-actions"><button class="btn-icon" onclick="editCoupon(\'' + c.code + '\')"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button><button class="btn-icon danger" onclick="deleteCoupon(\'' + c.code + '\')"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg></button></div></td></tr>'; }).join('');
+    : coupons.map(function(c){ return '<tr><td><strong>' + c.code + '</strong></td><td><span class="badge badge--dark">' + (typeLabel[c.type]||c.type) + '</span></td><td>' + (c.type==='percent'?c.value+'% de desconto':c.type==='shipping'?'Frete Grátis':fmtPrice(c.value)+' de desconto') + '</td><td>' + fmtPrice(c.minOrder||0) + '</td><td>' + (c.expires||'Sem prazo') + '</td><td><div class="admin-actions"><button class="btn-icon" onclick="editCoupon(' + c.id + ')"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button><button class="btn-icon danger" onclick="deleteCoupon(' + c.id + ')"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg></button></div></td></tr>'; }).join('');
 }
 
 function newCoupon() { 
@@ -588,10 +610,10 @@ function newCoupon() {
   openModal('couponModal'); 
 }
 
-function editCoupon(code) {
-  const c = getCoupons().find(function(x){ return x.code === code; });
+function editCoupon(id) {
+  const c = getCoupons().find(function(x){ return x.id == id; });
   if (!c) return;
-  editingCouponId = code;
+  editingCouponId = id;
   document.getElementById('cCode').value = c.code;
   document.getElementById('cCode').disabled = true;
   document.getElementById('cType').value = c.type;
@@ -603,8 +625,7 @@ function editCoupon(code) {
   openModal('couponModal');
 }
 
-function saveCoupon() {
-  const coupons = getCoupons();
+async function saveCoupon() {
   const code = (document.getElementById('cCode').value||'').toUpperCase().trim();
   if (!code) { toast('Digite o código do cupom', 'error'); return; }
   const obj = { 
@@ -614,18 +635,31 @@ function saveCoupon() {
      minOrder: parseFloat(document.getElementById('cMinOrder').value)||0, 
      expires: document.getElementById('cExpires').value,
      color: document.getElementById('cColor').value || '#f97316',
-     show_banner: document.getElementById('cShowBanner').checked
+     show_banner: document.getElementById('cShowBanner').checked,
+     description: (document.getElementById('cType').value === 'percent' ? (parseFloat(document.getElementById('cValue').value)||0) + '% de desconto' : document.getElementById('cType').value === 'shipping' ? 'Frete grátis' : 'R$' + (parseFloat(document.getElementById('cValue').value)||0) + ' de desconto')
   };
-  if (editingCouponId) { var idx = coupons.findIndex(function(x){ return x.code===editingCouponId; }); coupons[idx] = obj; }
-  else { if (coupons.find(function(x){ return x.code===code; })) { toast('Este código já existe', 'error'); return; } coupons.push(obj); }
-  saveCoupons(coupons); closeModal('couponModal'); loadCoupons();
-  toast(editingCouponId ? 'Cupom atualizado!' : 'Cupom criado!');
+  try {
+    if (editingCouponId) {
+      await fetch('/api/coupons/' + editingCouponId, { method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(obj) });
+    } else {
+      await fetch('/api/coupons', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(obj) });
+    }
+    closeModal('couponModal');
+    await loadCoupons();
+    toast(editingCouponId ? 'Cupom atualizado!' : 'Cupom criado!');
+  } catch(e) {
+    console.error(e);
+    toast('Erro ao salvar cupom', 'error');
+  }
 }
 
-function deleteCoupon(code) {
-  if (!confirm('Excluir cupom ' + code + '?')) return;
-  saveCoupons(getCoupons().filter(function(c){ return c.code!==code; }));
-  loadCoupons(); toast('Cupom excluído');
+async function deleteCoupon(id) {
+  if (!confirm('Excluir este cupom?')) return;
+  try {
+    await fetch('/api/coupons/' + id, { method: 'DELETE' });
+    await loadCoupons();
+    toast('Cupom excluído');
+  } catch(e) { toast('Erro ao excluir', 'error'); }
 }
 
 // ── Categorias ──
