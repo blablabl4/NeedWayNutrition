@@ -853,17 +853,18 @@ document.addEventListener('DOMContentLoaded', async function() {
   }
   initPillSelects();
 
-  // Populate category select
+  // Populate category select from API
   var sel = document.getElementById('pCategory');
-  if (sel && sel.options.length === 0) {
-    var d = getNeedwayData();
-    if (d && d.categories) {
-      d.categories.forEach(function(c) {
-        var opt = document.createElement('option');
-        opt.value = c.id; opt.textContent = c.name;
-        sel.appendChild(opt);
-      });
-    }
+  if (sel) {
+    await fetchCategories();
+    var cats = getCategories();
+    // Limpar opções existentes exceto a primeira (Selecione...)
+    while (sel.options.length > 1) sel.remove(1);
+    cats.forEach(function(c) {
+      var opt = document.createElement('option');
+      opt.value = c.id; opt.textContent = c.name;
+      sel.appendChild(opt);
+    });
   }
 
   if (localStorage.getItem(ADMIN_KEY) === 'true') {
