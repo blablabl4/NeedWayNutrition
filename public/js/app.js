@@ -3,7 +3,10 @@
 // Global initialization, scroll, nav
 // ===================================
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+ if (typeof loadNeedwayData === 'function') {
+  await loadNeedwayData();
+ }
  initHeader();
  initMobileNav();
  initMegaMenu();
