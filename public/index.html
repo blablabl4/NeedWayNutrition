@@ -354,12 +354,25 @@
    <!-- Banners Stack Container -->
    <div class="modalities-showcase__banners">
    <div class="modalities-showcase__images">
-    <img src="img/objetivos/musculacao.png" alt="Musculação" class="modalities-showcase__img active">
-    <img src="img/objetivos/luta.png" alt="Luta" class="modalities-showcase__img">
-    <img src="img/objetivos/corrida.png" alt="Corrida" class="modalities-showcase__img">
-    <img src="img/objetivos/bike.png" alt="Bike" class="modalities-showcase__img">
+    <img src="img/objetivos/musculacao.png" id="mod_top_1" alt="Musculação" class="modalities-showcase__img active">
+    <img src="img/objetivos/luta.png" id="mod_top_2" alt="Luta" class="modalities-showcase__img">
+    <img src="img/objetivos/corrida.png" id="mod_top_3" alt="Corrida" class="modalities-showcase__img">
+    <img src="img/objetivos/bike.png" id="mod_top_4" alt="Bike" class="modalities-showcase__img">
     <div class="modalities-showcase__overlay"></div>
    </div>
+   <script>
+    (function(){
+      var b = window.AdminBanners;
+      if(!b) return;
+      ['mod_top_1','mod_top_2','mod_top_3','mod_top_4'].forEach(function(pos) {
+        var banner = b.slice().reverse().find(function(x){ return x.position === pos; });
+        if(banner && banner.image) {
+          var img = document.getElementById(pos);
+          if(img) img.src = banner.image;
+        }
+      });
+    })();
+   </script>
    
    <!-- Interactive Overlay Tabs -->
    <div class="modalities-showcase__tabs">
@@ -541,12 +554,28 @@
    <!-- Banners Stack Container -->
    <div class="modalities-showcase__banners">
    <div class="modalities-showcase__images">
-    <img src="img/objetivos/musculacao.png" alt="Vestuário e Rash" class="modalities-showcase__img active" style="filter: hue-rotate(90deg) grayscale(30%);">
-    <img src="img/objetivos/luta.png" alt="Calça" class="modalities-showcase__img" style="filter: hue-rotate(90deg) grayscale(30%);">
-    <img src="img/objetivos/corrida.png" alt="Acessórios" class="modalities-showcase__img" style="filter: hue-rotate(90deg) grayscale(30%);">
-    <img src="img/objetivos/bike.png" alt="Bolsa" class="modalities-showcase__img" style="filter: hue-rotate(90deg) grayscale(30%);">
+    <img src="img/objetivos/musculacao.png" id="mod_bot_1" alt="Vestuário e Rash" class="modalities-showcase__img active" style="filter: hue-rotate(90deg) grayscale(30%);">
+    <img src="img/objetivos/luta.png" id="mod_bot_2" alt="Calça" class="modalities-showcase__img" style="filter: hue-rotate(90deg) grayscale(30%);">
+    <img src="img/objetivos/corrida.png" id="mod_bot_3" alt="Acessórios" class="modalities-showcase__img" style="filter: hue-rotate(90deg) grayscale(30%);">
+    <img src="img/objetivos/bike.png" id="mod_bot_4" alt="Bolsa" class="modalities-showcase__img" style="filter: hue-rotate(90deg) grayscale(30%);">
     <div class="modalities-showcase__overlay"></div>
    </div>
+   <script>
+    (function(){
+      var b = window.AdminBanners;
+      if(!b) return;
+      ['mod_bot_1','mod_bot_2','mod_bot_3','mod_bot_4'].forEach(function(pos) {
+        var banner = b.slice().reverse().find(function(x){ return x.position === pos; });
+        if(banner && banner.image) {
+          var img = document.getElementById(pos);
+          if(img) {
+             img.src = banner.image;
+             img.style.filter = 'none'; // remove the default hue rotate for custom images
+          }
+        }
+      });
+    })();
+   </script>
    
    <!-- Interactive Overlay Tabs -->
    <div class="modalities-showcase__tabs">

@@ -387,15 +387,30 @@ function toggleBannerExtras() {
   const sizeTip = document.getElementById('bImageSizeTip');
   if(sizeTip) {
     if(pos === 'hero') sizeTip.innerHTML = 'JPG, PNG, WEBP — recomendado 1920x600px';
-    else if(pos === 'coupon') sizeTip.innerHTML = 'JPG, PNG, WEBP — recomendado 1200x300px (ou 600x200px pro botão)';
-    else sizeTip.innerHTML = 'JPG, PNG, WEBP — recomendado 1400x400px';
+    else if(pos === 'coupon') sizeTip.innerHTML = 'JPG, PNG, WEBP — recomendado 1920x300px';
+    else if(pos.startsWith('mod_')) sizeTip.innerHTML = 'JPG, PNG, WEBP — recomendado 800x1200px (Formato Vertical)';
+    else sizeTip.innerHTML = 'JPG, PNG, WEBP — recomendado 1920x400px';
   }
 }
 
 function loadBanners() {
   const banners = getBanners();
   const c = document.getElementById('bannersContainer');
-  const posLabels = { hero: 'Hero Carousel', mais_vendidos: 'Mais Vendidos', lancamentos: 'Lançamentos', outlet: 'Outlet', coupon: 'Cupons' };
+  const posLabels = { 
+    hero: 'Hero Carousel', 
+    mais_vendidos: 'Mais Vendidos', 
+    lancamentos: 'Lançamentos', 
+    outlet: 'Outlet', 
+    coupon: 'Cupons',
+    mod_top_1: 'Objetivos: Imagem 1',
+    mod_top_2: 'Objetivos: Imagem 2',
+    mod_top_3: 'Objetivos: Imagem 3',
+    mod_top_4: 'Objetivos: Imagem 4',
+    mod_bot_1: 'Vestuário: Imagem 1',
+    mod_bot_2: 'Vestuário: Imagem 2',
+    mod_bot_3: 'Vestuário: Imagem 3',
+    mod_bot_4: 'Vestuário: Imagem 4'
+  };
   c.innerHTML = banners.length === 0 ? '<div class="admin-empty"><p>Nenhum banner cadastrado.</p></div>'
     : banners.map(function(b){ 
       var pLabel = posLabels[b.position||'hero'] || 'Hero';
