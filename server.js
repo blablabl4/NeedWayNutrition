@@ -76,7 +76,9 @@ app.get('/api/coupons', async (req, res) => {
       type: row.type,
       value: Number(row.value),
       minOrder: Number(row.min_order),
-      description: row.description
+      description: row.description,
+      color: row.color || '#f97316',
+      show_banner: row.show_banner !== false
     }));
     res.json(coupons);
   } catch (error) {
