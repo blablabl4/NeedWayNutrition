@@ -3041,7 +3041,8 @@ function getBadgeInfo(badge) {
 (function applyAdminOverrides() {
  try {
   // Products
-  const prodOverride = localStorage.getItem('needway-products-override');
+  localStorage.removeItem('needway-products-override');
+  const prodOverride = null;
   if (prodOverride) NeedwayData.products = JSON.parse(prodOverride);
 
   // Categories
