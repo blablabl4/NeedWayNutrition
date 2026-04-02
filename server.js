@@ -273,14 +273,13 @@ app.put('/api/products/:id', async (req, res) => {
     const p = req.body;
     await db.query(
       `UPDATE products SET 
-        name = $1, 
-        price = $2, 
-        original_price = $3, 
-        discount = $4, 
-        stock = $5,
-        description = $6
-      WHERE id = $7`,
-      [p.name, p.price, p.originalPrice, p.discount, p.stock, p.description, req.params.id]
+        name = $1, slug = $2, category_slug = $3, brand = $4,
+        original_price = $5, price = $6, discount = $7, stock = $8,
+        description = $9, nutrition_table = $10, images = $11,
+        is_new = $12, is_outlet = $13, tags = $14,
+        flavors = $15, sizes = $16, sold = $17
+      WHERE id = $18`,
+      [p.name, p.slug || '', p.category || '', p.brand || '', p.originalPrice || 0, p.price || 0, p.discount || 0, p.stock || 0, p.description || '', JSON.stringify(p.nutritionTable || {}), JSON.stringify(p.images || []), p.isNew || false, p.isOutlet || false, JSON.stringify(p.tags || []), JSON.stringify(p.flavors || []), JSON.stringify(p.sizes || []), p.sold || 0, req.params.id]
     );
     res.json({ success: true });
   } catch (err) {
@@ -295,7 +294,7 @@ app.post('/api/products', async (req, res) => {
     await db.query(
       `INSERT INTO products (name, slug, category_slug, brand, original_price, price, discount, stock, description, nutrition_table, images, is_new, is_outlet, tags, flavors, sizes, rating, review_count, sold)
        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)`,
-      [p.name, p.slug || 'novo-prod', p.category || 'kits', p.brand || '', p.originalPrice || 0, p.price || 0, p.discount || 0, p.stock || 0, p.description || '', JSON.stringify({}), JSON.stringify(['img/produtos/default.jpg']), false, false, JSON.stringify([]), JSON.stringify([]), JSON.stringify([]), 5.0, 0, 0]
+      [p.name, p.slug || '', p.category || '', p.brand || '', p.originalPrice || 0, p.price || 0, p.discount || 0, p.stock || 0, p.description || '', JSON.stringify(p.nutritionTable || {}), JSON.stringify(p.images || []), p.isNew || false, p.isOutlet || false, JSON.stringify(p.tags || []), JSON.stringify(p.flavors || []), JSON.stringify(p.sizes || []), p.rating || 5.0, p.reviewCount || 0, p.sold || 0]
     );
     res.json({ success: true });
   } catch (err) {
