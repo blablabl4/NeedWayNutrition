@@ -75,6 +75,18 @@ function getBadgeInfo(badge) {
  return badges[badge] || { text: badge, class: 'badge--dark' };
 }
 
+function getPixPrice(price) {
+ return price * (1 - NeedwayData.config.pixDiscount);
+}
+
+function getInstallments(price) {
+ const max = NeedwayData.config.maxInstallments || 6;
+ const minVal = NeedwayData.config.minInstallmentValue || 25;
+ let count = Math.min(max, Math.floor(price / minVal));
+ if (count < 1) count = 1;
+ return { count, value: price / count };
+}
+
 // ── Async Fetch Function ──
 window.loadNeedwayData = async function() {
     try {
