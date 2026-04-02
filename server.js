@@ -12,26 +12,42 @@ app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// ── Auto-create banners table if not exists ──
+// ── Auto-create tables ──
 (async () => {
   try {
     await db.query(`
       CREATE TABLE IF NOT EXISTS banners (
         id SERIAL PRIMARY KEY,
         position VARCHAR(50) DEFAULT 'hero',
-        title TEXT,
-        subtitle TEXT,
-        cta_text VARCHAR(255),
-        cta_link VARCHAR(255),
-        bg TEXT,
-        image TEXT,
-        coupon_style VARCHAR(50),
+        title TEXT, subtitle TEXT,
+        cta_text VARCHAR(255), cta_link VARCHAR(255),
+        bg TEXT, image TEXT, coupon_style VARCHAR(50),
         active BOOLEAN DEFAULT true,
         created_at TIMESTAMP DEFAULT NOW()
       )
     `);
-    console.log('Banners table ready');
-  } catch(e) { console.error('Banner table creation error:', e.message); }
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS settings (
+        key VARCHAR(100) PRIMARY KEY,
+        value TEXT
+      )
+    `);
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS leads (
+        id SERIAL PRIMARY KEY,
+        email VARCHAR(255),
+        phone VARCHAR(50),
+        created_at TIMESTAMP DEFAULT NOW()
+      )
+    `);
+    // Migrations: add columns if missing
+    try { await db.query(`ALTER TABLE coupons ADD COLUMN IF NOT EXISTS color VARCHAR(20) DEFAULT '#f97316'`); } catch(e) {}
+    try { await db.query(`ALTER TABLE coupons ADD COLUMN IF NOT EXISTS show_banner BOOLEAN DEFAULT true`); } catch(e) {}
+    try { await db.query(`ALTER TABLE coupons ADD COLUMN IF NOT EXISTS expires VARCHAR(50)`); } catch(e) {}
+    try { await db.query(`ALTER TABLE categories ADD COLUMN IF NOT EXISTS active BOOLEAN DEFAULT true`); } catch(e) {}
+    try { await db.query(`ALTER TABLE categories ADD COLUMN IF NOT EXISTS image TEXT`); } catch(e) {}
+    console.log('All tables ready');
+  } catch(e) { console.error('Table creation error:', e.message); }
 })();
 
 // Basic API routes
@@ -80,12 +96,53 @@ app.get('/api/products', async (req, res) => {
   }
 });
 
+// ── Categories CRUD ──
 app.get('/api/categories', async (req, res) => {
   try {
     const result = await db.query('SELECT * FROM categories ORDER BY count DESC');
-    res.json(result.rows);
+    res.json(result.rows.map(r => ({
+      id: r.id, name: r.name, slug: r.slug || r.id,
+      count: Number(r.count) || 0, image: r.image || '', active: r.active !== false
+    })));
   } catch (error) {
     res.status(500).json({ error: 'Database query failed' });
+  }
+});
+
+app.post('/api/categories', async (req, res) => {
+  try {
+    const c = req.body;
+    const slug = c.slug || c.id || c.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-');
+    await db.query(
+      `INSERT INTO categories (id, name, slug, count, image, active) VALUES ($1, $2, $3, $4, $5, $6)`,
+      [slug, c.name, slug, c.count || 0, c.image || '', c.active !== false]
+    );
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Falha ao criar categoria' });
+  }
+});
+
+app.put('/api/categories/:id', async (req, res) => {
+  try {
+    const c = req.body;
+    await db.query(`UPDATE categories SET name=$1, image=$2, active=$3 WHERE id=$4`,
+      [c.name, c.image || '', c.active !== false, req.params.id]);
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Falha ao atualizar categoria' });
+  }
+});
+
+app.delete('/api/categories/:id', async (req, res) => {
+  try {
+    await db.query('DELETE FROM categories WHERE id=$1', [req.params.id]);
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Falha ao deletar categoria' });
   }
 });
 
@@ -254,6 +311,56 @@ app.delete('/api/products/:id', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Falha ao deletar produto' });
+  }
+});
+
+// ── Settings (key-value store) ──
+app.get('/api/settings', async (req, res) => {
+  try {
+    const result = await db.query('SELECT * FROM settings');
+    const obj = {};
+    result.rows.forEach(r => { try { obj[r.key] = JSON.parse(r.value); } catch(e) { obj[r.key] = r.value; } });
+    res.json(obj);
+  } catch (error) {
+    res.status(500).json({ error: 'Database query failed' });
+  }
+});
+
+app.put('/api/settings', async (req, res) => {
+  try {
+    const settings = req.body;
+    for (const [key, value] of Object.entries(settings)) {
+      const val = typeof value === 'string' ? value : JSON.stringify(value);
+      await db.query(
+        `INSERT INTO settings (key, value) VALUES ($1, $2) ON CONFLICT (key) DO UPDATE SET value = $2`,
+        [key, val]
+      );
+    }
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Falha ao salvar configurações' });
+  }
+});
+
+// ── Leads ──
+app.get('/api/leads', async (req, res) => {
+  try {
+    const result = await db.query('SELECT * FROM leads ORDER BY created_at DESC');
+    res.json(result.rows.map(r => ({ id: r.id, email: r.email, phone: r.phone, date: r.created_at })));
+  } catch (error) {
+    res.status(500).json({ error: 'Database query failed' });
+  }
+});
+
+app.post('/api/leads', async (req, res) => {
+  try {
+    const { email, phone } = req.body;
+    await db.query('INSERT INTO leads (email, phone) VALUES ($1, $2)', [email || '', phone || '']);
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Falha ao salvar lead' });
   }
 });
 

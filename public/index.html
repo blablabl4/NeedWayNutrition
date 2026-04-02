@@ -299,20 +299,21 @@
  </section>
  <script>
   (function(){
-    var b = window.AdminBanners.slice().reverse().find(function(x){ return x.position === 'coupon'; });
-    
+    // Buscar banner de cupom e cupons da API (PostgreSQL)
+    var bannerData = null;
+
     function applyBannerStyles() {
-      if(!b) return;
-      if(b.title) document.getElementById('couponTitle').innerHTML = b.title;
-      if(b.subtitle) document.getElementById('couponSubtitle').innerHTML = b.subtitle;
+      if(!bannerData) return;
+      if(bannerData.title) document.getElementById('couponTitle').innerHTML = bannerData.title;
+      if(bannerData.subtitle) document.getElementById('couponSubtitle').innerHTML = bannerData.subtitle;
       
-      var bgVal = b.image ? 'url('+b.image+') center/cover no-repeat' : b.bg;
-      if(b.image || b.bg) {
-        if(b.couponStyle === 'button') {
+      var bgVal = bannerData.image ? 'url('+bannerData.image+') center/cover no-repeat' : bannerData.bg;
+      if(bannerData.image || bannerData.bg) {
+        if(bannerData.couponStyle === 'button') {
           var btns = document.querySelectorAll('#dynamicCouponGrid .coupon-btn');
           btns.forEach(function(btn){
             btn.style.background = bgVal;
-            if(b.image) { 
+            if(bannerData.image) { 
               btn.querySelector('div').style.color = '#fff'; 
               btn.querySelector('div').style.textShadow = '0 2px 4px rgba(0,0,0,0.8)';
             }
@@ -329,34 +330,41 @@
       }
     }
 
-
-
     function renderCoupons(cList) {
-      if(!cList || !cList.length) {
-        var grid = document.getElementById('dynamicCouponGrid');
+      var visibleCoupons = (cList || []).filter(function(c){ return c.show_banner !== false; });
+      var grid = document.getElementById('dynamicCouponGrid');
+      if(!visibleCoupons.length) {
         if(grid) grid.innerHTML = '';
+        // Aplicar background do banner mesmo sem cupons visíveis
+        applyBannerStyles();
         return;
       }
       var html = '';
-      cList.filter(function(c){ return c.show_banner !== false; }).forEach(function(c) {
+      visibleCoupons.forEach(function(c) {
         var color = c.color || '#f97316';
         var txt = '';
         if (c.type === 'percent') txt = c.value + '% OFF ' + (c.minOrder ? 'acima de R$' + c.minOrder : '');
         else if (c.type === 'fixed') txt = 'R$' + c.value + ' OFF ' + (c.minOrder ? 'acima de R$' + c.minOrder : '');
         else txt = 'Frete Grátis ' + (c.minOrder ? 'acima de R$' + c.minOrder : '');
-        if(!c.minOrder && c.type==='percent' && c.value === 15) txt = '15% OFF na 1ª compra'; // Fallback manual
+        if(!c.minOrder && c.type==='percent' && c.value === 15) txt = '15% OFF na 1ª compra';
         
         html += '<div class="coupon-btn" style="background:'+color+';border:2px dashed rgba(255,255,255,0.5);padding:var(--space-md) var(--space-xl);text-align:center;cursor:pointer;min-width:240px;flex:1;border-radius:4px; transition:transform 0.2s ease, opacity 0.2s ease;" onmouseover="this.style.transform=\'scale(1.02)\'; this.style.opacity=\'0.9\';" onmouseout="this.style.transform=\'scale(1)\'; this.style.opacity=\'1\';" onclick="navigator.clipboard.writeText(\''+c.code+'\');this.querySelector(\'small\').textContent=\'✓ Código Copiado!\'">' +
           '<div style="font-family:var(--font-heading);font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:0.05em;margin-bottom:6px;text-shadow:0 1px 2px rgba(0,0,0,0.2);">' + c.code + '</div>' +
           '<small style="color:#111;font-size:0.85rem;background:rgba(255,255,255,0.9);padding:2px 8px;border-radius:4px;display:inline-block;font-weight:bold;">' + txt + ' — Clique p/ copiar</small>' +
         '</div>';
       });
-      var grid = document.getElementById('dynamicCouponGrid');
       if(grid) grid.innerHTML = html;
       applyBannerStyles();
     }
 
-    // Sempre carregar cupons da API (PostgreSQL)
+    // Buscar banner de cupom da API
+    fetch('/api/banners').then(function(r){ return r.json(); }).then(function(banners){
+      bannerData = banners.find(function(b){ return b.position === 'coupon' && b.active; });
+      // Aplicar background imediatamente (antes mesmo dos cupons)
+      applyBannerStyles();
+    }).catch(function(){});
+
+    // Buscar cupons da API
     fetch('/api/coupons').then(function(r){ return r.json(); }).then(function(data){ renderCoupons(data); }).catch(function(){});
   })();
  </script>

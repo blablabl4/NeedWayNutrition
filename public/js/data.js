@@ -120,27 +120,25 @@ window.loadNeedwayData = async function() {
     }
 };
 
-// ── Admin Override: merge localStorage edits on top of static data ──
-(function applyAdminOverrides() {
- try {
-  // Limpeza de caches legados que não são mais usados
-  localStorage.removeItem('needway-products-override');
-  localStorage.removeItem('needway-coupons-override');
-
-  // Categories (still localStorage-based for now)
-  const catOverride = localStorage.getItem('needway-categories-override');
-  if (catOverride) NeedwayData.categories = JSON.parse(catOverride);
-
-  // Settings
-  const settings = localStorage.getItem('needway-settings');
-  if (settings) {
-   const s = JSON.parse(settings);
-   if (s.freeShippingMin) NeedwayData.config.freeShippingMin = parseFloat(s.freeShippingMin);
-   if (s.pixDiscount) NeedwayData.config.pixDiscount = parseFloat(s.pixDiscount) / 100;
-   if (s.maxInstallments) NeedwayData.config.maxInstallments = parseInt(s.maxInstallments);
-   if (s.storeName) NeedwayData.config.storeName = s.storeName;
-  }
- } catch(e) {
-  console.warn('Admin override merge failed:', e);
- }
+// ── Limpeza de caches legados e carregamento de settings da API ──
+(function cleanLegacyCache() {
+ // Remove todos os caches legados do localStorage
+ localStorage.removeItem('needway-products-override');
+ localStorage.removeItem('needway-coupons-override');
+ localStorage.removeItem('needway-categories-override');
+ localStorage.removeItem('needway-banners');
+ localStorage.removeItem('needway-settings');
+ localStorage.removeItem('needway-integrations');
 })();
+
+// Carregar settings da API e aplicar ao config
+async function loadSettingsFromAPI() {
+ try {
+  const r = await fetch('/api/settings');
+  const s = await r.json();
+  if (s.freeShippingMin) NeedwayData.config.freeShippingMin = parseFloat(s.freeShippingMin);
+  if (s.pixDiscount) NeedwayData.config.pixDiscount = parseFloat(s.pixDiscount) / 100;
+  if (s.maxInstallments) NeedwayData.config.maxInstallments = parseInt(s.maxInstallments);
+  if (s.storeName) NeedwayData.config.storeName = s.storeName;
+ } catch(e) { console.warn('Settings API load failed:', e); }
+}

@@ -41,19 +41,33 @@ async function fetchCoupons() {
 function getCoupons() { return _coupons; }
 function saveCoupons(arr) { _coupons = arr; }
 
+var _categories = [];
+var _settings = {};
+var _leads = [];
+var _integrations = {};
+
+async function fetchCategories() {
+  try { const r = await fetch('/api/categories'); _categories = await r.json(); } catch(e) { console.error(e); }
+  return _categories;
+}
+function getCategories() { return _categories; }
+
+async function fetchSettings() {
+  try { const r = await fetch('/api/settings'); _settings = await r.json(); } catch(e) { console.error(e); }
+  return _settings;
+}
+function getSettings() { return _settings; }
+
+async function fetchLeads() {
+  try { const r = await fetch('/api/leads'); _leads = await r.json(); } catch(e) { console.error(e); }
+  return _leads;
+}
+function getLeads() { return _leads; }
+
+function getIntegrations() { return _settings; }
+
 function getOrders() { return JSON.parse(localStorage.getItem('needway-orders') || '[]'); }
 function saveOrders(arr) { localStorage.setItem('needway-orders', JSON.stringify(arr)); }
-function getLeads() { return JSON.parse(localStorage.getItem('needway-leads') || '[]'); }
-function getCategories() {
-  const o = localStorage.getItem('needway-categories-override');
-  if (o) return JSON.parse(o);
-  return getNeedwayData()?.categories || [];
-}
-function saveCategories(arr) { localStorage.setItem('needway-categories-override', JSON.stringify(arr)); }
-function getSettings() { return JSON.parse(localStorage.getItem('needway-settings') || '{}'); }
-function saveSettings(obj) { localStorage.setItem('needway-settings', JSON.stringify(obj)); }
-function getIntegrations() { return JSON.parse(localStorage.getItem('needway-integrations') || '{}'); }
-function saveIntegrations(obj) { localStorage.setItem('needway-integrations', JSON.stringify(obj)); }
 
 // ── Compressão de imagem (upload real via FileReader + Canvas) ──
 function compressImage(file, maxDim, quality) {
@@ -665,7 +679,8 @@ async function deleteCoupon(id) {
 // ── Categorias ──
 var editingCategoryId = null;
 
-function loadCategories() {
+async function loadCategories() {
+  await fetchCategories();
   const cats = getCategories();
   document.getElementById('categoriesTable').innerHTML = cats.length === 0
     ? '<tr><td colspan="5" style="text-align:center;padding:var(--space-2xl);color:var(--text-muted);">Nenhuma categoria</td></tr>'
@@ -695,33 +710,46 @@ function editCategory(id) {
   openModal('categoryModal');
 }
 
-function saveCategory() {
-  const cats = getCategories();
+async function saveCategory() {
   const name = (document.getElementById('catName').value||'').trim();
   if (!name) { toast('Digite o nome da categoria', 'error'); return; }
   const id = editingCategoryId || name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
   const obj = { id, name, slug: id, image: categoryImageData || '', active: true, count: 0 };
-  if (editingCategoryId) { var idx = cats.findIndex(function(x){ return x.id == editingCategoryId; }); cats[idx] = Object.assign({}, cats[idx], obj); }
-  else cats.push(obj);
-  saveCategories(cats); closeModal('categoryModal'); loadCategories();
-  toast(editingCategoryId ? 'Categoria atualizada!' : 'Categoria criada!');
+  try {
+    if (editingCategoryId) {
+      await fetch('/api/categories/' + encodeURIComponent(editingCategoryId), { method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(obj) });
+    } else {
+      await fetch('/api/categories', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(obj) });
+    }
+    closeModal('categoryModal');
+    await loadCategories();
+    toast(editingCategoryId ? 'Categoria atualizada!' : 'Categoria criada!');
+  } catch(e) { console.error(e); toast('Erro ao salvar', 'error'); }
 }
 
-function toggleCategory(id, active) {
-  const cats = getCategories();
-  const c = cats.find(function(x){ return x.id == id; });
-  if (c) { c.active = active; saveCategories(cats); toast(active?'Categoria ativada':'Categoria desativada'); }
+async function toggleCategory(id, active) {
+  var c = getCategories().find(function(x){ return x.id == id; });
+  if (!c) return;
+  c.active = active;
+  try {
+    await fetch('/api/categories/' + encodeURIComponent(id), { method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(c) });
+    toast(active?'Categoria ativada':'Categoria desativada');
+  } catch(e) { toast('Erro', 'error'); }
 }
 
-function deleteCategory(id) {
+async function deleteCategory(id) {
   if (!confirm('Excluir esta categoria?')) return;
-  saveCategories(getCategories().filter(function(c){ return c.id != id; }));
-  loadCategories(); toast('Categoria excluída');
+  try {
+    await fetch('/api/categories/' + encodeURIComponent(id), { method: 'DELETE' });
+    await loadCategories();
+    toast('Categoria excluída');
+  } catch(e) { toast('Erro ao excluir', 'error'); }
 }
 
 // ── Integrações ──
-function loadIntegrations() {
-  const integ = getIntegrations();
+async function loadIntegrations() {
+  await fetchSettings();
+  const integ = getSettings();
   document.getElementById('mpAccessToken').value = integ.mpAccessToken || '';
   document.getElementById('mpPublicKey').value = integ.mpPublicKey || '';
   document.getElementById('mpWebhookUrl').value = window.location.origin + '/webhook/mercadopago';
@@ -740,27 +768,34 @@ function updateIntegrationStatus(key, status) {
   text.textContent = status === 'connected' ? 'Configurado' : 'Não configurado';
 }
 
-function saveMPIntegration() {
-  const integ = getIntegrations();
-  integ.mpAccessToken = document.getElementById('mpAccessToken').value;
-  integ.mpPublicKey = document.getElementById('mpPublicKey').value;
-  saveIntegrations(integ);
-  updateIntegrationStatus('mp', integ.mpAccessToken ? 'connected' : 'off');
-  toast('Mercado Pago salvo!');
+async function saveMPIntegration() {
+  const obj = {
+    mpAccessToken: document.getElementById('mpAccessToken').value,
+    mpPublicKey: document.getElementById('mpPublicKey').value
+  };
+  try {
+    await fetch('/api/settings', { method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(obj) });
+    updateIntegrationStatus('mp', obj.mpAccessToken ? 'connected' : 'off');
+    toast('Mercado Pago salvo!');
+  } catch(e) { toast('Erro ao salvar', 'error'); }
 }
 
-function saveBlingIntegration() {
-  const integ = getIntegrations();
-  integ.blingToken = document.getElementById('blingToken').value;
-  integ.blingSyncStock = document.getElementById('blingSyncStock').checked;
-  integ.blingImportOrders = document.getElementById('blingImportOrders').checked;
-  saveIntegrations(integ);
-  updateIntegrationStatus('bling', integ.blingToken ? 'connected' : 'off');
-  toast('Bling salvo!');
+async function saveBlingIntegration() {
+  const obj = {
+    blingToken: document.getElementById('blingToken').value,
+    blingSyncStock: document.getElementById('blingSyncStock').checked,
+    blingImportOrders: document.getElementById('blingImportOrders').checked
+  };
+  try {
+    await fetch('/api/settings', { method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(obj) });
+    updateIntegrationStatus('bling', obj.blingToken ? 'connected' : 'off');
+    toast('Bling salvo!');
+  } catch(e) { toast('Erro ao salvar', 'error'); }
 }
 
 // ── Configurações ──
-function loadSettings() {
+async function loadSettings() {
+  await fetchSettings();
   const s = getSettings();
   document.getElementById('cfgStoreName').value = s.storeName || 'Needway Nutrition';
   document.getElementById('cfgEmail').value = s.email || '';
@@ -775,21 +810,24 @@ function loadSettings() {
   document.getElementById('cfgMaintenance').checked = s.maintenance || false;
 }
 
-function saveGeneralSettings() {
-  const s = getSettings();
-  s.storeName = document.getElementById('cfgStoreName').value;
-  s.email = document.getElementById('cfgEmail').value;
-  s.whatsapp = document.getElementById('cfgWhatsApp').value;
-  s.pixDiscount = parseFloat(document.getElementById('cfgPix').value) || 10;
-  s.freeShippingMin = parseFloat(document.getElementById('cfgFreeShipping').value) || 250;
-  s.maxInstallments = parseInt(document.getElementById('cfgInstallments').value) || 6;
-  s.metaPixel = document.getElementById('cfgMetaPixel').value;
-  s.googleAnalytics = document.getElementById('cfgGoogleAnalytics').value;
-  s.leadPopup = document.getElementById('cfgLeadPopup').checked;
-  s.leadDelay = parseInt(document.getElementById('cfgLeadDelay').value) || 3;
-  s.maintenance = document.getElementById('cfgMaintenance').checked;
-  saveSettings(s);
-  toast('Configurações salvas!');
+async function saveGeneralSettings() {
+  const s = {
+    storeName: document.getElementById('cfgStoreName').value,
+    email: document.getElementById('cfgEmail').value,
+    whatsapp: document.getElementById('cfgWhatsApp').value,
+    pixDiscount: parseFloat(document.getElementById('cfgPix').value) || 10,
+    freeShippingMin: parseFloat(document.getElementById('cfgFreeShipping').value) || 250,
+    maxInstallments: parseInt(document.getElementById('cfgInstallments').value) || 6,
+    metaPixel: document.getElementById('cfgMetaPixel').value,
+    googleAnalytics: document.getElementById('cfgGoogleAnalytics').value,
+    leadPopup: document.getElementById('cfgLeadPopup').checked,
+    leadDelay: parseInt(document.getElementById('cfgLeadDelay').value) || 3,
+    maintenance: document.getElementById('cfgMaintenance').checked
+  };
+  try {
+    await fetch('/api/settings', { method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(s) });
+    toast('Configurações salvas!');
+  } catch(e) { toast('Erro ao salvar', 'error'); }
 }
 
 function saveAdminPassword() {
@@ -797,6 +835,7 @@ function saveAdminPassword() {
   const cf = document.getElementById('cfgConfirmPassword').value;
   if (!nw) { toast('Digite a nova senha', 'error'); return; }
   if (nw !== cf) { toast('As senhas não são iguais', 'error'); return; }
+  // Admin password still stored in localStorage - it's a client-side gate only
   localStorage.setItem('needway-admin-pass', nw);
   document.getElementById('cfgNewPassword').value = '';
   document.getElementById('cfgConfirmPassword').value = '';
