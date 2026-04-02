@@ -100,6 +100,7 @@ window.loadNeedwayData = async function() {
  try {
   // Limpeza forçada do cache legado
   localStorage.removeItem('needway-products-override');
+  localStorage.removeItem('needway_cart'); // APAGA O CARRINHO FANTASMA DA DEMO
   const prodOverride = null;
   if (prodOverride) NeedwayData.products = JSON.parse(prodOverride);
 

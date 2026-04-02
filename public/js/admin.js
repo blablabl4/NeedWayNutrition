@@ -324,7 +324,7 @@ function fillProductForm(p) {
   setPillValues('tagsPills', p.tags || []);
 }
 
-function saveProduct() {
+async function saveProduct() {
   const products = getProducts();
   var p = editingProductId ? products.find(function(x){ return x.id === editingProductId; }) : {};
   if (!p) p = {};
@@ -349,23 +349,27 @@ function saveProduct() {
   p.sizes = getSimpleTags('sizesTags');
   p.badges = getPillValues('badgesPills');
   p.tags = getPillValues('tagsPills');
+  
   if (editingProductId) {
     var idx = products.findIndex(function(x){ return x.id === editingProductId; });
     products[idx] = p;
+    await fetch('/api/products/' + p.id, { method: 'PUT', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(p) });
   } else {
     p.id = Date.now();
     p.rating = 5.0; p.reviewCount = 0;
-    products.push(p);
+    await fetch('/api/products', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(p) });
   }
-  saveProducts(products);
+  
+  if (typeof loadNeedwayData === 'function') await loadNeedwayData();
   closeModal('productModal');
   loadProducts();
   toast(editingProductId ? 'Produto atualizado!' : 'Produto criado com sucesso!');
 }
 
-function deleteProduct(id) {
+async function deleteProduct(id) {
   if (!confirm('Excluir este produto?')) return;
-  saveProducts(getProducts().filter(function(p){ return p.id !== id; }));
+  await fetch('/api/products/' + id, { method: 'DELETE' });
+  if (typeof loadNeedwayData === 'function') await loadNeedwayData();
   loadProducts();
   toast('Produto excluído');
 }
@@ -736,7 +740,10 @@ function initDashboard() {
   setTimeout(function() { showTab('overview', document.querySelector('.admin-sidebar__link')); }, 0);
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
+  if (typeof loadNeedwayData === 'function') {
+    await loadNeedwayData();
+  }
   initPillSelects();
 
   // Populate category select
