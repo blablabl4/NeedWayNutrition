@@ -204,16 +204,20 @@
  </section>
 
  <script>
- (function() {
+ (async function() {
   var defaultSlides = [
    { title: 'Força em <span class="highlight">Cada Dose</span>', subtitle: 'Novos Lançamentos', desc: 'Suplementos de alta performance desenvolvidos para quem busca resultados reais. Qualidade premium, preço justo.', ctaText: 'Ver Lançamentos', ctaLink: 'lancamentos.html', ctaText2: 'Explorar Loja', ctaLink2: 'loja.html', bg: 'linear-gradient(135deg, #000 0%, #1a0a00 50%, #0d0d0d 100%)', image: '' },
    { title: 'Whey Protein a partir de <span class="highlight">R$149</span>', subtitle: 'Oferta Especial', desc: '24g de proteína por dose. Diversas opções de sabores. Entrega para todo o Brasil.', ctaText: 'Comprar Agora', ctaLink: 'categoria.html?cat=whey-protein', bg: 'linear-gradient(135deg, #0d0d0d 0%, #1a0d00 50%, #000 100%)', image: '' },
    { title: 'Ofertas <span class="highlight">Imperdíveis</span>', subtitle: 'Outlet — até 50% OFF', desc: 'Produtos selecionados com descontos especiais. Estoque limitado — aproveite!', ctaText: 'Ver Outlet', ctaLink: 'outlet.html', subtitleColor: 'var(--accent-gold)', bg: 'linear-gradient(135deg, #1a0a00 0%, #000 50%, #0d0a00 100%)', image: '' }
   ];
 
-  var saved = null;
-  try { var raw = localStorage.getItem('needway-banners'); if (raw) saved = JSON.parse(raw); } catch(e) {}
-  window.AdminBanners = saved && saved.length ? saved.filter(function(b){ return b.active !== false; }) : [];
+  // Carregar banners da API (PostgreSQL)
+  window.AdminBanners = [];
+  try {
+    var res = await fetch('/api/banners');
+    var allBanners = await res.json();
+    window.AdminBanners = allBanners.filter(function(b){ return b.active !== false; });
+  } catch(e) { console.warn('Banners API load failed:', e); }
 
   var heroBanners = window.AdminBanners.filter(function(b){ return !b.position || b.position === 'hero'; });
 
