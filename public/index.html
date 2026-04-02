@@ -291,25 +291,8 @@
     <h3 id="couponTitle" style="font-family:var(--font-heading);font-size:1.8rem;text-transform:uppercase;color:#111;margin:0;letter-spacing:0.02em;">Use seu <span style="font-weight:900;">Cupom</span></h3>
     <p id="couponSubtitle" style="font-size:1rem;color:#777;margin-top:6px;">Digite no carrinho ou checkout</p>
    </div>
-   <div style="display:flex;gap:var(--space-md);flex-wrap:wrap;justify-content:center;flex:2; position:relative; z-index:2; width: 100%;">
-   <div class="coupon-btn"
-    style="background:#f97316;border:2px dashed rgba(255,255,255,0.5);padding:var(--space-md) var(--space-xl);text-align:center;cursor:pointer;min-width:240px;flex:1;border-radius:4px; transition:transform 0.2s ease, opacity 0.2s ease;"
-    onmouseover="this.style.transform='scale(1.02)'; this.style.opacity='0.9';"
-    onmouseout="this.style.transform='scale(1)'; this.style.opacity='1';"
-    onclick="navigator.clipboard.writeText('PRIMEIRA15');this.querySelector('small').textContent='✓ Código Copiado!'">
-    <div style="font-family:var(--font-heading);font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:0.05em;margin-bottom:6px;text-shadow:0 1px 2px rgba(0,0,0,0.2);">
-    PRIMEIRA15</div>
-    <small style="color:#111;font-size:0.85rem;background:rgba(255,255,255,0.9);padding:2px 8px;border-radius:4px;display:inline-block;font-weight:bold;">15% OFF na 1ª compra — Clique p/ copiar</small>
-   </div>
-   <div class="coupon-btn"
-    style="background:#eab308;border:2px dashed rgba(255,255,255,0.5);padding:var(--space-md) var(--space-xl);text-align:center;cursor:pointer;min-width:240px;flex:1;border-radius:4px; transition:transform 0.2s ease, opacity 0.2s ease;"
-    onmouseover="this.style.transform='scale(1.02)'; this.style.opacity='0.9';"
-    onmouseout="this.style.transform='scale(1)'; this.style.opacity='1';"
-    onclick="navigator.clipboard.writeText('NEEDWAY10');this.querySelector('small').textContent='✓ Código Copiado!'">
-    <div style="font-family:var(--font-heading);font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:0.05em;margin-bottom:6px;text-shadow:0 1px 2px rgba(0,0,0,0.2);">
-    NEEDWAY10</div>
-    <small style="color:#111;font-size:0.85rem;background:rgba(255,255,255,0.9);padding:2px 8px;border-radius:4px;display:inline-block;font-weight:bold;">10% OFF acima de R$200 — Clique p/ copiar</small>
-   </div>
+   <div id="dynamicCouponGrid" style="display:flex;gap:var(--space-md);flex-wrap:wrap;justify-content:center;flex:2; position:relative; z-index:2; width: 100%;">
+    <!-- Cupons injetados dinamicamente via JS abaixo -->
    </div>
   </div>
   </div>
@@ -317,14 +300,16 @@
  <script>
   (function(){
     var b = window.AdminBanners.slice().reverse().find(function(x){ return x.position === 'coupon'; });
-    if(b) {
+    
+    function applyBannerStyles() {
+      if(!b) return;
       if(b.title) document.getElementById('couponTitle').innerHTML = b.title;
       if(b.subtitle) document.getElementById('couponSubtitle').innerHTML = b.subtitle;
       
       var bgVal = b.image ? 'url('+b.image+') center/cover no-repeat' : b.bg;
       if(b.image || b.bg) {
         if(b.couponStyle === 'button') {
-          var btns = document.querySelectorAll('.coupon-btn');
+          var btns = document.querySelectorAll('#dynamicCouponGrid .coupon-btn');
           btns.forEach(function(btn){
             btn.style.background = bgVal;
             if(b.image) { 
@@ -334,12 +319,44 @@
           });
         } else {
           var wrap = document.getElementById('couponBannerWrapper');
-          wrap.insertAdjacentHTML('afterbegin', '<div style="position:absolute;inset:0;background:'+bgVal+';opacity:0.9;z-index:1;"></div>');
-          wrap.style.borderTop = 'none';
-          document.getElementById('couponTitle').style.color = '#fff';
-          document.getElementById('couponSubtitle').style.color = '#eee';
+          if(!document.getElementById('couponBgOverlay')) {
+            wrap.insertAdjacentHTML('afterbegin', '<div id="couponBgOverlay" style="position:absolute;inset:0;background:'+bgVal+';opacity:0.9;z-index:1;"></div>');
+            wrap.style.borderTop = 'none';
+            document.getElementById('couponTitle').style.color = '#fff';
+            document.getElementById('couponSubtitle').style.color = '#eee';
+          }
         }
       }
+    }
+
+    var coupons = [];
+    try { var raw = localStorage.getItem('needway-coupons-override'); if(raw) coupons = JSON.parse(raw); } catch(e) {}
+    
+    function renderCoupons(cList) {
+      if(!cList || !cList.length) return;
+      var html = '';
+      cList.filter(function(c){ return c.show_banner !== false; }).forEach(function(c) {
+        var color = c.color || '#f97316';
+        var txt = '';
+        if (c.type === 'percent') txt = c.value + '% OFF ' + (c.minOrder ? 'acima de R$' + c.minOrder : '');
+        else if (c.type === 'fixed') txt = 'R$' + c.value + ' OFF ' + (c.minOrder ? 'acima de R$' + c.minOrder : '');
+        else txt = 'Frete Grátis ' + (c.minOrder ? 'acima de R$' + c.minOrder : '');
+        if(!c.minOrder && c.type==='percent' && c.value === 15) txt = '15% OFF na 1ª compra'; // Fallback manual
+        
+        html += '<div class="coupon-btn" style="background:'+color+';border:2px dashed rgba(255,255,255,0.5);padding:var(--space-md) var(--space-xl);text-align:center;cursor:pointer;min-width:240px;flex:1;border-radius:4px; transition:transform 0.2s ease, opacity 0.2s ease;" onmouseover="this.style.transform=\'scale(1.02)\'; this.style.opacity=\'0.9\';" onmouseout="this.style.transform=\'scale(1)\'; this.style.opacity=\'1\';" onclick="navigator.clipboard.writeText(\''+c.code+'\');this.querySelector(\'small\').textContent=\'✓ Código Copiado!\'">' +
+          '<div style="font-family:var(--font-heading);font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:0.05em;margin-bottom:6px;text-shadow:0 1px 2px rgba(0,0,0,0.2);">' + c.code + '</div>' +
+          '<small style="color:#111;font-size:0.85rem;background:rgba(255,255,255,0.9);padding:2px 8px;border-radius:4px;display:inline-block;font-weight:bold;">' + txt + ' — Clique p/ copiar</small>' +
+        '</div>';
+      });
+      var grid = document.getElementById('dynamicCouponGrid');
+      if(grid) grid.innerHTML = html;
+      applyBannerStyles();
+    }
+
+    if (coupons.length > 0) {
+      renderCoupons(coupons);
+    } else {
+      fetch('/api/coupons').then(function(r){ return r.json(); }).then(function(data){ renderCoupons(data); }).catch(function(){});
     }
   })();
  </script>

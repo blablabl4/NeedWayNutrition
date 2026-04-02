@@ -720,6 +720,19 @@
         <div class="field-label">Data de Validade <span class="info-tip"><span class="tip-icon">i</span><span class="tip-bubble">Após esta data o cupom não funciona mais. Deixe em branco para não ter prazo de validade.</span></span></div>
         <input type="date" class="input" id="cExpires">
       </div>
+      <div class="input-group">
+        <div class="field-label">Cor no Banner <span class="info-tip"><span class="tip-icon">i</span><span class="tip-bubble">Cor de fundo do botão de cupom na página inicial.</span></span></div>
+        <input type="color" class="input" id="cColor" value="#f97316" style="height:44px;cursor:pointer;">
+      </div>
+      <div class="input-group" style="display:flex; align-items:flex-end;">
+        <label class="admin-toggle" style="margin-bottom: 12px;">
+          <input type="checkbox" id="cShowBanner" checked>
+          <div class="admin-toggle__track"></div>
+          <span class="admin-toggle__label">Mostrar no Banner do Site
+            <span class="info-tip"><span class="tip-icon">i</span><span class="tip-bubble">Se ativado, cria um botão desenhado com o código e desconto no banner principal de cupons.</span></span>
+          </span>
+        </label>
+      </div>
     </div>
     <div class="admin-modal__footer">
       <button class="btn btn--ghost" onclick="closeModal('couponModal')">Cancelar</button>

@@ -578,17 +578,28 @@ function loadCoupons() {
     : coupons.map(function(c){ return '<tr><td><strong>' + c.code + '</strong></td><td><span class="badge badge--dark">' + (typeLabel[c.type]||c.type) + '</span></td><td>' + (c.type==='percent'?c.value+'% de desconto':c.type==='shipping'?'Frete Grátis':fmtPrice(c.value)+' de desconto') + '</td><td>' + fmtPrice(c.minOrder||0) + '</td><td>' + (c.expires||'Sem prazo') + '</td><td><div class="admin-actions"><button class="btn-icon" onclick="editCoupon(\'' + c.code + '\')"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button><button class="btn-icon danger" onclick="deleteCoupon(\'' + c.code + '\')"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg></button></div></td></tr>'; }).join('');
 }
 
-function newCoupon() { editingCouponId = null; ['cCode','cValue','cMinOrder','cExpires'].forEach(function(id){ var el=document.getElementById(id); if(el)el.value=''; }); document.getElementById('cType').value='percent'; openModal('couponModal'); }
+function newCoupon() { 
+  editingCouponId = null; 
+  ['cCode','cValue','cMinOrder','cExpires'].forEach(function(id){ var el=document.getElementById(id); if(el)el.value=''; }); 
+  document.getElementById('cCode').disabled = false;
+  document.getElementById('cType').value='percent'; 
+  document.getElementById('cColor').value='#f97316'; 
+  document.getElementById('cShowBanner').checked = true;
+  openModal('couponModal'); 
+}
 
 function editCoupon(code) {
   const c = getCoupons().find(function(x){ return x.code === code; });
   if (!c) return;
   editingCouponId = code;
   document.getElementById('cCode').value = c.code;
+  document.getElementById('cCode').disabled = true;
   document.getElementById('cType').value = c.type;
   document.getElementById('cValue').value = c.value;
   document.getElementById('cMinOrder').value = c.minOrder || '';
   document.getElementById('cExpires').value = c.expires || '';
+  document.getElementById('cColor').value = c.color || '#f97316';
+  document.getElementById('cShowBanner').checked = c.show_banner !== false;
   openModal('couponModal');
 }
 
@@ -596,7 +607,15 @@ function saveCoupon() {
   const coupons = getCoupons();
   const code = (document.getElementById('cCode').value||'').toUpperCase().trim();
   if (!code) { toast('Digite o código do cupom', 'error'); return; }
-  const obj = { code, type: document.getElementById('cType').value, value: parseFloat(document.getElementById('cValue').value)||0, minOrder: parseFloat(document.getElementById('cMinOrder').value)||0, expires: document.getElementById('cExpires').value };
+  const obj = { 
+     code, 
+     type: document.getElementById('cType').value, 
+     value: parseFloat(document.getElementById('cValue').value)||0, 
+     minOrder: parseFloat(document.getElementById('cMinOrder').value)||0, 
+     expires: document.getElementById('cExpires').value,
+     color: document.getElementById('cColor').value || '#f97316',
+     show_banner: document.getElementById('cShowBanner').checked
+  };
   if (editingCouponId) { var idx = coupons.findIndex(function(x){ return x.code===editingCouponId; }); coupons[idx] = obj; }
   else { if (coupons.find(function(x){ return x.code===code; })) { toast('Este código já existe', 'error'); return; } coupons.push(obj); }
   saveCoupons(coupons); closeModal('couponModal'); loadCoupons();
