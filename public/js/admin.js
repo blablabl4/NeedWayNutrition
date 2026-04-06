@@ -370,20 +370,26 @@ async function saveProduct() {
   p.badges = getPillValues('badgesPills');
   p.tags = getPillValues('tagsPills');
   
-  if (editingProductId) {
-    var idx = products.findIndex(function(x){ return x.id === editingProductId; });
-    products[idx] = p;
-    await fetch('/api/products/' + p.id, { method: 'PUT', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(p) });
-  } else {
-    p.id = Date.now();
-    p.rating = 5.0; p.reviewCount = 0;
-    await fetch('/api/products', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(p) });
+  try {
+    let res;
+    if (editingProductId) {
+      res = await fetch('/api/products/' + p.id, { method: 'PUT', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(p) });
+    } else {
+      p.id = Date.now();
+      p.rating = 5.0; p.reviewCount = 0;
+      res = await fetch('/api/products', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(p) });
+    }
+    
+    if (!res.ok) throw new Error('Falha na API: ' + res.statusText);
+    
+    if (typeof loadNeedwayData === 'function') await loadNeedwayData();
+    closeModal('productModal');
+    loadProducts();
+    toast(editingProductId ? 'Produto atualizado!' : 'Produto criado com sucesso!');
+  } catch (err) {
+    console.error('Erro ao salvar produto:', err);
+    toast('Erro ao salvar produto. Verifique sua conexão.', 'error');
   }
-  
-  if (typeof loadNeedwayData === 'function') await loadNeedwayData();
-  closeModal('productModal');
-  loadProducts();
-  toast(editingProductId ? 'Produto atualizado!' : 'Produto criado com sucesso!');
 }
 
 async function deleteProduct(id) {

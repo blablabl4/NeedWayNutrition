@@ -47,6 +47,12 @@ app.use(express.static(path.join(__dirname, 'public')));
     try { await db.query(`ALTER TABLE categories ADD COLUMN IF NOT EXISTS active BOOLEAN DEFAULT true`); } catch(e) {}
     try { await db.query(`ALTER TABLE categories ADD COLUMN IF NOT EXISTS image TEXT`); } catch(e) {}
     try { await db.query(`ALTER TABLE products ADD COLUMN IF NOT EXISTS badges JSONB DEFAULT '[]'`); } catch(e) {}
+    try { await db.query(`ALTER TABLE products ADD COLUMN IF NOT EXISTS tags JSONB DEFAULT '[]'`); } catch(e) {}
+    try { await db.query(`ALTER TABLE products ADD COLUMN IF NOT EXISTS flavors JSONB DEFAULT '[]'`); } catch(e) {}
+    try { await db.query(`ALTER TABLE products ADD COLUMN IF NOT EXISTS sizes JSONB DEFAULT '[]'`); } catch(e) {}
+    try { await db.query(`ALTER TABLE products ADD COLUMN IF NOT EXISTS is_new BOOLEAN DEFAULT false`); } catch(e) {}
+    try { await db.query(`ALTER TABLE products ADD COLUMN IF NOT EXISTS is_outlet BOOLEAN DEFAULT false`); } catch(e) {}
+    try { await db.query(`ALTER TABLE products ADD COLUMN IF NOT EXISTS sold INTEGER DEFAULT 0`); } catch(e) {}
     console.log('All tables ready');
   } catch(e) { console.error('Table creation error:', e.message); }
 })();

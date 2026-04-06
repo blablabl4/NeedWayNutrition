@@ -233,14 +233,14 @@
  <script src="js/theme.js"></script>
  <script>
   let filteredProducts = [];
-  let activeFilters = { categories: [], maxPrice: 350, minRating: 0 };
+  let activeFilters = { categories: [], tags: [], maxPrice: 350, minRating: 0 };
 
   document.addEventListener('DOMContentLoaded', async () => {
    if (typeof loadNeedwayData === 'function') await loadNeedwayData();
    filteredProducts = [...NeedwayData.products];
    const params = new URLSearchParams(window.location.search);
    const cat = params.get('cat');
-   const obj = params.get('obj');
+   const obj = params.get('obj') || params.get('tag');
 
    // Build filter UI
    document.getElementById('filterCategories').innerHTML = NeedwayData.categories.map(c => `
@@ -251,6 +251,7 @@
 
    document.getElementById('filterObjectives').innerHTML = NeedwayData.objectives.map(o => `
   <div class="sidebar-filter__option" onclick="toggleObjectiveFilter('${o.id}')">
+   <div class="sidebar-filter__checkbox" id="chk-obj-${o.id}"></div>
    <span>${o.icon} ${o.name}</span>
   </div>`).join('');
 
@@ -265,6 +266,16 @@
     }
     document.getElementById(`chk-${cat}`)?.classList.add('checked');
    }
+   if (obj) {
+    activeFilters.tags = [obj];
+    const tagObj = NeedwayData.objectives.find(o => o.id === obj);
+    if (tagObj) {
+     document.getElementById('shopHeading').innerHTML = `${tagObj.icon} <span class="highlight">${tagObj.name}</span>`;
+     document.getElementById('shopTitle').textContent = tagObj.name;
+     document.title = `${tagObj.name} | Needway Nutrition`;
+    }
+    document.getElementById(`chk-obj-${obj}`)?.classList.add('checked');
+   }
 
    applyFilters();
    initSearch();
@@ -278,7 +289,9 @@
   }
 
   function toggleObjectiveFilter(objId) {
-   // Simple toggle: filter by tags
+   const idx = activeFilters.tags.indexOf(objId);
+   if (idx >= 0) { activeFilters.tags.splice(idx, 1); } else { activeFilters.tags.push(objId); }
+   document.getElementById(`chk-obj-${objId}`)?.classList.toggle('checked');
    applyFilters();
   }
 
@@ -303,6 +316,7 @@
   function applyFilters() {
    filteredProducts = NeedwayData.products.filter(p => {
     if (activeFilters.categories.length > 0 && !activeFilters.categories.includes(p.category)) return false;
+    if (activeFilters.tags.length > 0 && (!p.tags || !activeFilters.tags.some(t => p.tags.includes(t)))) return false;
     if (p.price > activeFilters.maxPrice) return false;
     if (p.rating < activeFilters.minRating) return false;
     return true;

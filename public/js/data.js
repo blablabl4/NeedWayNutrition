@@ -14,12 +14,16 @@ const NeedwayData = {
  minInstallmentValue: 25,
  },
 
- // ── Objectives ──
+ // ── Objectives / Banners (Tags) ──
  objectives: [
- { id: 'massa', name: 'Massa Muscular', icon: '', desc: 'Ganhe massa com qualidade', slug: 'massa-muscular' },
- { id: 'emagrecimento', name: 'Emagrecimento', icon: '', desc: 'Queime gordura de forma inteligente', slug: 'emagrecimento' },
- { id: 'energia', name: 'Energia', icon: '', desc: 'Potencialize seus treinos', slug: 'energia' },
- { id: 'saude', name: 'Saúde & Bem-estar', icon: '', desc: 'Cuide do seu corpo por completo', slug: 'saude' },
+  { id: 'musculacao', name: 'Musculação', icon: '🏋️', desc: 'Treino de Força e Performance', slug: 'musculacao' },
+  { id: 'luta', name: 'Luta / Artes Marciais', icon: '🥊', desc: 'Força e Explosão', slug: 'luta' },
+  { id: 'corrida', name: 'Corrida / Endurance', icon: '🏃', desc: 'Resistência', slug: 'corrida' },
+  { id: 'bike', name: 'Bike / Ciclismo', icon: '🚴', desc: 'Vigor e Recuperação', slug: 'bike' },
+  { id: 'rashguard', name: 'Rash Guard / Vestuário', icon: '👕', desc: 'Vestuário Esportivo', slug: 'rashguard' },
+  { id: 'calca', name: 'Calça de Treino', icon: '👖', desc: 'Conforto e Performance', slug: 'calca' },
+  { id: 'acessorios', name: 'Acessórios', icon: '🧤', desc: 'Acessórios Diversos', slug: 'acessorios' },
+  { id: 'bolsa', name: 'Bolsas e Mochilas', icon: '🎒', desc: 'Transporte e Praticidade', slug: 'bolsa' },
  ],
 
  // ── Empty placeholders (will be fetched) ──
