@@ -871,7 +871,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     while (sel.options.length > 1) sel.remove(1);
     cats.forEach(function(c) {
       var opt = document.createElement('option');
-      opt.value = c.id; opt.textContent = c.name;
+      opt.value = c.slug || c.id; opt.textContent = c.name;
       sel.appendChild(opt);
     });
   }
