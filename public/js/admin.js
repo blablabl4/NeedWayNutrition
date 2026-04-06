@@ -380,7 +380,10 @@ async function saveProduct() {
       res = await fetch('/api/products', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(p) });
     }
     
-    if (!res.ok) throw new Error('Falha na API: ' + res.statusText);
+    if (!res.ok) {
+      const errBody = await res.json().catch(() => ({}));
+      throw new Error(errBody.detail || errBody.error || res.statusText);
+    }
     
     if (typeof loadNeedwayData === 'function') await loadNeedwayData();
     closeModal('productModal');
@@ -388,7 +391,7 @@ async function saveProduct() {
     toast(editingProductId ? 'Produto atualizado!' : 'Produto criado com sucesso!');
   } catch (err) {
     console.error('Erro ao salvar produto:', err);
-    toast('Erro ao salvar produto. Verifique sua conexão.', 'error');
+    toast('Erro: ' + err.message, 'error');
   }
 }
 

@@ -271,6 +271,7 @@ app.delete('/api/banners/:id', async (req, res) => {
 app.put('/api/products/:id', async (req, res) => {
   try {
     const p = req.body;
+    console.log('PUT /api/products/' + req.params.id, 'fields:', Object.keys(p).join(', '));
     await db.query(
       `UPDATE products SET 
         name = $1, slug = $2, category_slug = $3, brand = $4,
@@ -283,8 +284,8 @@ app.put('/api/products/:id', async (req, res) => {
     );
     res.json({ success: true });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Falha ao atualizar produto' });
+    console.error('PUT /api/products ERROR:', err.message, err.detail || '', err.hint || '');
+    res.status(500).json({ error: 'Falha ao atualizar produto', detail: err.message });
   }
 });
 
