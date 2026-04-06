@@ -280,7 +280,7 @@ app.put('/api/products/:id', async (req, res) => {
         is_new = $12, is_outlet = $13, tags = $14,
         flavors = $15, sizes = $16, sold = $17, badges = $18
       WHERE id = $19`,
-      [p.name, p.slug || '', p.category || '', p.brand || '', p.originalPrice || 0, p.price || 0, p.discount || 0, p.stock || 0, p.description || '', JSON.stringify(p.nutritionTable || {}), JSON.stringify(p.images || []), p.isNew || false, p.isOutlet || false, JSON.stringify(p.tags || []), JSON.stringify(p.flavors || []), JSON.stringify(p.sizes || []), p.sold || 0, JSON.stringify(p.badges || []), req.params.id]
+      [p.name, p.slug || '', p.category || null, p.brand || '', p.originalPrice || 0, p.price || 0, p.discount || 0, p.stock || 0, p.description || '', JSON.stringify(p.nutritionTable || {}), JSON.stringify(p.images || []), p.isNew || false, p.isOutlet || false, JSON.stringify(p.tags || []), JSON.stringify(p.flavors || []), JSON.stringify(p.sizes || []), p.sold || 0, JSON.stringify(p.badges || []), req.params.id]
     );
     res.json({ success: true });
   } catch (err) {
@@ -295,7 +295,7 @@ app.post('/api/products', async (req, res) => {
     await db.query(
       `INSERT INTO products (name, slug, category_slug, brand, original_price, price, discount, stock, description, nutrition_table, images, is_new, is_outlet, tags, flavors, sizes, rating, review_count, sold, badges)
        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20)`,
-      [p.name, p.slug || '', p.category || '', p.brand || '', p.originalPrice || 0, p.price || 0, p.discount || 0, p.stock || 0, p.description || '', JSON.stringify(p.nutritionTable || {}), JSON.stringify(p.images || []), p.isNew || false, p.isOutlet || false, JSON.stringify(p.tags || []), JSON.stringify(p.flavors || []), JSON.stringify(p.sizes || []), p.rating || 5.0, p.reviewCount || 0, p.sold || 0, JSON.stringify(p.badges || [])]
+      [p.name, p.slug || '', p.category || null, p.brand || '', p.originalPrice || 0, p.price || 0, p.discount || 0, p.stock || 0, p.description || '', JSON.stringify(p.nutritionTable || {}), JSON.stringify(p.images || []), p.isNew || false, p.isOutlet || false, JSON.stringify(p.tags || []), JSON.stringify(p.flavors || []), JSON.stringify(p.sizes || []), p.rating || 5.0, p.reviewCount || 0, p.sold || 0, JSON.stringify(p.badges || [])]
     );
     res.json({ success: true });
   } catch (err) {
