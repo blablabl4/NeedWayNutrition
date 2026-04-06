@@ -947,7 +947,7 @@
  function renderLaunches() {
   const grid = document.getElementById('launchesGrid');
   if (!grid) return;
-  const launches = getNewProducts();
+  const launches = NeedwayData.products.filter(p => p.isNew).slice(0, 8);
   grid.innerHTML = launches.map(renderProductCard).join('');
  }
 
